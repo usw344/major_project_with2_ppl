@@ -3,8 +3,8 @@ Stickman s1;
 
 void setup() {
   fullScreen();
-  //b1 = new TheGameSquare();
-  s1 = new Stickman();
+  b1 = new TheGameSquare();
+  //s1 = new Stickman();
   
 
 
@@ -12,10 +12,11 @@ void setup() {
 
 
 void draw() {
-  //b1.drawBoard();
   background(0);
-  s1.display();
-  s1.movement();
+  b1.drawBoard();
+
+  //s1.display();
+  //s1.movement();
   
 
 }
