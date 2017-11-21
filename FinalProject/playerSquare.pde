@@ -16,6 +16,7 @@ class TheGameSquare {
   void drawBoard() {
     for (int x = 0; x < cols; x++) {
       for (int y = 0; y < rows; y++) {
+        strokeWeight(4);
         rect(x*widthOfBoard, y*heightOfBoard, widthOfBoard, heightOfBoard);
       }
     }
