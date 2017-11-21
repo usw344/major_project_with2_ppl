@@ -1,3 +1,4 @@
+// Muhammad's class
 class TheGameSquare {
   int [][] theLargeGrid;
   int cols, rows;
