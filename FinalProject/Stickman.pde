@@ -23,41 +23,52 @@ class Stickman {
   void movement() {
     if (movingUp) {
       if (y > h/2) {
-          y -= dy;
-        }
+        y -= dy;
+      }
+    }
+    if (movingDown) {
       if (y < height-h/2) {
-          y += dy;
-        }
+        y += dy;
+      }
+    }
+    if (movingLeft) {
       if (x > w/2) {
-         x -= dx;
-       }
-     if (x < width-w/2) {
-         x += dy;
-       }
-        
+        x -= dx;
+      }
+    }
+    if (movingRight) {
+      if (x < width-w/2) {
+        x += dy;
+      }
     }
   }
 
   void handleKeyPress() {
     if (key == 'w') {
       movingUp = true;
-    }if (key == 's') {
+    }
+    if (key == 's') {
       movingDown = true;
-    }if (key == 'a') {
+    }
+    if (key == 'a') {
       movingLeft = true;
-    }if (key == 'd') {
+    }
+    if (key == 'd') {
       movingRight = true;
     }
   }
-  
+
   void handleKeyRelease() {
     if (key == 'w') {
       movingUp = false;
-    }if (key == 's') {
+    }
+    if (key == 's') {
       movingDown = false;
-    }if (key == 'a') {
+    }
+    if (key == 'a') {
       movingLeft = false;
-    }if (key == 'd') {
+    }
+    if (key == 'd') {
       movingRight = false;
     }
   }
