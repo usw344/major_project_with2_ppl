@@ -1,8 +1,10 @@
 Stickman s1;
-
+LevelLoader lvl1;
 void setup() {
-  size(500,500);
+  size(625,625);
   //fullScreen();
+  lvl1 = new LevelLoader("/levels/0.txt");
+
 
   s1 = new Stickman();
   
@@ -13,7 +15,8 @@ void setup() {
 
 void draw() {
   background(0);
-  handleStickerman();
+  //handleStickerman();
+  lvl1.showBoard();
 
   
 
