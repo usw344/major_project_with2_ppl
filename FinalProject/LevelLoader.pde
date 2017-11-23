@@ -25,8 +25,17 @@ class LevelLoader {
   void showBoard() {
     for (int y = 0; y < tileHeight; y++) {
       for (int x = 0; x < tileWidth; x++) {
+        //moveCharch():
         allTiles[x][y].display();
       }
     }
   }
+
+  void moveCharch() {
+    
+  
+  
+  }
+
+
 }

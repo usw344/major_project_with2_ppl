@@ -20,6 +20,7 @@ class Tile {
       rgb = color(255,0,0); // for other town halls;
     }
     if(tileType == 'C') {
+      rgb = color(0,0,255);
       // add the new class functionhere.
     }
 
