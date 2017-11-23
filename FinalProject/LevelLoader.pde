@@ -23,6 +23,7 @@ class LevelLoader {
         if (tileType == 'C') {
           Cx = x;
           Cy = y;
+          println(Cx,Cy);
         }
         allTiles[x][y] = new Tile(x*indivudalTileWidth, y*indivudalTileHeight, indivudalTileWidth, indivudalTileHeight, tileType);
       }
@@ -40,7 +41,6 @@ class LevelLoader {
   void moveCharch() {
     if (key == 'w'){
       Cy -=1;
-      allTiles[Cx][Cy] = 'Cssss';
       
     }
 
