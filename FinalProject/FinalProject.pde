@@ -1,5 +1,8 @@
 Stickman s1;
+Weapon w1;
 LevelLoader lvl1;
+
+
 void setup() {
   size(625,625);
   //fullScreen();
@@ -7,7 +10,7 @@ void setup() {
 
 
   s1 = new Stickman();
-  
+  w1 = new Weapon();
 
 
 }

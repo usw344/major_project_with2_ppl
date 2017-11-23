@@ -2,6 +2,7 @@ class Stickman {
   float x, y, dx, dy, w, h;
   boolean movingUp, movingDown, movingRight, movingLeft;
 
+//constructor
   Stickman() {
     x = width/16;
     y = height/2;
@@ -15,11 +16,14 @@ class Stickman {
     movingUp = false;
   }
 
+
   void display() {
     rectMode(CENTER);
     rect(x, y, w, h);
   }
-
+  
+  
+//this is all the code for handling the movement of the stickman
   void movement() {
     if (movingUp) {
       if (y > h/2) {
@@ -42,6 +46,7 @@ class Stickman {
       }
     }
   }
+
 
   void handleKeyPress() {
     if (key == 'w') {
