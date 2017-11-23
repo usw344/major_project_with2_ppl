@@ -1,34 +1,63 @@
 Stickman s1;
 Weapon w1;
 LevelLoader lvl1;
+Button startButton;
+
+int state;
 
 
 void setup() {
   size(625,625);
   //fullScreen();
-  lvl1 = new LevelLoader("/levels/0.txt");
-
-
-  s1 = new Stickman();
-  w1 = new Weapon();
-
+  state = 0;
+  objectLoader();
 
 }
 
 
 void draw() {
   background(0);
-  //handleStickerman();
-  lvl1.showBoard();
-
   
-
+  
+  if (state == 0) { // intro screne
+    startScreen();
+  }
+  
+  else if(state == 1) { // grid game
+    lvl1.showBoard();
+  
+  }
+  
+  else if(state == 2) { // stick man fight
+     handleStickerman();
+  
+  }
+  
 }
+
+
+void startScreen() {
+  background(255);
+  startButton.displayButton(width/2,height/2,width/5,height/5);
+  startButton.isTheButtonBeingClicked(1);
+  startButton.theText("Start");
+}
+
 
 void handleStickerman() { // sets up the stickman and starts the moving;
   s1.display();
   s1.movement();
 
+
+}
+
+void objectLoader() {
+  lvl1 = new LevelLoader("/levels/0.txt");
+  
+  s1 = new Stickman();
+  w1 = new Weapon();
+
+  startButton = new Button();
 
 }
 

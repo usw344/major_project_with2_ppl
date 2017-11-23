@@ -1,6 +1,9 @@
+
 class LevelLoader {
   int tileHeight, tileWidth; 
   float indivudalTileHeight, indivudalTileWidth;
+  //this is the x and y of the character
+  int Cx,Cy;
   Tile[][] allTiles;
 
   LevelLoader(String levelWeAreOn) {
@@ -17,6 +20,10 @@ class LevelLoader {
     for (int y = 0; y < tileHeight; y++) {
       for (int x = 0; x < tileWidth; x++) {
         char tileType = lines[y].charAt(x);
+        if (tileType == 'C') {
+          Cx = x;
+          Cy = y;
+        }
         allTiles[x][y] = new Tile(x*indivudalTileWidth, y*indivudalTileHeight, indivudalTileWidth, indivudalTileHeight, tileType);
       }
     }
@@ -30,12 +37,14 @@ class LevelLoader {
       }
     }
   }
-
   void moveCharch() {
-    
-  
-  
+    if (key == 'w'){
+      Cy -=1;
+      allTiles[Cx][Cy] = 'Cssss';
+      
+    }
+
+
+
   }
-
-
 }

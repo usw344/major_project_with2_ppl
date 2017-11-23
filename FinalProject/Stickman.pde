@@ -1,3 +1,4 @@
+//Made by Kam
 class Stickman {
   float x, y, dx, dy, w, h;
   boolean movingUp, movingDown, movingRight, movingLeft;
