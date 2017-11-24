@@ -10,8 +10,8 @@ class Stickman {
     y = height/2;
     dx = 5;
     dy = 5;
-    w = width/30;
-    h = height/15;
+    w = width/12;
+    h = height/6;
     movingDown = false;
     movingLeft = false;
     movingRight = false;
