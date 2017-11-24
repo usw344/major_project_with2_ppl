@@ -11,8 +11,10 @@ class LevelLoader {
     tileHeight = lines.length;
     tileWidth = lines[0].length();
 
-    indivudalTileWidth = width/tileWidth;
-    indivudalTileHeight = height/tileHeight;
+    indivudalTileWidth = width/float(tileWidth);
+    indivudalTileHeight = height/float(tileHeight);
+    
+    println(indivudalTileWidth, indivudalTileHeight);
 
     allTiles = new Tile[tileWidth][tileHeight];
 
@@ -21,7 +23,7 @@ class LevelLoader {
       for (int x = 0; x < tileWidth; x++) {
         char tileType = lines[y].charAt(x);
         allTiles[x][y] = new Tile(x*indivudalTileWidth, y*indivudalTileHeight, indivudalTileWidth, indivudalTileHeight, tileType);
-        println(x,y);
+        //println(x,y);
       }
     }
   }
@@ -34,12 +36,8 @@ class LevelLoader {
       }
     }
   }
+  
   void moveCharch() {
-    if (key == 'w'){
-         
-    }
-
-
-
+    
   }
 }

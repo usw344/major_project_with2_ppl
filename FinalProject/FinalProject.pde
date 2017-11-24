@@ -7,8 +7,8 @@ int state;
 
 
 void setup() {
-  //size(625,625);
-  fullScreen();
+  size(650,650);
+  //fullScreen();
   state = 0;
   objectLoader();
 
