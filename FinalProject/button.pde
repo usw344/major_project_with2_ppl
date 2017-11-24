@@ -43,7 +43,7 @@ class Button {
   void theText(String blank) {
     textSize(buttonWidth/6);
     fill(255);
-    text(blank,buttonX - buttonWidth/4,buttonY);
+    text(blank,buttonX - buttonWidth/5,buttonY + buttonHeight/8);
   }
 
 

@@ -1,14 +1,14 @@
 Stickman s1;
 Weapon w1;
 LevelLoader lvl1;
-Button startButton;
+Button startButton, helpButton;
 
 int state;
 
 
 void setup() {
-  size(625,625);
-  //fullScreen();
+  //size(625,625);
+  fullScreen();
   state = 0;
   objectLoader();
 
@@ -21,8 +21,12 @@ void draw() {
   
   if (state == 0) { // intro screne
     startScreen();
+    helpButtonCode();
   }
+  else if(state == -1) {
+    helpScreen();
   
+  }
   else if(state == 1) { // grid game
     lvl1.showBoard();
   
@@ -38,9 +42,23 @@ void draw() {
 
 void startScreen() {
   background(255);
-  startButton.displayButton(width/2,height/2,width/5,height/5);
+  startButton.displayButton(width/2,height/4,width/3,height/5);
   startButton.isTheButtonBeingClicked(1);
   startButton.theText("Start");
+}
+
+void helpButtonCode(){
+  helpButton.displayButton(width/2,height- height/4,width/3,height/5);
+  helpButton.isTheButtonBeingClicked(-1);
+  helpButton.theText("HELP!!");
+
+
+}
+
+void  helpScreen() {
+  text("dont knwo yet to play the game", width/2,height/2);
+
+
 }
 
 
@@ -58,6 +76,8 @@ void objectLoader() {
   w1 = new Weapon();
 
   startButton = new Button();
+  
+  helpButton = new Button();
 
 }
 
