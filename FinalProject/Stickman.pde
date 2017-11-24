@@ -2,6 +2,7 @@
 class Stickman {
   float x, y, dx, dy, w, h;
   boolean movingUp, movingDown, movingRight, movingLeft;
+  PImage sticky;
 
 //constructor
   Stickman() {
@@ -9,18 +10,20 @@ class Stickman {
     y = height/2;
     dx = 5;
     dy = 5;
-    w = width/50;
-    h = height/25;
+    w = width/30;
+    h = height/15;
     movingDown = false;
     movingLeft = false;
     movingRight = false;
     movingUp = false;
+    sticky = loadImage("Sticky.png");
   }
 
 
   void display() {
     rectMode(CENTER);
-    rect(x, y, w, h);
+    image(sticky,x,y,w,h);//the stickman PImage
+    //rect(x, y, w, h);
   }
   
   
