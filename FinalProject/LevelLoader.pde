@@ -20,12 +20,8 @@ class LevelLoader {
     for (int y = 0; y < tileHeight; y++) {
       for (int x = 0; x < tileWidth; x++) {
         char tileType = lines[y].charAt(x);
-        if (tileType == 'C') {
-          Cx = x;
-          Cy = y;
-          println(Cx,Cy);
-        }
         allTiles[x][y] = new Tile(x*indivudalTileWidth, y*indivudalTileHeight, indivudalTileWidth, indivudalTileHeight, tileType);
+        println(x,y);
       }
     }
   }
@@ -40,8 +36,7 @@ class LevelLoader {
   }
   void moveCharch() {
     if (key == 'w'){
-      Cy -=1;
-      
+         
     }
 
 

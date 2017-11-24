@@ -11,7 +11,7 @@ class Tile {
     tileType = _tileType;
     
     if(tileType == 'o'){
-      rgb = color(255); // this is for empty space
+      rgb = color(100); // this is for empty space
     }
     if(tileType == 'b') {
       rgb = color(0,255,0); // this is for our base
@@ -23,13 +23,16 @@ class Tile {
       rgb = color(0,0,255);
       // add the new class functionhere.
     }
+    if (tileType == 'O') {
+      rgb = color(150,255,150);
+    }
 
 
 }
 
   void display() {
     fill(rgb);
-    stroke(100);
+    stroke(0);
     rect(x, y, w, h);
   }
 
