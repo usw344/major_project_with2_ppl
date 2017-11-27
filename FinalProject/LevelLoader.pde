@@ -2,19 +2,23 @@
 class LevelLoader {
   int tileHeight, tileWidth; 
   float indivudalTileHeight, indivudalTileWidth;
+  int charX, charY;
   //this is the x and y of the character
-  int Cx,Cy;
+
   Tile[][] allTiles;
+  int xCord, yCord;
+  
 
   LevelLoader(String levelWeAreOn) {
     String lines[] = loadStrings(levelWeAreOn);
     tileHeight = lines.length;
     tileWidth = lines[0].length();
 
+
     indivudalTileWidth = width/float(tileWidth);
     indivudalTileHeight = height/float(tileHeight);
     
-    println(indivudalTileWidth, indivudalTileHeight);
+    //println(indivudalTileWidth, indivudalTileHeight);
 
     allTiles = new Tile[tileWidth][tileHeight];
 
@@ -26,7 +30,9 @@ class LevelLoader {
         //println(x,y);
       }
     }
-  }
+    charX = 11 * int(indivudalTileWidth);
+    charY = 22 * int(indivudalTileHeight);  
+}
 
   void showBoard() {
     for (int y = 0; y < tileHeight; y++) {
@@ -38,6 +44,18 @@ class LevelLoader {
   }
   
   void moveCharch() {
+    xCord = int(mouseX/indivudalTileWidth);
+    yCord = int(mouseY/indivudalTileHeight);
+
+    if(mousePressed) {
+      charX = mouseX- int(indivudalTileWidth/2);
+      charY = mouseY - int(indivudalTileHeight/2);
+      
+    }
+    
+    PImage stiuc;
+    stiuc = loadImage("Sticky.png");
+    image(stiuc,charX,charY, indivudalTileWidth,indivudalTileHeight);
     
   }
 }

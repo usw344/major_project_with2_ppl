@@ -3,6 +3,7 @@ class Tile {
   float w, h;
   char tileType;
   color rgb;
+  PImage playerHut;
   Tile(float _x, float _y, float _w, float _h, char _tileType) {
     x = _x;
     y = _y;
@@ -25,6 +26,12 @@ class Tile {
 
 
 }
+
+  void findWhereThePlayerIsClicking() {
+    //
+  
+  }
+
 
   void display() {
     rectMode(CORNER);

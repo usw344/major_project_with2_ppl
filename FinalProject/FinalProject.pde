@@ -2,13 +2,15 @@ Stickman s1;
 Weapon w1;
 LevelLoader lvl1;
 Button startButton, helpButton;
+PImage ourHut;
+
 
 int state;
 
 
 void setup() {
-  size(650,650);
-  //fullScreen();
+  //size(625,625);
+  fullScreen();
   state = 0;
   objectLoader();
 
@@ -29,6 +31,7 @@ void draw() {
   }
   else if(state == 1) { // grid game
     lvl1.showBoard();
+    lvl1.moveCharch();
   
   }
   
