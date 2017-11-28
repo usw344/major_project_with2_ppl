@@ -44,18 +44,33 @@ class LevelLoader {
   }
   
   void moveCharch() {
+
     xCord = int(mouseX/indivudalTileWidth);
     yCord = int(mouseY/indivudalTileHeight);
 
-    if(mousePressed) {
-      charX = mouseX- int(indivudalTileWidth/2);
-      charY = mouseY - int(indivudalTileHeight/2);
-      
-    }
-    
     PImage stiuc;
     stiuc = loadImage("Sticky.png");
     image(stiuc,charX,charY, indivudalTileWidth,indivudalTileHeight);
-    
+
+    legalMoveChecker(xCord,yCord);
+    if(mousePressed ) {//&& legalMoveChecker(xCord,yCord)) {
+      charX = mouseX- int(indivudalTileWidth/2);
+      charY = mouseY - int(indivudalTileHeight/2);
+      
+      allTiles[xCord][yCord].switchTileTo('O');
+      
+      stiuc = loadImage("Sticky.png");
+      image(stiuc,charX,charY, indivudalTileWidth,indivudalTileHeight);
+    }
   }
+
+
+
+  void  legalMoveChecker(int x, int y) {
+    if(allTiles[x][y+1].checker('o')){
+      println("true");
+    }
+  
+  }
+
 }

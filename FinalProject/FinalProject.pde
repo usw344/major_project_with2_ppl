@@ -9,8 +9,8 @@ int state;
 
 
 void setup() {
-  //size(625,625);
-  fullScreen();
+  size(625,625);
+  //fullScreen();
   state = 0;
   objectLoader();
 
@@ -18,8 +18,8 @@ void setup() {
 
 
 void draw() {
-  background(0);
-  
+  background(255);
+  println("false");
   
   if (state == 0) { // intro screne
     startScreen();
