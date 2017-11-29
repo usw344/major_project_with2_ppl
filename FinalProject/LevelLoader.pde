@@ -70,7 +70,18 @@ class LevelLoader {
     if(allTiles[x][y+1].checker('o')){
       println("true");
     }
-  
+    else if(allTiles[x][y-1].checker('o')) {
+      println("true");
+    }
+    else if(allTiles[x][y+1].checker('o')) {
+      //
+    }
+    else if(allTiles[x][y+1].checker('o')) {
+    }
+    else if(allTiles[x][y+1].checker('o')) {
+    }
+    else if(allTiles[x][y+1].checker('o')){
+    }
   }
 
 }
