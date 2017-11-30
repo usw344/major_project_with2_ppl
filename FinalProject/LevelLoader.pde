@@ -4,20 +4,28 @@ class LevelLoader {
   float indivudalTileHeight, indivudalTileWidth;
   int charX, charY;
   //this is the x and y of the character
+  PImage stiuc;
+
+  int charXActualLocal, charYActualLocal;
 
   Tile[][] allTiles;
   int xCord, yCord;
-  
+
+
+  int clickedXCord, clickedYCord;
+
+
 
   LevelLoader(String levelWeAreOn) {
     String lines[] = loadStrings(levelWeAreOn);
     tileHeight = lines.length;
     tileWidth = lines[0].length();
+    stiuc = loadImage("Sticky.png");
 
 
     indivudalTileWidth = width/float(tileWidth);
     indivudalTileHeight = height/float(tileHeight);
-    
+
     //println(indivudalTileWidth, indivudalTileHeight);
 
     allTiles = new Tile[tileWidth][tileHeight];
@@ -30,8 +38,9 @@ class LevelLoader {
         //println(x,y);
       }
     }
-    charX = 11 * int(indivudalTileWidth);
-    charY = 22 * int(indivudalTileHeight);  
+    charX = 5 * int(indivudalTileWidth);
+    charY = 22 * int(indivudalTileHeight);
+
 }
 
   void showBoard() {
@@ -42,55 +51,61 @@ class LevelLoader {
       }
     }
   }
-  
-  void moveCharch() {
 
+  void moveCharch() {
     xCord = int(mouseX/indivudalTileWidth);
     yCord = int(mouseY/indivudalTileHeight);
 
-    PImage stiuc;
-    stiuc = loadImage("Sticky.png");
-    image(stiuc,charX,charY, indivudalTileWidth,indivudalTileHeight);
-
-    legalMoveChecker(xCord,yCord);
-    if(mousePressed ) {//&& legalMoveChecker(xCord,yCord)) {
-      charX = mouseX- int(indivudalTileWidth/2);
-      charY = mouseY - int(indivudalTileHeight/2);
-      
-      allTiles[xCord][yCord].switchTileTo('O');
-      
-      stiuc = loadImage("Sticky.png");
-      image(stiuc,charX,charY, indivudalTileWidth,indivudalTileHeight);
-    }
   }
 
 
 
-  void  legalMoveChecker(int x, int y) {
-    if(allTiles[x][y+1].checker('o')){
-      println("true");
+  boolean  legalMoveChecker(int x, int y) {
+    println("try");
+    if (x >= 0 && x<=24 && y <= 23) {
+      if (allTiles[x][y+1].checker('O')) {
+        return true;
+      }
+      if (allTiles[x][y-1].checker('O')) {
+        return true;
+      }
+      if (allTiles[x+1][y].checker('O')) {
+        return true;
+      }
+      if (allTiles[x-1][y+1].checker('O')) {
+        return true;
+      }
+      if (allTiles[x-1][y+1].checker('O')) {
+        return true;
+      }
+      if (allTiles[x+1][y+1].checker('O')) {
+        return true;
+      }
+      if (allTiles[x+1][y-1].checker('O')) {
+        return true;
+      }
+      if (allTiles[x-1][y-1].checker('O')) {
+        return true;
+      }
+    } else {
+      return false;
     }
-    else if(allTiles[x][y-1].checker('o')) {
-      println("true");
+    return false;
+  }
+
+  void mouseHandler() {
+    clickedXCord = int(mouseX/indivudalTileWidth);
+    clickedYCord = int(mouseY/indivudalTileHeight);
+
+    if (legalMoveChecker(clickedXCord, clickedYCord)) {
+      charX = clickedXCord * int(indivudalTileWidth);
+      charY = clickedYCord * int(indivudalTileHeight);
+      allTiles[xCord][yCord].switchTileTo('O');
     }
-    else if(allTiles[x+1][y].checker('o')) {
-      println("true");
-    }
-    else if(allTiles[x-1][y+1].checker('o')) {
-      println("true");
-    }
-    else if(allTiles[x-1][y+1].checker('o')) {
-      println("true");
-    }
-    else if(allTiles[x+1][y+1].checker('o')){
-      println("true");
-    }
-    else if(allTiles[x+1][y-1].checker('o')){
-      println("true");
-    }
-    else if(allTiles[x-1][y-1].checker('o')){
-      println("true");
-    }
+}
+
+  void displayChar() {
+    image(stiuc, charX, charY, indivudalTileWidth, indivudalTileHeight);
   }
 
 }
