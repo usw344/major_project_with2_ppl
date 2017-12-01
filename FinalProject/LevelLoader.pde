@@ -11,6 +11,7 @@ class LevelLoader {
   Tile[][] allTiles;
   int xCord, yCord;
 
+  int turnCounter;
   boolean isTurnOver;
   int clickedXCord, clickedYCord;
 
@@ -22,6 +23,7 @@ class LevelLoader {
     tileWidth = lines[0].length();
     stiuc = loadImage("Sticky.png");
     isTurnOver = false;
+    turnCounter = 0;
 
 
     indivudalTileWidth = width/float(tileWidth);
@@ -109,7 +111,7 @@ class LevelLoader {
       charX = clickedXCord * int(indivudalTileWidth);
       charY = clickedYCord * int(indivudalTileHeight);
       allTiles[xCord][yCord].switchTileTo('O');
-      isTurnOver = true;
+      turnCounter ++;
     }
   }
 
