@@ -11,7 +11,7 @@ class LevelLoader {
   Tile[][] allTiles;
   int xCord, yCord;
 
-
+  boolean isTurnOver;
   int clickedXCord, clickedYCord;
 
 
@@ -21,6 +21,7 @@ class LevelLoader {
     tileHeight = lines.length;
     tileWidth = lines[0].length();
     stiuc = loadImage("Sticky.png");
+    isTurnOver = false;
 
 
     indivudalTileWidth = width/float(tileWidth);
@@ -40,8 +41,7 @@ class LevelLoader {
     }
     charX = 5 * int(indivudalTileWidth);
     charY = 22 * int(indivudalTileHeight);
-
-}
+  }
 
   void showBoard() {
     for (int y = 0; y < tileHeight; y++) {
@@ -55,14 +55,19 @@ class LevelLoader {
   void moveCharch() {
     xCord = int(mouseX/indivudalTileWidth);
     yCord = int(mouseY/indivudalTileHeight);
-
   }
 
 
 
   boolean  legalMoveChecker(int x, int y) {
-    println("try");
+
     if (x >= 0 && x<=24 && y <= 23) {
+      // this part checks for enemy base and then starts battle
+      if (checkForlegalMoveOnTownHall(x,y) && allTiles[x][y].checker('B')) {
+        battle();
+        return true;
+      }
+      /// this next if block checks for empty space to  move to
       if (allTiles[x][y+1].checker('O')) {
         return true;
       }
@@ -88,10 +93,13 @@ class LevelLoader {
         return true;
       }
     } else {
-      return false;
+      text("invalid move", width/2, height/2);
+      return false;// not a valid move.
     }
+    text("invalid move", width/2, height/2);
     return false;
   }
+
 
   void mouseHandler() {
     clickedXCord = int(mouseX/indivudalTileWidth);
@@ -101,11 +109,45 @@ class LevelLoader {
       charX = clickedXCord * int(indivudalTileWidth);
       charY = clickedYCord * int(indivudalTileHeight);
       allTiles[xCord][yCord].switchTileTo('O');
+      isTurnOver = true;
     }
-}
+  }
 
   void displayChar() {
     image(stiuc, charX, charY, indivudalTileWidth, indivudalTileHeight);
   }
+  void battle() {
+    state = 2;
+  }
+
+
+  boolean checkForlegalMoveOnTownHall(int x, int y) {
+    if (allTiles[x][y+1].checker('O')) {
+      return true;
+    }
+    if (allTiles[x][y-1].checker('O')) {
+      return true;
+    }
+    if (allTiles[x+1][y].checker('O')) {
+      return true;
+    }
+    if (allTiles[x-1][y+1].checker('O')) {
+      return true;
+    }
+    if (allTiles[x-1][y+1].checker('O')) {
+      return true;
+    }
+    if (allTiles[x+1][y+1].checker('O')) {
+      return true;
+    }
+    if (allTiles[x+1][y-1].checker('O')) {
+      return true;
+    }
+    if (allTiles[x-1][y-1].checker('O')) {
+      return true;
+    }
+    return false;
+
+}
 
 }

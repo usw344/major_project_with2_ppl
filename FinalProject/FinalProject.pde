@@ -1,10 +1,24 @@
+// work on this on the weekend
+// find out why the bottom row does not work
+// find out about right movement\
+//FIND BETTER NAMES
+// standarize names
+// comment stuff
+// ai
+// turn 
+// BATTLE
+
+
+
+
+
 Stickman s1;
 Weapon w1;
 LevelLoader lvl1;
 Button startButton, helpButton;
 PImage ourHut;
 
-
+int move;
 int state;
 
 
@@ -13,6 +27,7 @@ void setup() {
   //fullScreen();
   state = 0;
   objectLoader();
+  move = 1;
 }
 
 
@@ -23,12 +38,15 @@ void draw() {
   if (state == 0) { // intro screne
     startScreen();
     helpButtonCode();
-  } else if (state == -1) {
+  } 
+  else if (state == -1) {
     helpScreen();
-  } else if (state == 1) { // grid game
+  } 
+  else if (state == 1) { // grid game
     lvl1.showBoard();
     lvl1.moveCharch();
-  } else if (state == 2) { // stick man fight
+  } 
+  else if (state == 2) { // stick man fight
     handleStickerman();
   }
 }
@@ -81,6 +99,6 @@ void keyReleased() {
 
 
 void mousePressed() {
-  lvl1.mouseHandler();
+  lvl1.mouseHandler(); // triggers the char to move. ALL THE MAJOR CODE FOR CHAR
 
 }
