@@ -1,7 +1,7 @@
 //Made by Kam
 class Stickman {
   float x, y, dx, dy, w, h;
-  boolean movingUp, movingDown, movingRight, movingLeft;
+  boolean movingUp, movingDown, movingRight, movingLeft, engageAi;
   PImage sticky;
 
 //constructor
@@ -17,11 +17,26 @@ class Stickman {
     movingRight = false;
     movingUp = false;
     sticky = loadImage("Sticky.png");
+    engageAi = false;
+  }
+  Stickman(float _x) {
+    x = _x;
+    y = height/2;
+    dx = 5;
+    dy = 5;
+    w = width/12;
+    h = height/6;
+    movingDown = false;
+    movingLeft = false;
+    movingRight = false;
+    movingUp = false;
+    sticky = loadImage("Sticky.png");
+    engageAi = true;
   }
 
 
   void display() {
-    rectMode(CENTER);
+    //rectMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
     //rect(x, y, w, h);
   }
@@ -81,4 +96,38 @@ class Stickman {
       movingRight = false;
     }
   }
+
+
+  void ai(Stickman humanPlayer) {
+    float humanStickmanXBox, humanStickmanYBox;
+    //humanStickmanXBox = 
+    String test = ("e1 x is: " + x + "the human x is: " + humanPlayer.x );
+    float speedToMove = 3;
+    textSize(14);
+    text(test, 200,300);
+    if(x == humanPlayer.x && y == humanPlayer.y) { // to check if range
+      text("hi",width/2,height/2);
+}
+    else {
+      if(humanPlayer.x < x) {
+        x -= speedToMove;
+        
+      }
+      else if(humanPlayer.x > x) {
+        x += speedToMove;
+        
+      }
+      if(humanPlayer.y > y) {
+        y += speedToMove;
+      }
+      else if(humanPlayer.y < y ){
+        y -= speedToMove;
+      }
+    
+    }
+  
+  }
+
+
+
 }

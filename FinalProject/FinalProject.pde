@@ -12,7 +12,7 @@
 
 
 
-Stickman s1;
+Stickman s1,e1;
 Weapon w1;
 LevelLoader lvl1;
 Button startButton, helpButton;
@@ -73,12 +73,17 @@ void  helpScreen() {
 void handleStickerman() { // sets up the stickman and starts the moving;
   s1.display();
   s1.movement();
+  e1.display();
+  e1.ai(s1);
+
+
 }
 
 void objectLoader() {
   lvl1 = new LevelLoader("/levels/0.txt");
 
   s1 = new Stickman();
+  e1 = new Stickman(4*width/5);
   w1 = new Weapon();
 
   startButton = new Button();

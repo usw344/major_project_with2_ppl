@@ -1,4 +1,5 @@
 
+
 class LevelLoader {
   int tileHeight, tileWidth; 
   float indivudalTileHeight, indivudalTileWidth;
@@ -70,6 +71,9 @@ class LevelLoader {
         return true;
       }
       /// this next if block checks for empty space to  move to
+      if(allTiles[x+1][y].checker('O')) {
+        return true;
+      }
       if (allTiles[x][y+1].checker('O')) {
         return true;
       }
