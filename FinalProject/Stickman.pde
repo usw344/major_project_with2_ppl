@@ -1,6 +1,6 @@
 //Made by Kam
 class Stickman {
-  float x, y, dx, dy, w, h;
+  float x, y, dx, dy, w, h,current;
   int health;
   boolean movingUp, movingDown, movingRight, movingLeft, engageAi;
   PImage sticky;
@@ -19,6 +19,7 @@ class Stickman {
     movingUp = false;
     sticky = loadImage("Sticky.png");
     engageAi = false;
+    health = 100;
   }
   Stickman(float _x) {
     x = _x;
@@ -33,14 +34,13 @@ class Stickman {
     movingUp = false;
     sticky = loadImage("Sticky.png");
     engageAi = true;
+    health = 100;
   }
 
 
   void display() {
     imageMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
-    rectMode(CENTER);
-    rect(x, y, w, h);
   }
   
   
@@ -101,17 +101,18 @@ class Stickman {
 
 
   void ai(Stickman humanPlayer) {
-    float humanStickmanXBox, humanStickmanYBox;
-    //humanStickmanXBox = 
-    String test = ("e1 x is: " + x + "the human x is: " + humanPlayer.x );
-    float speedToMove = 3;
-    health = 100;
-    textSize(14);
-    text(test, 200,300);
-    rect(width/10,height/8,width/2, height/25);
-    if(x == humanPlayer.x && y == humanPlayer.y) { // to check if range
-      text("hi",width/2,height/2);
-      health -= 1;
+    float humanX, humanY, humanWidth,humanHeight;
+    humanX = humanPlayer.x;
+    humanY = humanPlayer.y;
+    humanWidth = humanPlayer.w;
+    humanHeight = humanPlayer.h;
+    float speedToMove = 2.5;
+    if(humanX + w/2 >= x - w/2 && humanX - w/2 <= x + w/2 && humanY + h/2 >= y - h/2 && humanY - h/2 <= y + h/2){ // to check if range
+      if(keyPressed && key == ' ') {
+      x += 50;
+      health -= 5;
+      healthBar();
+    }
     }
     else {
       if(humanPlayer.x < x) {
@@ -135,7 +136,17 @@ class Stickman {
 
 void healthBar() {
   //sets un the health bar
-  rect(width/10,height/8,width/2, height/25);
+  float widthOfHealth;
+  
+  widthOfHealth = width/3;
+  current = widthOfHealth;
+  current = widthOfHealth * health/10;
+  rect(width/10,height/8,health*5, height/25);
+  if (health <= 0) {
+    state = 1;
+    health = 100;
+    
+  }
 }
 
 

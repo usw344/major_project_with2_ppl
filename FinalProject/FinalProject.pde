@@ -73,6 +73,7 @@ void handleStickerman() { // sets up the stickman and starts the moving;
   s1.movement();
   e1.display();
   e1.ai(s1);
+  e1.healthBar();
 
 
 }
