@@ -1,6 +1,6 @@
 // work on this on the weekend
 // find out why the bottom row does not work
-// find out about right movement\
+
 //FIND BETTER NAMES
 // standarize names
 // comment stuff
