@@ -1,8 +1,6 @@
 // work on this on the weekend
 // find out why the bottom row does not work
 
-//FIND BETTER NAMES
-// standarize names
 // comment stuff
 // ai
 // turn 

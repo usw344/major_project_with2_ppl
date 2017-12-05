@@ -39,7 +39,8 @@ class Stickman {
   void display() {
     imageMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
-    //rect(x, y, w, h);
+    rectMode(CENTER);
+    rect(x, y, w, h);
   }
   
   
