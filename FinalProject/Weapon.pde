@@ -1,4 +1,5 @@
 //Made by Kam
+//not in use yet
 class Weapon {
   float x,y,w,h,dx,dy;
   boolean movingUp, movingDown, movingRight, movingLeft;
