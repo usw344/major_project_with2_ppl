@@ -1,6 +1,7 @@
 //Made by Kam
 class Stickman {
   float x, y, dx, dy, w, h;
+  int health;
   boolean movingUp, movingDown, movingRight, movingLeft, engageAi;
   PImage sticky;
 
@@ -36,7 +37,7 @@ class Stickman {
 
 
   void display() {
-    //rectMode(CENTER);
+    imageMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
     //rect(x, y, w, h);
   }
@@ -103,11 +104,14 @@ class Stickman {
     //humanStickmanXBox = 
     String test = ("e1 x is: " + x + "the human x is: " + humanPlayer.x );
     float speedToMove = 3;
+    health = 100;
     textSize(14);
     text(test, 200,300);
+    rect(width/10,height/8,width/2, height/25);
     if(x == humanPlayer.x && y == humanPlayer.y) { // to check if range
       text("hi",width/2,height/2);
-}
+      health -= 1;
+    }
     else {
       if(humanPlayer.x < x) {
         x -= speedToMove;
@@ -128,6 +132,10 @@ class Stickman {
   
   }
 
+void healthBar() {
+  //sets un the health bar
+  rect(width/10,height/8,width/2, height/25);
+}
 
 
 }
