@@ -8,7 +8,7 @@ class LevelLoader {
   int xCord, yCord;
   int turnCounter;
   int clickedXCord, clickedYCord;
-
+  int amountOfGold, amountToAdd;
 
   // float vars
   float tileHeight, tileWidth;
@@ -127,6 +127,7 @@ class LevelLoader {
       charY = clickedYCord * int(tileHeight);
       allTiles[xCord][yCord].switchTileTo('O');
       turnCounter ++;
+      calculateGold();
     }
   }
 
@@ -168,4 +169,17 @@ class LevelLoader {
     }
     return false;
   }
+
+  void calculateGold() {
+    amountToAdd = 0;
+    for (int y = 0; y < boardHeight; y++) {
+      for (int x = 0; x < boardWidth; x++) {
+        if(allTiles[x][y].checker('O')) {
+          amountToAdd ++;
+        }  
+      }
+  }
+    amountOfGold += amountToAdd;  
+
+}
 }

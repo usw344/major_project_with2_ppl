@@ -11,8 +11,8 @@ class Stickman {
     y = height/2;
     dx = 5;
     dy = 5;
-    w = width/12;
-    h = height/6;
+    w = width/6;
+    h = height/3;
     movingDown = false;
     movingLeft = false;
     movingRight = false;
@@ -26,8 +26,8 @@ class Stickman {
     y = height/2;
     dx = 5;
     dy = 5;
-    w = width/12;
-    h = height/6;
+    w = width/6;
+    h = height/3;
     movingDown = false;
     movingLeft = false;
     movingRight = false;
@@ -106,10 +106,10 @@ class Stickman {
     humanY = humanPlayer.y;
     humanWidth = humanPlayer.w;
     humanHeight = humanPlayer.h;
-    float speedToMove = 2.5;
+    float speedToMove = 3.5;
     if(humanX + w/2 >= x - w/2 && humanX - w/2 <= x + w/2 && humanY + h/2 >= y - h/2 && humanY - h/2 <= y + h/2){ // to check if range
       if(keyPressed && key == ' ') {
-      x += 50;
+      x += 25;
       health -= 5;
       healthBar();
     }
@@ -137,7 +137,7 @@ class Stickman {
 void healthBar() {
   //sets un the health bar
   float widthOfHealth;
-  
+
   widthOfHealth = width/3;
   current = widthOfHealth;
   current = widthOfHealth * health/10;
@@ -147,6 +147,10 @@ void healthBar() {
     health = 100;
     
   }
+  fill(0);
+  textSize(32);
+  text(health,width/10,height/8+100);
+
 }
 
 

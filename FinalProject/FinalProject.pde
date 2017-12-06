@@ -14,7 +14,7 @@ Stickman s1,e1;
 Weapon w1;
 LevelLoader lvl1;
 Button startButton, helpButton;
-PImage ourHut;
+PImage ourHut,theGoldBar;
 
 int move;
 int state;
@@ -25,6 +25,7 @@ void setup() {
   //fullScreen();
   state = 0;
   objectLoader();
+  theGoldBar = loadImage("gold.png");
   move = 1;
 }
 
@@ -43,6 +44,8 @@ void draw() {
   else if (state == 1) { // grid game
     lvl1.showBoard();
     lvl1.moveCharch();
+    fill(0);
+    drawResourceBar();
   } 
   else if (state == 2) { // stick man fight
     handleStickerman();
@@ -89,18 +92,43 @@ void objectLoader() {
 
   helpButton = new Button();
 }
+void drawResourceBar() {
+  //where to draw the black bar at the bottom of the screen
+  float barY = height-lvl1.tileHeight;
+  float barWidth = width;
+  float barHeight = lvl1.tileHeight;
+  
+  // floats for the gold bar PImage
+  float goldBarX = width-width/3;
+  float goldBarW = lvl1.tileWidth;
+  float goldBarH =lvl1.tileHeight;
+  
 
+  rect(0,barY,barWidth,barHeight);
+
+
+  image(theGoldBar,goldBarX,barY,goldBarW,goldBarH);
+  
+  fill(255);
+  textSize(24);
+  
+  text("= ",goldBarX + 40,barY+goldBarH/2+5);
+  text(lvl1.amountOfGold,goldBarX + 80,barY+goldBarH/2+5);
+  
+  text("turn",goldBarX/2 - width/16,barY+goldBarH/2+5);
+  text(lvl1.turnCounter,goldBarX/2 - width/16 + 80,barY+goldBarH/2+5);
+}
 
 /// this makes the stickman move;
 void keyPressed() {
   s1.handleKeyPress();
+  
 }
 
 void keyReleased() {
   s1.handleKeyRelease();
   
 }
-
 
 void mousePressed() {
   lvl1.mouseHandler(); // triggers the char to move. ALL THE MAJOR CODE FOR CHAR
