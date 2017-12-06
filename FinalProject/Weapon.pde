@@ -1,5 +1,5 @@
 //Made by Kam
-//not in use yet
+//NOT IN USE YET COPY OF STICKMAN CODE
 class Weapon {
   float x,y,w,h,dx,dy;
   boolean movingUp, movingDown, movingRight, movingLeft;

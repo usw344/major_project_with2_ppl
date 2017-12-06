@@ -3,12 +3,15 @@
 class LevelLoader {
   // all int vars
   int boardHeight, boardWidth; 
+  
+  //var used to see where you are clicking
   int charX, charY;
-
   int xCord, yCord;
-  int turnCounter;
   int clickedXCord, clickedYCord;
+  
+  // to do with turn and resources
   int amountOfGold, amountToAdd;
+  int turnCounter;
 
   // float vars
   float tileHeight, tileWidth;
@@ -20,39 +23,42 @@ class LevelLoader {
   //the board array
   Tile[][] allTiles;
   
-
-  //???
-  boolean isTurnOver;
   
 
 
 
   LevelLoader(String levelWeAreOn) {
     String lines[] = loadStrings(levelWeAreOn);
+    
     boardHeight = lines.length;
     boardWidth = lines[0].length();
+    
     stickMan = loadImage("Sticky.png");
-    isTurnOver = false;
+    
     turnCounter = 0;
 
-
+    //scalling the tiles to each screen
     tileWidth = width/float(boardWidth);
     tileHeight = height/float(boardHeight);
 
-
+    //starting the array for the board
     allTiles = new Tile[boardWidth][boardHeight];
 
 
+    //setting up default board
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
         char tileType = lines[y].charAt(x);
+        
         allTiles[x][y] = new Tile(x*tileWidth, y*tileHeight, tileWidth, tileHeight, tileType);
-        //println(x,y);
+
       }
     }
+    //doesnt do much for now
     charX = 5 * int(tileWidth);
     charY = 22 * int(tileHeight);
   }
+
 
   void showBoard() {
     for (int y = 0; y < boardHeight; y++) {
@@ -63,70 +69,76 @@ class LevelLoader {
     }
   }
 
-  void moveCharch() {
-    xCord = int(mouseX/tileWidth);
-    yCord = int(mouseY/tileHeight);
 
-  }
 
 
 
   boolean  legalMoveChecker(int x, int y) {
-
-    if (x >= 0 && x<=24 && y <= 23) {
+    if (x > 0 && x<24 && y < 23) {// prevents array out of bound error
       // this part checks for enemy base and then starts battle
       if (checkForlegalMoveOnTownHall(x, y) && allTiles[x][y].checker('B')) {
         battle();
+        
         return true;
       }
+      
       /// this next if block checks for empty space to  move to
       if (allTiles[x-1][y].checker('O')) {
-        //println("true");
         return true;
       }
+      
       if (allTiles[x][y+1].checker('O')) {
-
         return true;
       }
+      
       if (allTiles[x][y-1].checker('O')) {
         return true;
       }
+      
       if (allTiles[x+1][y].checker('O')) {
         return true;
       }
+      
       if (allTiles[x-1][y+1].checker('O')) {
         return true;
       }
+      
       if (allTiles[x-1][y+1].checker('O')) {
         return true;
       }
+      
       if (allTiles[x+1][y+1].checker('O')) {
         return true;
       }
+      
       if (allTiles[x+1][y-1].checker('O')) {
         return true;
       }
+      
       if (allTiles[x-1][y-1].checker('O')) {
         return true;
       }
-    } else {
-      text("invalid move", width/2, height/2);
-      return false;// not a valid move.
-    }
-    text("invalid move", width/2, height/2);
-    return false;
+    } 
+    return false; // not a valid move dont move
   }
 
 
   void mouseHandler() {
+    //calculating which tile the mouse is on the screen    
     clickedXCord = int(mouseX/tileWidth);
     clickedYCord = int(mouseY/tileHeight);
 
     if (legalMoveChecker(clickedXCord, clickedYCord)) {
+      //changing where the stickman is to be drawn later on
       charX = clickedXCord * int(tileWidth);
       charY = clickedYCord * int(tileHeight);
-      allTiles[xCord][yCord].switchTileTo('O');
+      
+      // switching the tile which was clicked upon into a upperCase o which is green tile
+      allTiles[clickedXCord][clickedYCord].switchTileTo('O');
+      
+      //upadte both turn and gold count
       turnCounter ++;
+      
       calculateGold();
     }
   }
@@ -140,30 +152,39 @@ class LevelLoader {
 
 
   boolean checkForlegalMoveOnTownHall(int x, int y) {
+    //checking all around to see if we can have a battle
     if (allTiles[x+1][y].checker('O')) {
       return true;
     }
+    
     if (allTiles[x][y+1].checker('O')) {
       return true;
     }
+    
     if (allTiles[x][y-1].checker('O')) {
       return true;
     }
+    
     if (allTiles[x-1][y].checker('O')) {
       return true;
     }
+    
     if (allTiles[x-1][y+1].checker('O')) {
       return true;
     }
+    
     if (allTiles[x-1][y+1].checker('O')) {
       return true;
     }
+    
     if (allTiles[x+1][y+1].checker('O')) {
       return true;
     }
+    
     if (allTiles[x+1][y-1].checker('O')) {
       return true;
     }
+    
     if (allTiles[x-1][y-1].checker('O')) {
       return true;
     }
@@ -171,7 +192,10 @@ class LevelLoader {
   }
 
   void calculateGold() {
+    //this function goes through and checks for all your tiles and gives you one gold per tile
+    
     amountToAdd = 0;
+    
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
         if(allTiles[x][y].checker('O')) {

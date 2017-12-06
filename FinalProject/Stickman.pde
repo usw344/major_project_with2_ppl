@@ -7,33 +7,40 @@ class Stickman {
 
 //constructor
   Stickman() {
+    //setting up where the stickman will be
     x = width/16;
     y = height/2;
     dx = 5;
     dy = 5;
     w = width/6;
     h = height/3;
+    
+    // setting all the movment booleans to false. 
     movingDown = false;
     movingLeft = false;
     movingRight = false;
     movingUp = false;
+    
+    //loading up the stickman
     sticky = loadImage("Sticky.png");
-    engageAi = false;
+    
+    engageAi = false;// this is human controled so no ai
+    
     health = 100;
   }
-  Stickman(float _x) {
+  Stickman(float _x) {// second constructor for the enemy one. (no movement boolean and diffeent draw lcoation)
+    //setting up enemy localtion
     x = _x;
     y = height/2;
     dx = 5;
     dy = 5;
     w = width/6;
     h = height/3;
-    movingDown = false;
-    movingLeft = false;
-    movingRight = false;
-    movingUp = false;
+    
+    //loading its place
     sticky = loadImage("Sticky.png");
-    engageAi = true;
+   
+    engageAi = true;//the computer will controll this one
     health = 100;
   }
 
@@ -44,7 +51,7 @@ class Stickman {
   }
   
   
-//this is all the code for handling the movement of the stickman
+//////////////////////////////////////////////////////this is all the code for handling the movement of the stickman
   void movement() {
     if (movingUp) {
       if (y > h/2) {
@@ -68,8 +75,8 @@ class Stickman {
     }
   }
 
-
-  void handleKeyPress() {
+////////////////////////////////////////////////////////////////////////// dealing with keyPressed and released
+  void handleKeyPress() {// used with the keyPressed in the main file
     if (key == 'w') {
       movingUp = true;
     }
@@ -99,59 +106,58 @@ class Stickman {
     }
   }
 
-
+//////////////////////////////////////
   void ai(Stickman humanPlayer) {
-    float humanX, humanY, humanWidth,humanHeight;
+    float humanX, humanY;
+    float speedToMove = 3.5;
+    
     humanX = humanPlayer.x;
     humanY = humanPlayer.y;
-    humanWidth = humanPlayer.w;
-    humanHeight = humanPlayer.h;
-    float speedToMove = 3.5;
-    if(humanX + w/2 >= x - w/2 && humanX - w/2 <= x + w/2 && humanY + h/2 >= y - h/2 && humanY - h/2 <= y + h/2){ // to check if range
+    
+    if(humanX + w/2 >= x - w/2 && humanX - w/2 <= x + w/2 && humanY + h/2 >= y - h/2 && humanY - h/2 <= y + h/2){ // to check if range of the other stickman and hit it
       if(keyPressed && key == ' ') {
-      x += 25;
-      health -= 5;
+      x += 25;// move them apart after a hit by 25
+      
+      health -= 5;// reduce and update healthbar
       healthBar();
-    }
-    }
+    }  
+  }
+    
     else {
+      // very simple ai just moves towards the humanPlayer
       if(humanPlayer.x < x) {
         x -= speedToMove;
-        
       }
       else if(humanPlayer.x > x) {
-        x += speedToMove;
-        
+        x += speedToMove;  
       }
+      
       if(humanPlayer.y > y) {
         y += speedToMove;
       }
+      
       else if(humanPlayer.y < y ){
         y -= speedToMove;
       }
-    
     }
-  
   }
 
 void healthBar() {
-  //sets un the health bar
-  float widthOfHealth;
 
-  widthOfHealth = width/3;
-  current = widthOfHealth;
-  current = widthOfHealth * health/10;
+  //drawing a rect based on your current health
+  
   rect(width/10,height/8,health*5, height/25);
+  
   if (health <= 0) {
-    state = 1;
+    state = 1;// when the battle end go back to grid
     health = 100;
     
   }
+  
   fill(0);
   textSize(32);
+  
   text(health,width/10,height/8+100);
 
-}
-
-
+  }
 }

@@ -1,64 +1,81 @@
-// work on this on the weekend
-// find out why the bottom row does not work
+// Muhammad and kam pair prog. game. (milestone 1 for major project)
+// Due december 6
+// button objecy by Muhmmad
+// stickman Object by kam
+// both worked heavily on levelLoader
 
-// comment stuff
-// ai
-// turn 
-// BATTLE
+// what works right now
+//you can expand
+//primative fighting is also there
 
 
 
-
-
-Stickman s1,e1;
+//loading our objects
+Stickman humanPlayerStickMan,aiControledStickMan;
 Weapon w1;
 LevelLoader lvl1;
 Button startButton, helpButton;
+
+// images for the resource bar at the bottom and hut
 PImage ourHut,theGoldBar;
 
-int move;
+
 int state;
 
 
 void setup() {
+  //switch between full screen and normal WARNING DO NOT USE FULLSCREEN FOR DEBUGGING
   size(625, 625);
   //fullScreen();
+  
   state = 0;
+  
+  // starts the constructor for the objects
   objectLoader();
+  
   theGoldBar = loadImage("gold.png");
-  move = 1;
+
 }
 
 
 void draw() {
   background(255);
-  //println("false");
+
 
   if (state == 0) { // intro screne
-    startScreen();
-    helpButtonCode();
+    startScreen(); // all the buttons for the first screen
+    helpButtonCode(); // instructions for the game
   } 
+  
   else if (state == -1) {
-    helpScreen();
+    helpScreen();// coming soon a help screen
   } 
+  
   else if (state == 1) { // grid game
     lvl1.showBoard();
-    lvl1.moveCharch();
+    //lvl1.moveCharch();// deals with adding squares to your side
+    
     fill(0);
     drawResourceBar();
   } 
+  
   else if (state == 2) { // stick man fight
-    handleStickerman();
+    handleStickerman();// all the code for the red square battle
   }
 }
 
 
+///////////////////////////////////////////////// all code for the buttons
 void startScreen() {
   background(255);
   startButton.displayButton(width/2, height/4, width/3, height/5);
-  startButton.isTheButtonBeingClicked(1);
+  
+  startButton.isTheButtonBeingClicked(1);// go to the game when clicked
+  
   startButton.theText("Start");
 }
+
+
 
 void helpButtonCode() {
   helpButton.displayButton(width/2, height- height/4, width/3, height/5);
@@ -71,28 +88,66 @@ void  helpScreen() {
 }
 
 
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////// code involing the stickman
 void handleStickerman() { // sets up the stickman and starts the moving;
-  s1.display();
-  s1.movement();
-  e1.display();
-  e1.ai(s1);
-  e1.healthBar();
+  //human plauer
+  humanPlayerStickMan.display();
+  
+  humanPlayerStickMan.movement();
+  
+  //ai player
+  aiControledStickMan.display();
+  
+  aiControledStickMan.ai(humanPlayerStickMan); //passing in the human stickman to be used in the ai
+  
+  aiControledStickMan.healthBar();
 
 
 }
 
-void objectLoader() {
-  lvl1 = new LevelLoader("0.txt");
+/// this makes the stickman move;
+void keyPressed() {
+  humanPlayerStickMan.handleKeyPress();
+  
+}
 
-  s1 = new Stickman();
-  e1 = new Stickman(4*width/5);
+void keyReleased() {
+  humanPlayerStickMan.handleKeyRelease();
+  
+}
+
+void mousePressed() {
+  lvl1.mouseHandler(); // triggers the char to move. ALL THE MAJOR CODE FOR CHAR
+
+}
+
+
+
+//////////////////////////////////////  background functions such as loading objects
+void objectLoader() {
+  lvl1 = new LevelLoader("0.txt"); //load whichever level you want hint make your own if you want
+
+  humanPlayerStickMan = new Stickman();
+  
+  aiControledStickMan = new Stickman(4*width/5);
+  
   w1 = new Weapon();
 
   startButton = new Button();
 
   helpButton = new Button();
 }
+
+
 void drawResourceBar() {
+  
   //where to draw the black bar at the bottom of the screen
   float barY = height-lvl1.tileHeight;
   float barWidth = width;
@@ -104,33 +159,20 @@ void drawResourceBar() {
   float goldBarH =lvl1.tileHeight;
   
 
-  rect(0,barY,barWidth,barHeight);
+  rect(0,barY,barWidth,barHeight);// drawing the black bar at the bottom
 
 
-  image(theGoldBar,goldBarX,barY,goldBarW,goldBarH);
+  image(theGoldBar,goldBarX,barY,goldBarW,goldBarH);// drawing the gold sprite
   
-  fill(255);
+  fill(255);// want white for the text with size 24
   textSize(24);
   
-  text("= ",goldBarX + 40,barY+goldBarH/2+5);
-  text(lvl1.amountOfGold,goldBarX + 80,barY+goldBarH/2+5);
+  // all the text you find on the resource bar
+  text("= ",goldBarX + 40,barY+goldBarH/2+5);// just the word gold
   
-  text("turn",goldBarX/2 - width/16,barY+goldBarH/2+5);
-  text(lvl1.turnCounter,goldBarX/2 - width/16 + 80,barY+goldBarH/2+5);
-}
-
-/// this makes the stickman move;
-void keyPressed() {
-  s1.handleKeyPress();
+  text(lvl1.amountOfGold,goldBarX + 80,barY+goldBarH/2+5); // amount of gold you have as of this turn
   
-}
-
-void keyReleased() {
-  s1.handleKeyRelease();
+  text("turn",goldBarX/2 - width/16,barY+goldBarH/2+5); // just the word turn
   
-}
-
-void mousePressed() {
-  lvl1.mouseHandler(); // triggers the char to move. ALL THE MAJOR CODE FOR CHAR
-
+  text(lvl1.turnCounter,goldBarX/2 - width/16 + 80,barY+goldBarH/2+5);// how many turns have passed
 }
