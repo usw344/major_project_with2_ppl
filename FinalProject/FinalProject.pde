@@ -79,7 +79,7 @@ void handleStickerman() { // sets up the stickman and starts the moving;
 }
 
 void objectLoader() {
-  lvl1 = new LevelLoader("/levels/0.txt");
+  lvl1 = new LevelLoader("0.txt");
 
   s1 = new Stickman();
   e1 = new Stickman(4*width/5);
