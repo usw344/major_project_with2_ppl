@@ -13,8 +13,9 @@ Our game is a strategy game, that includes conquering places (like civilisation)
 
 ## Must have
 * Pretty good ai for both sides of game(grid and stick fight)
-* Multiple weapons (stick fight)
+* Multiple weapons (stick fight)/in turn have a system to buy them using gold
 * Multiple levels of difficulty for ai
+* more than one level (randomize the place for the bases).
 
 ## Nice to have
 * Good graphics
