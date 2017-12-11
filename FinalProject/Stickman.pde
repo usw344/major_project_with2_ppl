@@ -2,7 +2,7 @@
 class Stickman {
   float x, y, dx, dy, w, h,current;
   int health;
-  boolean movingUp, movingDown, movingRight, movingLeft, engageAi;
+  boolean movingRight, movingLeft, engageAi;
   PImage sticky;
 
 //constructor
@@ -16,10 +16,8 @@ class Stickman {
     h = height/3;
     
     // setting all the movment booleans to false. 
-    movingDown = false;
     movingLeft = false;
     movingRight = false;
-    movingUp = false;
     
     //loading up the stickman
     sticky = loadImage("Sticky.png");
@@ -53,16 +51,6 @@ class Stickman {
   
 //////////////////////////////////////////////////////this is all the code for handling the movement of the stickman
   void movement() {
-    if (movingUp) {
-      if (y > h/2) {
-        y -= dy;
-      }
-    }
-    if (movingDown) {
-      if (y < height-h/2) {
-        y += dy;
-      }
-    }
     if (movingLeft) {
       if (x > w/2) {
         x -= dx;
@@ -77,12 +65,6 @@ class Stickman {
 
 ////////////////////////////////////////////////////////////////////////// dealing with keyPressed and released
   void handleKeyPress() {// used with the keyPressed in the main file
-    if (key == 'w') {
-      movingUp = true;
-    }
-    if (key == 's') {
-      movingDown = true;
-    }
     if (key == 'a') {
       movingLeft = true;
     }
@@ -92,12 +74,6 @@ class Stickman {
   }
 
   void handleKeyRelease() {
-    if (key == 'w') {
-      movingUp = false;
-    }
-    if (key == 's') {
-      movingDown = false;
-    }
     if (key == 'a') {
       movingLeft = false;
     }
