@@ -2,6 +2,7 @@
 class Stickman {
   float x, y, dx, dy, w, h,current;
   int health;
+  PImage plains;
   boolean movingRight, movingLeft, engageAi;
   PImage sticky;
 
@@ -21,9 +22,7 @@ class Stickman {
     
     //loading up the stickman
     sticky = loadImage("Sticky.png");
-    
     engageAi = false;// this is human controled so no ai
-    
     health = 100;
   }
   Stickman(float _x) {// second constructor for the enemy one. (no movement boolean and diffeent draw lcoation)
@@ -47,6 +46,7 @@ class Stickman {
     imageMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
   }
+  
   
   
 //////////////////////////////////////////////////////this is all the code for handling the movement of the stickman

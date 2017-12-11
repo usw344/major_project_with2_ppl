@@ -17,7 +17,7 @@ LevelLoader lvl1;
 Button startButton, helpButton;
 
 // images for the resource bar at the bottom and hut
-PImage ourHut,theGoldBar;
+PImage ourHut,theGoldBar,back;
 
 
 int state;
