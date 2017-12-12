@@ -1,6 +1,4 @@
 // use floats for everythihg
-
-
 class WeaponType {
   float dmg,hitSpeed,range,behavior,x,y,w,h;
   PImage thePicOfTheWeapon;
@@ -20,11 +18,8 @@ class WeaponType {
   }
   void attack(Stickman theThingToAttack) {
     if(mousePressed) {
-      theThingToAttack.health -= 10;
-    
+      theThingToAttack.health -= dmg;
     }
-  
-  
   }
 
 }
