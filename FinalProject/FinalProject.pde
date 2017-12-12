@@ -1,5 +1,5 @@
-// Muhammad and kam pair prog. game. (milestone 1 for major project)
-// Due december 6
+// Muhammad and kam major project
+// Due Jan
 // button objecy by Muhmmad
 // stickman Object by kam
 // both worked heavily on levelLoader
