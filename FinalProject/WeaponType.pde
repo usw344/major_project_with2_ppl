@@ -14,7 +14,7 @@ class WeaponType {
     h = ___h;
 }
   void display() {
-    image(thePicOfTheWeapon, x,y,w,h);   
+    image(thePicOfTheWeapon, x + w/10,y - h/15 ,w/2,h/5);   
   }
   
   void move(float currentX, float currentY) {
@@ -24,7 +24,8 @@ class WeaponType {
   
   }
   void attack(Stickman theThingToAttack) {
-    if(mousePressed && theThingToAttack.x == x) {
+    println(theThingToAttack.x,x);
+    if(mousePressed == false && theThingToAttack.x / x < 1.4) {
       theThingToAttack.health -= dmg;
     }
   }

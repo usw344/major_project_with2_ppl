@@ -28,7 +28,7 @@ void setup() {
   size(625, 625);
   //fullScreen();
   
-  state = 0;
+  state = 2;
   
   // starts the constructor for the objects
   objectLoader();
@@ -63,9 +63,8 @@ void draw() {
   else if (state == 2) { // stick man fight
     image(back,width/2,height/2,width,height);
     handleStickerman();// all the code for the stick square battle
-    weapon1.display();
-    weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
-    weapon1.attack(aiControledStickMan);
+    weaponHandler();
+
   }
 }
 
@@ -114,6 +113,12 @@ void handleStickerman() { // sets up the stickman and starts the moving;
   
   aiControledStickMan.healthBar();
 
+}
+
+void weaponHandler() {
+  weapon1.display();
+  weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
+  weapon1.attack(aiControledStickMan);
 
 }
 
@@ -150,7 +155,7 @@ void objectLoader() {
 
   helpButton = new Button();
   
-  weapon1 = new WeaponType(5, 1 , 20 , "stickWeapon.jpg", 0, humanPlayerStickMan.x , humanPlayerStickMan.y,humanPlayerStickMan.w,humanPlayerStickMan.h);
+  weapon1 = new WeaponType(5, 1 , 20 , "stick.jpg", 0, humanPlayerStickMan.x , humanPlayerStickMan.y,humanPlayerStickMan.w,humanPlayerStickMan.h);
 }
 
 
