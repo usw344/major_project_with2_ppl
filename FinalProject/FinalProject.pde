@@ -15,7 +15,7 @@ Stickman humanPlayerStickMan,aiControledStickMan;
 Weapon w1;
 LevelLoader lvl1;
 Button startButton, helpButton;
-
+WeaponType weapon1;
 // images for the resource bar at the bottom and hut
 PImage ourHut,theGoldBar,back;
 
@@ -63,6 +63,9 @@ void draw() {
   else if (state == 2) { // stick man fight
     image(back,width/2,height/2,width,height);
     handleStickerman();// all the code for the stick square battle
+    weapon1.display();
+    weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
+    weapon1.attack(aiControledStickMan);
   }
 }
 
@@ -123,6 +126,7 @@ void keyPressed() {
 void keyReleased() {
   humanPlayerStickMan.handleKeyRelease();
   
+  
 }
 
 void mousePressed() {
@@ -145,6 +149,8 @@ void objectLoader() {
   startButton = new Button();
 
   helpButton = new Button();
+  
+  weapon1 = new WeaponType(5, 1 , 20 , "stickWeapon.jpg", 0, humanPlayerStickMan.x , humanPlayerStickMan.y,humanPlayerStickMan.w,humanPlayerStickMan.h);
 }
 
 
