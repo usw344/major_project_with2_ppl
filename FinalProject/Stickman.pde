@@ -121,7 +121,7 @@ class Stickman {
 void healthBar() {
 
   //drawing a rect based on your current health
-  
+  colorOfHealth(health);
   rect(width/10,height/8,health*5, height/25);
   
   if (health <= 0) {
@@ -135,5 +135,17 @@ void healthBar() {
   
   text(health,width/10,height/8+100);
 
+  }
+}
+
+void colorOfHealth(int health) {
+  if (health > 66) {
+    fill(0,255,5);
+  }
+  else if ( health > 33) {
+    fill(255,141,0);
+  }
+  else {
+    fill(255,0,0);
   }
 }

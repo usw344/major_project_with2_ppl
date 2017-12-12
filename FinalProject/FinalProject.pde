@@ -19,7 +19,7 @@ Button startButton, helpButton;
 // images for the resource bar at the bottom and hut
 PImage ourHut,theGoldBar,back;
 
-
+//the state
 int state;
 
 
@@ -34,6 +34,7 @@ void setup() {
   objectLoader();
   
   theGoldBar = loadImage("gold.png");
+  back = loadImage("Plains.jpg");
 
 }
 
@@ -60,7 +61,8 @@ void draw() {
   } 
   
   else if (state == 2) { // stick man fight
-    handleStickerman();// all the code for the red square battle
+    image(back,width/2,height/2,width,height);
+    handleStickerman();// all the code for the stick square battle
   }
 }
 
