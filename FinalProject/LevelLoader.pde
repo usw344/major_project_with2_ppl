@@ -23,6 +23,15 @@ class LevelLoader {
   //the board array
   Tile[][] allTiles;
   
+  // vars for ai
+  int aiX, aiY;
+  
+  //booleans for ai movement
+  boolean moveToRight;
+  boolean moveToLeft;
+  boolean moveToUp;
+  boolean moveToDown;
+  
   
 
 
@@ -57,7 +66,22 @@ class LevelLoader {
     //doesnt do much for now
     charX = 5 * int(tileWidth);
     charY = 22 * int(tileHeight);
+    
+    for (int y = 0; y < boardHeight; y++) {
+      for (int x = 0; x < boardWidth; x++) {
+        if(allTiles[x][y].checker('A')) {
+          aiX = x;
+          aiY = y;
+          
+        }  
+      }
   }
+  moveToRight = false;
+  moveToLeft = false;
+  moveToUp = false;
+  moveToDown = false;
+
+}
 
 
   void showBoard() {
@@ -74,7 +98,7 @@ class LevelLoader {
 
 
   boolean  legalMoveChecker(int x, int y) {
-    if (x > 0 && x<24 && y < 23) {// prevents array out of bound error
+    if (x >= 0 && x<=24 && y <= 23) {// prevents array out of bound error
       // this part checks for enemy base and then starts battle
       if (checkForlegalMoveOnTownHall(x, y) && allTiles[x][y].checker('B')) {
         battle();
@@ -206,4 +230,38 @@ class LevelLoader {
     amountOfGold += amountToAdd;  
 
 }
+
+  void aiHandler() {
+    
+    int whichWayToMove;
+    whichWayToMove =  int(random(0,4));
+    
+    
+    
+    if(moveToRight) {
+    // add checker code for right
+    
+    }
+    else if(moveToLeft) {
+    // add checker code for left
+    
+    }
+    else if(moveToUp) {
+    // add checker code for up
+    
+    }
+    else if(moveToDown){
+    // add checker code for down
+    
+    }
+    
+    
+  }
+  
+
+
+
+
+
+
 }
