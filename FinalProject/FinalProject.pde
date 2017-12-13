@@ -157,7 +157,7 @@ void objectLoader() {
 
   helpButton = new Button();
   
-  weapon1 = new WeaponType(5, 1 , 30 , "stick.jpg", 0, humanPlayerStickMan.x , humanPlayerStickMan.y,humanPlayerStickMan.w,humanPlayerStickMan.h);
+  weapon1 = new WeaponType(5, 1 , 15 , "Stick.png", 0, humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y,humanPlayerStickMan.w*2,humanPlayerStickMan.h);
   
   arrow = new Ammo(weapon1.x,weapon1.y, 1,1,10,"arrow.png",100,50,false, false);
 }
