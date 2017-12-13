@@ -26,7 +26,8 @@ class WeaponType {
   }
   void attack(Stickman theThingToAttack) {
     println(theThingToAttack.x,x);
-    if(mousePressed == false && theThingToAttack.x / x < 1.4) {
+    if(mousePressed && theThingToAttack.x / x < 1.4) {
+      
       theThingToAttack.health -= dmg;
       
     }
