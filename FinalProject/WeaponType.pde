@@ -2,6 +2,7 @@
 class WeaponType {
   float dmg,hitSpeed,range,behavior,x,y,w,h;
   PImage thePicOfTheWeapon;
+  
   WeaponType(float amountOfDmg, float hitSpeedOfWeapon,float rangeOfWeapon, String theImage, float howItActs, float ___x, float ___y,float ___w,float ___h) {
     dmg = amountOfDmg;
     hitSpeed = hitSpeedOfWeapon;

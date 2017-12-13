@@ -122,6 +122,7 @@ void weaponHandler() {
   weapon1.attack(aiControledStickMan);
   
   arrow.display();
+  arrow.move(weapon1.x,weapon1.y);
 }
 
 /// this makes the stickman move;
@@ -159,7 +160,7 @@ void objectLoader() {
   
   weapon1 = new WeaponType(5, 1 , 30 , "stick.jpg", 0, humanPlayerStickMan.x , humanPlayerStickMan.y,humanPlayerStickMan.w,humanPlayerStickMan.h);
   
-  arrow = new Ammo(weapon1.x,weapon1.y, 1,1,10,"arrow.png",20,20);
+  arrow = new Ammo(weapon1.x,weapon1.y, 1,1,10,"arrow.png",100,50);
 }
 
 
