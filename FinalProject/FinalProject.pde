@@ -16,6 +16,7 @@ Weapon w1;
 LevelLoader lvl1;
 Button startButton, helpButton;
 WeaponType weapon1;
+Ammo arrow;
 // images for the resource bar at the bottom and hut
 PImage ourHut,theGoldBar,back;
 
@@ -119,7 +120,8 @@ void weaponHandler() {
   weapon1.display();
   weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
   weapon1.attack(aiControledStickMan);
-
+  
+  arrow.display();
 }
 
 /// this makes the stickman move;
@@ -155,7 +157,9 @@ void objectLoader() {
 
   helpButton = new Button();
   
-  weapon1 = new WeaponType(5, 1 , 20 , "stick.jpg", 0, humanPlayerStickMan.x , humanPlayerStickMan.y,humanPlayerStickMan.w,humanPlayerStickMan.h);
+  weapon1 = new WeaponType(5, 1 , 30 , "stick.jpg", 0, humanPlayerStickMan.x , humanPlayerStickMan.y,humanPlayerStickMan.w,humanPlayerStickMan.h);
+  
+  arrow = new Ammo(weapon1.x,weapon1.y, 1,1,10,"arrow.png",20,20);
 }
 
 

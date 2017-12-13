@@ -27,6 +27,7 @@ class WeaponType {
     println(theThingToAttack.x,x);
     if(mousePressed == false && theThingToAttack.x / x < 1.4) {
       theThingToAttack.health -= dmg;
+      
     }
   }
 
