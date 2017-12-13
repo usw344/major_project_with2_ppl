@@ -13,7 +13,9 @@ class SquarCollisiondetection {
     h2 = _h2;
     isCenterMode = _isCenterMode;
 }
-  //void
+ //boolean isBeingHit() {
+   //if() {
+   //}
 
 
 }
