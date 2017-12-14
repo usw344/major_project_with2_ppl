@@ -17,6 +17,8 @@ LevelLoader lvl1;
 Button startButton, helpButton;
 WeaponType weapon1;
 Ammo arrow;
+int turn;
+
 // images for the resource bar at the bottom and hut
 PImage ourHut,theGoldBar,back;
 
@@ -29,13 +31,17 @@ void setup() {
   size(625, 625);
   //fullScreen();
   
-  state = 2;
+  state = 1;
   
+  turn = 0;
   // starts the constructor for the objects
   objectLoader();
   
   theGoldBar = loadImage("gold.png");
   back = loadImage("Plains.jpg");
+  
+  
+
 
 }
 
@@ -54,9 +60,19 @@ void draw() {
   } 
   
   else if (state == 1) { // grid game
-    lvl1.showBoard();
-    //lvl1.moveCharch();// deals with adding squares to your side
-    
+
+
+    if(turn == 0) {
+      lvl1.showBoard();
+      if(keyPressed && key == 'k'){
+        turn = 1;
+      }
+      
+    }
+    else if(turn == 1) {
+      lvl1.aiHandler();
+      turn = 0;
+    }
     fill(0);
     drawResourceBar();
   } 

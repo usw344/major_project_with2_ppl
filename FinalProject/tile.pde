@@ -45,7 +45,6 @@ class Tile {
       rgb = color(150,255,150);
     }
     if (tileType == 'A') {
-      println("true");
       rgb = color(250,124,20);
     }
   }

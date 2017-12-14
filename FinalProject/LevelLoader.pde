@@ -107,41 +107,7 @@ class LevelLoader {
       }
       
       /// this next if block checks for empty space to  move to
-      if (allTiles[x-1][y].checker('O')) {
-        return true;
-      }
-      
-      if (allTiles[x][y+1].checker('O')) {
-        return true;
-      }
-      
-      if (allTiles[x][y-1].checker('O')) {
-        return true;
-      }
-      
-      if (allTiles[x+1][y].checker('O')) {
-        return true;
-      }
-      
-      if (allTiles[x-1][y+1].checker('O')) {
-        return true;
-      }
-      
-      if (allTiles[x-1][y+1].checker('O')) {
-        return true;
-      }
-      
-      if (allTiles[x+1][y+1].checker('O')) {
-        return true;
-      }
-      
-      if (allTiles[x+1][y-1].checker('O')) {
-        return true;
-      }
-      
-      if (allTiles[x-1][y-1].checker('O')) {
-        return true;
-      }
+      return checkerCode('O',x,y);
     } 
     return false; // not a valid move dont move
   }
@@ -177,42 +143,7 @@ class LevelLoader {
 
   boolean checkForlegalMoveOnTownHall(int x, int y) {
     //checking all around to see if we can have a battle
-    if (allTiles[x+1][y].checker('O')) {
-      return true;
-    }
-    
-    if (allTiles[x][y+1].checker('O')) {
-      return true;
-    }
-    
-    if (allTiles[x][y-1].checker('O')) {
-      return true;
-    }
-    
-    if (allTiles[x-1][y].checker('O')) {
-      return true;
-    }
-    
-    if (allTiles[x-1][y+1].checker('O')) {
-      return true;
-    }
-    
-    if (allTiles[x-1][y+1].checker('O')) {
-      return true;
-    }
-    
-    if (allTiles[x+1][y+1].checker('O')) {
-      return true;
-    }
-    
-    if (allTiles[x+1][y-1].checker('O')) {
-      return true;
-    }
-    
-    if (allTiles[x-1][y-1].checker('O')) {
-      return true;
-    }
-    return false;
+    return checkerCode('O',x,y);
   }
 
   void calculateGold() {
@@ -234,10 +165,27 @@ class LevelLoader {
   void aiHandler() {
     
     int whichWayToMove;
-    whichWayToMove =  int(random(0,4));
+    whichWayToMove =  int(random(1,5));
     
-    
-    
+     println(aiX,aiY,whichWayToMove);
+    if(whichWayToMove == 1) {// move down
+      allTiles[aiX][aiY + 1].switchTileTo('A');
+      aiY = aiY +1;
+      
+    }
+    else if(whichWayToMove == 2) {// move up
+      allTiles[aiX][aiY -1].switchTileTo('A');
+       aiY = aiY -1;
+    }
+    else if(whichWayToMove == 3) {// move right
+      allTiles[aiX +1][aiY].switchTileTo('A');
+       aiX = aiX +1;
+      
+    }
+    else if(whichWayToMove == 4) {// move left
+      allTiles[aiX -1 ][aiY].switchTileTo('A');
+      aiX = aiX -1;
+    } 
     if(moveToRight) {
     // add checker code for right
     
@@ -258,6 +206,45 @@ class LevelLoader {
     
   }
   
+  // generic code for checking multiple char
+  boolean checkerCode(char checkThis,int __x, int __y){
+      if (allTiles[__x+1][__y].checker(checkThis)) {
+      return true;
+    }
+    
+    if (allTiles[__x][__y+1].checker(checkThis)) {
+      return true;
+    }
+    
+    if (allTiles[__x][__y-1].checker(checkThis)) {
+      return true;
+    }
+    
+    if (allTiles[__x-1][__y].checker(checkThis)) {
+      return true;
+    }
+    
+    if (allTiles[__x-1][__y+1].checker(checkThis)) {
+      return true;
+    }
+    
+    if (allTiles[__x-1][__y+1].checker(checkThis)) {
+      return true;
+    }
+    
+    if (allTiles[__x+1][__y+1].checker(checkThis)) {
+      return true;
+    }
+    
+    if (allTiles[__x+1][__y-1].checker(checkThis)) {
+      return true;
+    }
+    
+    if (allTiles[__x-1][__y-1].checker(checkThis)) {
+      return true;
+    }
+    return false;
+  }  
 
 
 
