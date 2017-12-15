@@ -26,12 +26,6 @@ class LevelLoader {
   // vars for ai
   int aiX, aiY;
   
-  //booleans for ai movement
-  boolean moveToRight;
-  boolean moveToLeft;
-  boolean moveToUp;
-  boolean moveToDown;
-  
   
 
 
@@ -76,18 +70,12 @@ class LevelLoader {
         }  
       }
   }
-  moveToRight = false;
-  moveToLeft = false;
-  moveToUp = false;
-  moveToDown = false;
-
 }
 
 
   void showBoard() {
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
-        //moveCharch():
         allTiles[x][y].display();
       }
     }
@@ -95,12 +83,10 @@ class LevelLoader {
 
 
 
-
-
-  boolean  legalMoveChecker(int x, int y) {
+  boolean  legalMoveChecker(char baseChar,int x, int y) {
     if (x >= 0 && x<=24 && y <= 23) {// prevents array out of bound error
       // this part checks for enemy base and then starts battle
-      if (checkForlegalMoveOnTownHall(x, y) && allTiles[x][y].checker('B')) {
+      if (allTiles[x][y].checker(baseChar)) {
         battle();
         
         return true;
@@ -118,7 +104,10 @@ class LevelLoader {
     clickedXCord = int(mouseX/tileWidth);
     clickedYCord = int(mouseY/tileHeight);
 
-    if (legalMoveChecker(clickedXCord, clickedYCord)) {
+  println(legalMoveChecker('B',clickedXCord, clickedYCord));
+  println(legalMoveChecker('A',clickedXCord, clickedYCord));
+
+    if (legalMoveChecker('B',clickedXCord, clickedYCord) || legalMoveChecker('A',clickedXCord, clickedYCord) ) {
       //changing where the stickman is to be drawn later on
       charX = clickedXCord * int(tileWidth);
       charY = clickedYCord * int(tileHeight);
@@ -130,21 +119,14 @@ class LevelLoader {
       turnCounter ++;
       
       calculateGold();
+      turn = 1;
     }
   }
 
-  void displayChar() {
-    image(stickMan, charX, charY, tileWidth, tileHeight);
-  }
   void battle() {
     state = 2;
   }
 
-
-  boolean checkForlegalMoveOnTownHall(int x, int y) {
-    //checking all around to see if we can have a battle
-    return checkerCode('O',x,y);
-  }
 
   void calculateGold() {
     //this function goes through and checks for all your tiles and gives you one gold per tile
@@ -167,84 +149,69 @@ class LevelLoader {
     int whichWayToMove;
     whichWayToMove =  int(random(1,5));
     
-     println(aiX,aiY,whichWayToMove);
-    if(whichWayToMove == 1) {// move down
+    if(whichWayToMove == 1 && aiY + 1 <= 24 ) {  //checkerCode('A',aiX,aiY + 1)) {// move down
       allTiles[aiX][aiY + 1].switchTileTo('A');
       aiY = aiY +1;
       
     }
-    else if(whichWayToMove == 2) {// move up
+    else if(whichWayToMove == 2 && aiY -1 >= 0) {// checkerCode('A',aiX,aiY -1)) {// move up
       allTiles[aiX][aiY -1].switchTileTo('A');
        aiY = aiY -1;
     }
-    else if(whichWayToMove == 3) {// move right
+    else if(whichWayToMove == 3 &&  aiX + 1 <= 24) {//checkerCode('A',aiX + 1,aiY)) {// move right
       allTiles[aiX +1][aiY].switchTileTo('A');
        aiX = aiX +1;
       
     }
-    else if(whichWayToMove == 4) {// move left
+    else if(whichWayToMove == 4 && aiX -1 >= 0 ) {//checkerCode('A',aiX -1 ,aiY)) {// move left
       allTiles[aiX -1 ][aiY].switchTileTo('A');
       aiX = aiX -1;
     } 
-    if(moveToRight) {
-    // add checker code for right
-    
-    }
-    else if(moveToLeft) {
-    // add checker code for left
-    
-    }
-    else if(moveToUp) {
-    // add checker code for up
-    
-    }
-    else if(moveToDown){
-    // add checker code for down
-    
-    }
-    
     
   }
   
   // generic code for checking multiple char
   boolean checkerCode(char checkThis,int __x, int __y){
+   if (__x > 0 && __x<24 && __y < 23) {   
       if (allTiles[__x+1][__y].checker(checkThis)) {
-      return true;
-    }
-    
-    if (allTiles[__x][__y+1].checker(checkThis)) {
-      return true;
-    }
-    
-    if (allTiles[__x][__y-1].checker(checkThis)) {
-      return true;
-    }
-    
-    if (allTiles[__x-1][__y].checker(checkThis)) {
-      return true;
-    }
-    
-    if (allTiles[__x-1][__y+1].checker(checkThis)) {
-      return true;
-    }
-    
-    if (allTiles[__x-1][__y+1].checker(checkThis)) {
-      return true;
-    }
-    
-    if (allTiles[__x+1][__y+1].checker(checkThis)) {
-      return true;
-    }
-    
-    if (allTiles[__x+1][__y-1].checker(checkThis)) {
-      return true;
-    }
-    
-    if (allTiles[__x-1][__y-1].checker(checkThis)) {
-      return true;
-    }
+        return true;
+      }
+      
+      if (allTiles[__x][__y+1].checker(checkThis)) {
+        return true;
+      }
+      
+      if (allTiles[__x][__y-1].checker(checkThis)) {
+        return true;
+      }
+      
+      if (allTiles[__x-1][__y].checker(checkThis)) {
+        return true;
+      }
+      
+      if (allTiles[__x-1][__y+1].checker(checkThis)) {
+        return true;
+      }
+      
+      if (allTiles[__x-1][__y+1].checker(checkThis)) {
+        return true;
+      }
+      
+      if (allTiles[__x+1][__y+1].checker(checkThis)) {
+        return true;
+      }
+      
+      if (allTiles[__x+1][__y-1].checker(checkThis)) {
+        return true;
+      }
+      
+      if (allTiles[__x-1][__y-1].checker(checkThis)) {
+        return true;
+      }
+      return false;
+    }  
     return false;
-  }  
+  }
 
 
 

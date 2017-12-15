@@ -64,10 +64,6 @@ void draw() {
 
     if(turn == 0) {
       lvl1.showBoard();
-      if(keyPressed && key == 'k'){
-        turn = 1;
-      }
-      
     }
     else if(turn == 1) {
       lvl1.aiHandler();

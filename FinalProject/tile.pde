@@ -18,15 +18,15 @@ class Tile {
       rgb = color(0,255,0); // this is for our base
     }
     if(tileType == 'B') {
-      //rgb = color(100);
-      rgb = color(255,0,0); // for other town halls uncomment this if you want to debug;
+      rgb = color(100);
+      //rgb = color(255,0,0); // for other town halls uncomment this if you want to debug;
     }
     if (tileType == 'O') {
       rgb = color(150,255,150);
     }
     if (tileType == 'A') {
-      println("true");
-      rgb = color(250,124,20);
+      rgb = color(100);
+      //rgb = color(250,124,20);
     }
 }
 
@@ -45,7 +45,8 @@ class Tile {
       rgb = color(150,255,150);
     }
     if (tileType == 'A') {
-      rgb = color(250,124,20);
+      rgb = color(100);
+      //rgb = color(250,124,20);
     }
   }
   boolean checker(char tileTypeToCheck) {
