@@ -25,8 +25,8 @@ class Tile {
       rgb = color(150,255,150);
     }
     if (tileType == 'A') {
-      rgb = color(100);
-      //rgb = color(250,124,20);
+      //rgb = color(100);
+      rgb = color(250,124,20);
     }
 }
 
@@ -45,8 +45,8 @@ class Tile {
       rgb = color(150,255,150);
     }
     if (tileType == 'A') {
-      rgb = color(100);
-      //rgb = color(250,124,20);
+      //rgb = color(100);
+      rgb = color(250,124,20);
     }
   }
   boolean checker(char tileTypeToCheck) {

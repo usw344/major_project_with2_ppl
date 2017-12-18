@@ -17,6 +17,8 @@ LevelLoader lvl1;
 Button startButton, helpButton;
 WeaponType weapon1;
 Ammo arrow;
+Shop firstShop;
+
 int turn;
 
 // images for the resource bar at the bottom and hut
@@ -31,7 +33,7 @@ void setup() {
   size(625, 625);
   //fullScreen();
   
-  state = 1;
+  state = 3;
   
   turn = 0;
   // starts the constructor for the objects
@@ -77,7 +79,12 @@ void draw() {
     image(back,width/2,height/2,width,height);
     handleStickerman();// all the code for the stick square battle
     weaponHandler();
+    weapon1.myDraw();
 
+  }
+  else if(state == 3){
+    firstShop.display();
+    
   }
 }
 
@@ -133,7 +140,7 @@ void weaponHandler() {
   weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
   weapon1.attack(aiControledStickMan);
   
-  arrow.fire();
+  //arrow.fire();
 }
 
 /// this makes the stickman move;
@@ -169,9 +176,9 @@ void objectLoader() {
 
   helpButton = new Button();
   
-  weapon1 = new WeaponType(5, 1 , 15 , "Stick.png", 0, humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y,humanPlayerStickMan.w*2,humanPlayerStickMan.h);
+  weapon1 = new WeaponType(5, 1 , 15 , "gun.jpg", 2, humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y,humanPlayerStickMan.w*2,humanPlayerStickMan.h);
   
-  arrow = new Ammo(weapon1.x,weapon1.y, 1,1,10,"arrow.png",100,50,false, false);
+  firstShop = new Shop(2,3);
 }
 
 
