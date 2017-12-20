@@ -23,7 +23,7 @@ class Shop{
       choices[i].isTheButtonBeingClicked(1);
       if(i == 1){
         fill(0);
-        choices[i].theText("gun");
+        choices[i].theText("this does nothing");
       }
       
       x += w + w/6;

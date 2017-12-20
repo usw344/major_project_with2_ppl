@@ -38,7 +38,7 @@ class WeaponType {
       ammo1.fire();
       if(theThingToAttack.x / ammo1.x < 1.4){
         theThingToAttack.health -= dmg;
-        ammo1.x = x;
+        ammo1.x = x - 20;
       }
     }
   }
