@@ -26,7 +26,7 @@ class Shop{
         choices[i].theText("gun");
       }
       
-      x += w + w/6dd ;
+      x += w + w/6;
     }
   }
   
