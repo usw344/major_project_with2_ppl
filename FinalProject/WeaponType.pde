@@ -44,8 +44,10 @@ class WeaponType {
   }
 
   void myDraw() {
-    ammo1.fire();
-    ammo1.display();
+    if (mousePressed) {
+      ammo1.fire();
+      ammo1.display();
+    }
   }
 
 
