@@ -91,12 +91,7 @@ class Stickman {
     humanY = humanPlayer.y;
     
     if(humanX + w/2 >= x - w/2 && humanX - w/2 <= x + w/2 && humanY + h/2 >= y - h/2 && humanY - h/2 <= y + h/2){ // to check if range of the other stickman and hit it
-      if(keyPressed && key == ' ') {
-      //x += 25;// move them apart after a hit by 25
-      //// remember changes
-      //health -= 5;// reduce and update healthbar
-      healthBar();
-    }  
+      healthBar(); 
   }
     
     else {
