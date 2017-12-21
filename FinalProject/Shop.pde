@@ -14,10 +14,18 @@ class Shop{
     w = 200;
     h = 100;
     theButton = new Button2(x,y,w,h);
+    weaponState =  weaponObjectState;
     
   }
   
   void display() {
     theButton.displayButton();
+    
   }
+  float makeTheCalcForWeaponLvl(float theCurrentWeapon){
+    return theButton.isTheButtonBeingClicked(theCurrentWeapon);
+  
+  
+  }
+  
 }

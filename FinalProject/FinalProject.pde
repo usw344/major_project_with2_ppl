@@ -88,6 +88,8 @@ void draw() {
   }
   else if(state == 3){
     firstShop.display();
+
+    println(theWeaponLevel);
     
   }
 }
@@ -161,6 +163,7 @@ void keyReleased() {
 
 void mousePressed() {
   lvl1.mouseHandler(); // triggers the char to move. ALL THE MAJOR CODE FOR CHAR
+  //theWeaponLevel = firstShop.makeTheCalcForWeaponLvl(theWeaponLevel);
 
 }
 
@@ -180,9 +183,9 @@ void objectLoader() {
 
   helpButton = new Button();
   
-  weapon1 = new WeaponType(5, 1 , 15 , "gun.jpg", 2, humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y,humanPlayerStickMan.w*2,humanPlayerStickMan.h);
+  weapon1 = new WeaponType(5, 1 , 15 , "gun.jpg", 2,0.1,humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y,humanPlayerStickMan.w*2,humanPlayerStickMan.h);
   
-  firstShop = new Shop(2,3);
+  firstShop = new Shop(2,3,0.1);
 }
 
 

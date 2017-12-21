@@ -32,12 +32,12 @@ class WeaponType {
   void attack(Stickman theThingToAttack) {
     //anything that is a 1 is melee and 2 is shooting
     
-    if(mousePressed && theThingToAttack.x / x < 1.4 && behavior == 1) {
+    if(mousePressed && theThingToAttack.x / x < 1.4 && weaponLvl <= 1) {
       theThingToAttack.health -= dmg;
       
     }
-    if(weaponLvl > 1  && weaponLvl < 2){
-      ammo1.fire();
+    if(weaponLvl > 1  && weaponLvl <= 2){
+      //ammo1.fire();
       if(theThingToAttack.x / ammo1.x < 1.4){
         theThingToAttack.health -= dmg;
         ammo1.x = x - 20;
@@ -47,7 +47,7 @@ class WeaponType {
 
   void myDraw() {
     if (mousePressed) {
-      ammo1.fire();
+     // ammo1.fire();
       ammo1.display();
     }
   }

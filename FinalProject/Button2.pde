@@ -1,4 +1,4 @@
-// made by Muhammad
+ // made by Muhammad
 
 //instuctions on how to use 
 // first use the .display and tell it where to draw
@@ -29,7 +29,7 @@ class Button2 {
     
     rect(buttonX,buttonY,buttonWidth,buttonHeight);  
 }
-  int isTheButtonBeingClicked(int objCounter) {
+  float isTheButtonBeingClicked(float objCounter) {
     float halftheButtonSizeX =  buttonWidth/2;
     float halftheButtonSizeY = buttonHeight/2;
     // basic collsion detection
@@ -38,7 +38,7 @@ class Button2 {
       isButtonClicked = true;// setting it true here to change the color
       
       if (mousePressed) {
-       return objCounter += 1;
+       return objCounter += 0.1;
       }
     }
     
