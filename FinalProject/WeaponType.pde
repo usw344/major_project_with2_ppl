@@ -1,21 +1,23 @@
 // use floats for everythihg
 class WeaponType {
   float dmg,hitSpeed,range,x,y,w,h;
-  int behavior;
+  //int behavior;
   Ammo ammo1;
   PImage thePicOfTheWeapon;
+  float weaponLvl;
   
-  WeaponType(float amountOfDmg, float hitSpeedOfWeapon,float rangeOfWeapon, String theImage, int howItActs, float ___x, float ___y,float ___w,float ___h) {
+  WeaponType(float amountOfDmg, float hitSpeedOfWeapon,float rangeOfWeapon, String theImage, int howItActs, float __levelOfWeapon ,  float ___x, float ___y,float ___w,float ___h) {
     dmg = amountOfDmg;
     hitSpeed = hitSpeedOfWeapon;
     range = rangeOfWeapon;
     thePicOfTheWeapon = loadImage(theImage);
-    behavior = howItActs;
+    //behavior = howItActs;
     x = ___x;
     y = ___y;
     w = ___w;
     h = ___h;
     ammo1 = new Ammo(x,y,2,5,20,"arrow.png",w,h);
+    weaponLvl = __levelOfWeapon;
 }
   void display() {
     image(thePicOfTheWeapon, x + w/10,y - h/15 ,w/2,h/5);   
@@ -34,7 +36,7 @@ class WeaponType {
       theThingToAttack.health -= dmg;
       
     }
-    if(behavior == 2){
+    if(weaponLvl > 1  && weaponLvl < 2){
       ammo1.fire();
       if(theThingToAttack.x / ammo1.x < 1.4){
         theThingToAttack.health -= dmg;

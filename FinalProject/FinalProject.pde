@@ -21,6 +21,9 @@ Shop firstShop;
 
 int turn;
 
+float theWeaponLevel;
+
+
 // images for the resource bar at the bottom and hut
 PImage ourHut,theGoldBar,back;
 
@@ -42,6 +45,7 @@ void setup() {
   theGoldBar = loadImage("gold.png");
   back = loadImage("Plains.jpg");
   
+  theWeaponLevel = 0.1;
   
 
 

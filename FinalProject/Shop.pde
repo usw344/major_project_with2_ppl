@@ -1,33 +1,23 @@
 class Shop{
   int shopState;
-  Button[] choices;
   int numberOfButtons;
   float x,y,w,h;
+  Button2 theButton;
+  float weaponState; 
   
-  Shop(int _shopState, int _numberChoices) {
+  Shop(int _shopState, int _numberChoices,float weaponObjectState) {
     shopState = _shopState;
-    choices = new Button[_numberChoices];
     numberOfButtons = _numberChoices;
-    x = 50;
+    weaponState = 1;
+    x = 300;
     y = 200;
     w = 200;
-    h = 101;
+    h = 100;
+    theButton = new Button2(x,y,w,h);
     
   }
   
   void display() {
-    x = 50;
-    for(int i = 0; i <numberOfButtons; i++){
-      choices[i] = new Button();
-      choices[i].displayButton(x,y,w,h);
-      choices[i].isTheButtonBeingClicked(1);
-      if(i == 1){
-        fill(0);
-        choices[i].theText("this does nothing");
-      }
-      
-      x += w + w/6;
-    }
+    theButton.displayButton();
   }
-  
 }

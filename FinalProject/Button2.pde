@@ -6,30 +6,30 @@
 // .thetext to add the text to your button
 // the object does all the rest
 
-class Button {
+class Button2 {
   float buttonX,buttonY,buttonHeight,buttonWidth; 
   boolean isButtonClicked;
   
-  Button() {
+  Button2(float x, float y, float w,float h) {
     isButtonClicked = false;
-  }
-  void displayButton(float x, float y, float w,float h) {
-    rectMode(CENTER);
     buttonX = x;
     buttonY = y;
     buttonHeight = h;
     buttonWidth = w;
     
+  }
+  void displayButton() {
+    rectMode(CENTER);
     if (isButtonClicked) {// giving the hovering effect
-      fill(255,57,57);
+      fill(165,5,150);
     }
     else {
-      fill(252,0,0);
+      fill(95,5,86);
     }
     
     rect(buttonX,buttonY,buttonWidth,buttonHeight);  
 }
-  void isTheButtonBeingClicked(int objState) {
+  int isTheButtonBeingClicked(int objCounter) {
     float halftheButtonSizeX =  buttonWidth/2;
     float halftheButtonSizeY = buttonHeight/2;
     // basic collsion detection
@@ -38,19 +38,14 @@ class Button {
       isButtonClicked = true;// setting it true here to change the color
       
       if (mousePressed) {
-        doTheAction(objState);// change the state
+       return objCounter += 1;
       }
     }
     
     else {
       isButtonClicked = false;
     }
-  
-  }
-
-  void doTheAction(int stateVarNum) {
-    state = stateVarNum;
-    
+  return objCounter;
   }
 
   void theText(String blank) {
