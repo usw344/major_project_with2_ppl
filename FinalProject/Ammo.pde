@@ -16,16 +16,26 @@ class Ammo{
     spirte = loadImage(_ammoPicToload);
   }
   
-  void display(){
-    image(spirte,x,y,w,h);
+  void display(boolean stop){
+    if (stop) {
+      image(spirte,x,y,w,h);
+    }
   }
   
   
-  void fire(int _x, boolean shootWhere) {
-    if (shootWhere) {
-      x += dx;
-      if(x>=_x){
-        x = -1000;
+  void fire(int _x, int shootWhere, boolean stop) {
+    if (stop) {
+      if (shootWhere == 0) {
+        x += dx;
+        if(x<=_x){
+          stop = false;;
+        }
+      }
+      else { 
+        x -= dx;
+        if (x>=_x) {
+          stop = false;
+        }
       }
     }
   }
