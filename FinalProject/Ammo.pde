@@ -21,10 +21,12 @@ class Ammo{
   }
   
   
-  void fire() {
-    x += dx*2;
-    if(x>width-20){
-        x = 300;
+  void fire(int _x, boolean shootWhere) {
+    if (shootWhere) {
+      x += dx;
+      if(x>=_x){
+        x = -1000;
+      }
     }
   }
 }

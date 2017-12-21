@@ -3,7 +3,7 @@ class Stickman {
   float x, y, dx, dy, w, h,current;
   int health;
   PImage plains;
-  boolean movingRight, movingLeft, engageAi;
+  boolean movingRight, movingLeft, engageAi, shootWhichWay;
   PImage sticky;
 
 //constructor
@@ -45,6 +45,15 @@ class Stickman {
   void display() {
     imageMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
+  }
+  
+  void whichWayAmIFacing(int theX) {
+    if (x >= theX) {
+      shootWhichWay = true;
+    }
+    else {
+      shootWhichWay = false;;
+    }
   }
   
   
