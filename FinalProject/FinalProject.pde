@@ -36,7 +36,7 @@ void setup() {
   size(625, 625);
   //fullScreen();
   
-  state = 3;
+  state = 1;
   
   turn = 0;
   // starts the constructor for the objects
