@@ -37,8 +37,10 @@ class WeaponType {
       
     }
     if(weaponLvl > 1  && weaponLvl <= 2){
-      //ammo1.fire();
+     
+      
       if(theThingToAttack.x / ammo1.x < 1.4){
+      
         theThingToAttack.health -= dmg;
         ammo1.x = x - 20;
       }
@@ -47,8 +49,8 @@ class WeaponType {
 
   void myDraw() {
     if (mousePressed) {
-     // ammo1.fire();
-      ammo1.display();
+      ammo1.fire(aiControledStickMan.x,0,true);
+      ammo1.display(true);
     }
   }
 
