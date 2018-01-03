@@ -49,7 +49,7 @@ class WeaponType {
 
   void myDraw() {
     if (mousePressed) {
-      ammo1.fire(aiControledStickMan.x,0,true);
+      ammo1.fire(aiControledStickMan.x,true);
       ammo1.display(true);
     }
   }

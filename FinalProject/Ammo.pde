@@ -24,5 +24,8 @@ class Ammo {
 
 
   void fire(float _x, boolean shoot) {
+    if(x<= _x){ // check to see which way the shot should go
+      x += 10;
+    }
   }
 }

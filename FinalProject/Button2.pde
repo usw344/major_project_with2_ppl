@@ -29,7 +29,7 @@ class Button2 {
     
     rect(buttonX,buttonY,buttonWidth,buttonHeight);  
 }
-  float isTheButtonBeingClicked(float objCounter) {
+  boolean isTheButtonBeingClicked(float objCounter) {
     float halftheButtonSizeX =  buttonWidth/2;
     float halftheButtonSizeY = buttonHeight/2;
     // basic collsion detection
@@ -38,14 +38,14 @@ class Button2 {
       isButtonClicked = true;// setting it true here to change the color
       
       if (mousePressed) {
-       return objCounter += 0.1;
+       return true;
       }
     }
     
     else {
       isButtonClicked = false;
     }
-  return objCounter;
+  return false;
   }
 
   void theText(String blank) {

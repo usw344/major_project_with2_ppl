@@ -17,7 +17,7 @@ LevelLoader lvl1;
 Button startButton, helpButton;
 WeaponType weapon1;
 Ammo arrow;
-Shop firstShop;
+Shop theShop; //firstShop;
 
 int turn;
 
@@ -36,7 +36,7 @@ void setup() {
   size(625, 625);
   //fullScreen();
   
-  state = 1;
+  state = 3;
   
   turn = 0;
   // starts the constructor for the objects
@@ -87,10 +87,8 @@ void draw() {
 
   }
   else if(state == 3){
-    firstShop.display();
-
-    println(theWeaponLevel);
-    
+    //firstShop.display();
+    theShop.myShopDrawLoop();
   }
 }
 
@@ -185,7 +183,8 @@ void objectLoader() {
   
   weapon1 = new WeaponType(5, 1 , 15 , "gun.jpg", 2,0.1,humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y,humanPlayerStickMan.w*2,humanPlayerStickMan.h);
   
-  firstShop = new Shop(2,3,0.1);
+  //firstShop = new Shop(2,3,0.1);
+  theShop = new Shop();
 }
 
 
