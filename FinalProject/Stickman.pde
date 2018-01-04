@@ -59,7 +59,9 @@ class Stickman {
   
   
 //////////////////////////////////////////////////////this is all the code for handling the movement of the stickman
-  void movement() {
+  void movement(float currentSpeed) {
+    dx = currentSpeed;
+    dy = currentSpeed;
     if (movingLeft) {
       if (x > w/2) {
         x -= dx;

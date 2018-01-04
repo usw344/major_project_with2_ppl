@@ -55,8 +55,7 @@ class Button {
 
   void theText(String blank) {
     textSize(buttonWidth/6);
-    fill(255);
-    
+    fill(255); 
     text(blank,buttonX - buttonWidth/5,buttonY + buttonHeight/8);// gives you a centerd text
   }
 

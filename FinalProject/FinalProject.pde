@@ -96,6 +96,7 @@ void draw() {
     armour = theShop.armourLevel;
     speed = theShop.speedLevel;
     theShop.myShopDrawLoop();
+    backToGameButton();
   }
 }
 
@@ -119,7 +120,11 @@ void helpButtonCode() {
 }
 
 void backToGameButton(){
-
+  backButton.displayButton(width - width/3,height/4,200,100);
+  backButton.isTheButtonBeingClicked(1);
+  backButton.theText("Back");
+  
+  
 
 }
 
@@ -141,7 +146,7 @@ void handleStickerman() { // sets up the stickman and starts the moving;
   //human plauer
   humanPlayerStickMan.display();
   
-  humanPlayerStickMan.movement();
+  humanPlayerStickMan.movement(speed);
   
   //ai player
   aiControledStickMan.display();
