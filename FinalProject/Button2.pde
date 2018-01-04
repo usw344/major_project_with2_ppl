@@ -29,7 +29,7 @@ class Button2 {
     
     rect(buttonX,buttonY,buttonWidth,buttonHeight);  
 }
-  boolean isTheButtonBeingClicked(float objCounter) {
+  boolean isTheButtonBeingClicked() {
     float halftheButtonSizeX =  buttonWidth/2;
     float halftheButtonSizeY = buttonHeight/2;
     // basic collsion detection
@@ -38,7 +38,8 @@ class Button2 {
       isButtonClicked = true;// setting it true here to change the color
       
       if (mousePressed) {
-       return true;
+        mousePressed = false;
+        return true;
       }
     }
     
@@ -49,10 +50,10 @@ class Button2 {
   }
 
   void theText(String blank) {
-    textSize(buttonWidth/6);
+    textSize(buttonWidth/12);
     fill(255);
     
-    text(blank,buttonX - buttonWidth/5,buttonY + buttonHeight/8);// gives you a centerd text
+    text(blank,buttonX - buttonWidth/3,buttonY + buttonHeight/8);// gives you a centerd text
   }
 
 

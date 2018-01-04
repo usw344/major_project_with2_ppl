@@ -14,7 +14,7 @@
 Stickman humanPlayerStickMan,aiControledStickMan;
 Weapon w1;
 LevelLoader lvl1;
-Button startButton, helpButton;
+Button startButton, helpButton, shopButton, backButton;
 WeaponType weapon1;
 Ammo arrow;
 Shop theShop; //firstShop;
@@ -30,13 +30,15 @@ PImage ourHut,theGoldBar,back;
 //the state
 int state;
 
+// for the stickman armour, attack and speed
 
+float armour,attack,speed;
 void setup() {
   //switch between full screen and normal WARNING DO NOT USE FULLSCREEN FOR DEBUGGING
   size(625, 625);
   //fullScreen();
   
-  state = 3;
+  state = 1;
   
   turn = 0;
   // starts the constructor for the objects
@@ -47,6 +49,9 @@ void setup() {
   
   theWeaponLevel = 0.1;
   
+  armour = 0;
+  speed = 0;
+  attack = 0;
 
 
 }
@@ -76,7 +81,7 @@ void draw() {
       turn = 0;
     }
     fill(0);
-    drawResourceBar();
+    drawResourceBar();// draws all the elements at the bottom and the button to enter the shop
   } 
   
   else if (state == 2) { // stick man fight
@@ -87,7 +92,9 @@ void draw() {
 
   }
   else if(state == 3){
-    //firstShop.display();
+    attack = theShop.weaponLevel;
+    armour = theShop.armourLevel;
+    speed = theShop.speedLevel;
     theShop.myShopDrawLoop();
   }
 }
@@ -111,8 +118,14 @@ void helpButtonCode() {
   helpButton.theText("HELP!!");
 }
 
+void backToGameButton(){
+
+
+}
+
+
 void  helpScreen() {
-  text("dont knwo yet to play the game", width/2, height/2);
+  text("dont know yet to play the game", width/2, height/2);
 }
 
 
@@ -142,7 +155,7 @@ void handleStickerman() { // sets up the stickman and starts the moving;
 void weaponHandler() {
   weapon1.display();
   weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
-  weapon1.attack(aiControledStickMan);
+  weapon1.attack(aiControledStickMan,attack);
   
   //arrow.fire();
 }
@@ -169,22 +182,26 @@ void mousePressed() {
 
 //////////////////////////////////////  background functions such as loading objects
 void objectLoader() {
-  lvl1 = new LevelLoader("0.txt"); //load whichever level you want hint make your own if you want
 
+  // stickman/fighters
   humanPlayerStickMan = new Stickman();
-  
   aiControledStickMan = new Stickman(4*width/5);
   
-  w1 = new Weapon();
 
+
+  //buttons
   startButton = new Button();
-
   helpButton = new Button();
+  shopButton = new Button();
+  backButton = new Button();
   
-  weapon1 = new WeaponType(5, 1 , 15 , "gun.jpg", 2,0.1,humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y,humanPlayerStickMan.w*2,humanPlayerStickMan.h);
+  // weapons ammo,...
+  w1 = new Weapon();
+  weapon1 = new WeaponType(0, 1 , 15 , "gun.jpg", 2,0.1,humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y,humanPlayerStickMan.w*2,humanPlayerStickMan.h);
   
-  //firstShop = new Shop(2,3,0.1);
+  //game sections
   theShop = new Shop();
+  lvl1 = new LevelLoader("0.txt"); //load whichever level you want hint make your own if you want
 }
 
 
@@ -200,6 +217,15 @@ void drawResourceBar() {
   float goldBarW = lvl1.tileWidth;
   float goldBarH =lvl1.tileHeight;
   
+  float shopButtonX = 0;
+  float shopButtonY = height - lvl1.tileHeight/2;
+  float shopButtonW = lvl1.tileWidth*5;
+  float shopButtonH = lvl1.tileHeight;
+
+
+  // this is the code for the items at the buttom of the screen
+  rectMode(CORNER);
+  fill(0);
 
   rect(0,barY,barWidth,barHeight);// drawing the black bar at the bottom
 
@@ -209,12 +235,26 @@ void drawResourceBar() {
   fill(255);// want white for the text with size 24
   textSize(24);
   
-  // all the text you find on the resource bar
-  text("= ",goldBarX + 40,barY+goldBarH/2+5);// just the word gold
+  ////// all the text you find on the resource bar
+  // just the = sign
+  text("= ",goldBarX + 40,barY+goldBarH/2+5);
   
-  text(lvl1.amountOfGold,goldBarX + 80,barY+goldBarH/2+5); // amount of gold you have as of this turn
+  // amount of gold you have as of this turn 
+  text(lvl1.amountOfGold,goldBarX + 80,barY+goldBarH/2+5); 
   
-  text("turn",goldBarX/2 - width/16,barY+goldBarH/2+5); // just the word turn
+  // just the word turn
+  text("turn",goldBarX/2 - width/16,barY+goldBarH/2+5); 
   
-  text(lvl1.turnCounter,goldBarX/2 - width/16 + 80,barY+goldBarH/2+5);// how many turns have passed
+  // how many turns have passed
+  text(lvl1.turnCounter,goldBarX/2 - width/16 + 80,barY+goldBarH/2+5);
+  
+  //enter shop button code
+  shopButton.displayButton(shopButtonX,shopButtonY,shopButtonW,shopButtonH);
+  shopButton.isTheButtonBeingClicked(3);
+  
+  fill(255);
+  textSize(16);
+  text("SHOP",shopButtonX + shopButtonW/22,shopButtonY + shopButtonH/12);
+ 
+
 }

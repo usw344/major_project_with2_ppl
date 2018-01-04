@@ -29,9 +29,10 @@ class WeaponType {
   
   
   }
-  void attack(Stickman theThingToAttack) {
+  void attack(Stickman theThingToAttack,float updatedDamage) {
     //anything that is a 1 is melee and 2 is shooting
     
+    dmg = updatedDamage;
     if(mousePressed && theThingToAttack.x / x < 1.4 && weaponLvl <= 1) {
       theThingToAttack.health -= dmg;
       
