@@ -65,6 +65,7 @@ class Stickman {
     if (movingLeft) {
       if (x > w/2) {
         x -= dx;
+        
       }
     }
     if (movingRight) {
@@ -96,7 +97,7 @@ class Stickman {
 //////////////////////////////////////
   void ai(Stickman humanPlayer) {
     float humanX, humanY;
-    float speedToMove = 3.5;
+    float speedToMove = dx*2.3;
     
     humanX = humanPlayer.x;
     humanY = humanPlayer.y;

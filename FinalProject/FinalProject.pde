@@ -49,9 +49,9 @@ void setup() {
   
   theWeaponLevel = 0.1;
   
-  armour = 0;
-  speed = 0;
-  attack = 0;
+  armour = 3;
+  speed = 3;
+  attack = 3;
 
 
 }
@@ -92,9 +92,9 @@ void draw() {
 
   }
   else if(state == 3){
-    attack = theShop.weaponLevel;
-    armour = theShop.armourLevel;
-    speed = theShop.speedLevel;
+    attack = theShop.weaponLevel + 3;
+    armour = theShop.armourLevel + 3;
+    speed = theShop.speedLevel + 3;
     theShop.myShopDrawLoop();
     backToGameButton();
   }
