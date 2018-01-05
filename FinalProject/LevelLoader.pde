@@ -17,7 +17,7 @@ class LevelLoader {
   float tileHeight, tileWidth;
 
   //loading the stickman
-  PImage stickMan;
+  PImage stickMan, hill;
 
   //timer for water Animation;
   Timer clockForWaterAnimation;
@@ -65,6 +65,9 @@ class LevelLoader {
     //doesnt do much for now
     charX = 5 * int(tileWidth);
     charY = 22 * int(tileHeight);
+    
+    // need to load hill here as to not overburden the ram
+    hill = loadImage("hill.png");
 
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
@@ -81,6 +84,12 @@ class LevelLoader {
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
         allTiles[x][y].display();
+        if(allTiles[x][y].checker('H')){
+          fill(255);
+          rectMode(CORNER);
+          imageMode(CORNER);
+          image(hill,x*tileWidth, y*tileHeight, tileWidth, tileHeight);      
+        }
       }
     }
   }

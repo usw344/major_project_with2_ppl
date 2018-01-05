@@ -3,7 +3,7 @@ class Tile {
   float w, h;
   char tileType;
   color rgb;
-  PImage playerHut,hill;
+  PImage playerHut;
   
   
   Tile(float _x, float _y, float _w, float _h, char _tileType) {
@@ -12,7 +12,7 @@ class Tile {
     w = _w;
     h = _h;
     tileType = _tileType;
-    hill = loadImage("hill_outline.png");
+
     
     
     if (tileType == 'o') {
@@ -34,7 +34,6 @@ class Tile {
     }
     if(tileType == 'H'){
       rgb = color(33,131,203);
-      image(hill,w,h);
     }
   }
 
