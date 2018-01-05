@@ -72,7 +72,7 @@ void draw() {
   
   else if (state == 1) { // grid game
 
-
+    lvl1.waterAnimation();
     if(turn == 0) {
       lvl1.showBoard();
     }

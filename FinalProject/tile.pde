@@ -3,7 +3,7 @@ class Tile {
   float w, h;
   char tileType;
   color rgb;
-  PImage playerHut;
+  PImage playerHut,hill;
   
   
   Tile(float _x, float _y, float _w, float _h, char _tileType) {
@@ -12,7 +12,7 @@ class Tile {
     w = _w;
     h = _h;
     tileType = _tileType;
-
+    hill = loadImage("hill_outline.png");
     
     
     if (tileType == 'o') {
@@ -32,10 +32,20 @@ class Tile {
       //rgb = color(100);
       rgb = color(250, 124, 20);
     }
+    if(tileType == 'H'){
+      rgb = color(33,131,203);
+      image(hill,w,h);
+    }
   }
 
   void switchTileTo(char _tileType) {
-    tileType = _tileType;
+
+    if(tileType == 'w'){
+      tileType = 'w';
+    }
+    else{
+      tileType = _tileType;
+    }
     if (tileType == 'o') {
       rgb = color(100); // this is for empty space
     }

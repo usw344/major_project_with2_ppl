@@ -51,7 +51,8 @@ class LevelLoader {
     allTiles = new Tile[boardWidth][boardHeight];
 
     //getting timer started
-    clockForWaterAnimation = new Timer(1500);
+    clockForWaterAnimation = new Timer(500);
+    clockForWaterAnimation.begin();
 
     //setting up default board
     for (int y = 0; y < boardHeight; y++) {
@@ -84,12 +85,15 @@ class LevelLoader {
     }
   }
   void waterAnimation() {
-    for (int y = 0; y < boardHeight; y++) {
-      for (int x = 0; x < boardWidth; x++) {
-        allTiles[x][y].animateWater();
+    if (clockForWaterAnimation.isFinished()) {
+      for (int y = 0; y < boardHeight; y++) {
+        for (int x = 0; x < boardWidth; x++) {
+          allTiles[x][y].animateWater();
+        }
       }
+      clockForWaterAnimation.begin();
     }
-  }  
+  }
 
 
 
@@ -114,8 +118,8 @@ class LevelLoader {
     clickedXCord = int(mouseX/tileWidth);
     clickedYCord = int(mouseY/tileHeight);
 
-    println(legalMoveChecker('B', clickedXCord, clickedYCord));
-    println(legalMoveChecker('A', clickedXCord, clickedYCord));
+    legalMoveChecker('B', clickedXCord, clickedYCord);
+    legalMoveChecker('A', clickedXCord, clickedYCord);
 
     if (legalMoveChecker('B', clickedXCord, clickedYCord) || legalMoveChecker('A', clickedXCord, clickedYCord) ) {
       //changing where the stickman is to be drawn later on
