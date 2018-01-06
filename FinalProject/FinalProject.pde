@@ -51,7 +51,7 @@ void setup() {
   shop = false;
   
   state = 1;
-  
+
   turn = 0;
   // starts the constructor for the objects
   objectLoader();
@@ -84,17 +84,14 @@ void draw() {
   
   else if (state == 1) { // grid game
     shop = false;// allow for movement
-    
+    //println(lvl1.turnCounter);
     lvl1.waterAnimation();// makes the water gliter
+    lvl1.showBoard();
     
-    if(turn == 0) {
-      lvl1.showBoard();
-    }
-    
-    else if(turn == 1) {
+    if(lvl1.myTurn == false) {
       lvl1.aiHandler();
-      turn = 0;
     }
+    
     fill(0);
     drawResourceBar();// draws all the elements at the bottom and the button to enter the shop
   } 

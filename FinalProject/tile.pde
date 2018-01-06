@@ -73,6 +73,17 @@ class Tile {
       return false;
     }
   }
+  
+  int checkForObstcle(char charToCheck){
+    if(charToCheck == tileType && tileType == 'H'){
+      return 1;
+    }
+    if(charToCheck == tileType && tileType == 'w'){
+      return 2;
+    }
+    return 0;// for no obstcle in the way
+  
+  }
 
   void display() {
     rectMode(CORNER);

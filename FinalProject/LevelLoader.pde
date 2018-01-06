@@ -11,13 +11,16 @@ class LevelLoader {
 
   // to do with turn and resources
   float amountOfGold, amountToAdd;
-  int turnCounter;
+  int turnCounter, amountOfMovesLeft;
 
-  // float vars
+  // float vars for tiles
   float tileHeight, tileWidth;
 
   //loading the stickman
   PImage stickMan, hill;
+
+  //turn boolean
+  boolean myTurn;
 
   //timer for water Animation;
   Timer clockForWaterAnimation;
@@ -35,6 +38,8 @@ class LevelLoader {
 
   LevelLoader(String levelWeAreOn) {
     String lines[] = loadStrings(levelWeAreOn);
+    
+    myTurn = true;
 
     boardHeight = lines.length;
     boardWidth = lines[0].length();
@@ -54,6 +59,8 @@ class LevelLoader {
     clockForWaterAnimation = new Timer(500);
     clockForWaterAnimation.begin();
 
+    amountOfMovesLeft = 3;
+
     //setting up default board
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
@@ -62,6 +69,7 @@ class LevelLoader {
         allTiles[x][y] = new Tile(x*tileWidth, y*tileHeight, tileWidth, tileHeight, tileType);
       }
     }
+    
     //doesnt do much for now
     charX = 5 * int(tileWidth);
     charY = 22 * int(tileHeight);
@@ -71,7 +79,7 @@ class LevelLoader {
 
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
-        if (allTiles[x][y].checker('A')) {
+        if (allTiles[x][y].checker('A')) {// the start point of the ai is this **** change this to make the ai start at the top
           aiX = x;
           aiY = y;
         }
@@ -84,7 +92,7 @@ class LevelLoader {
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
         allTiles[x][y].display();
-        if(allTiles[x][y].checker('H')){
+        if(allTiles[x][y].checker('H')){// need to display hill here because it crashes in the tile object
           fill(255);
           rectMode(CORNER);
           imageMode(CORNER);
@@ -94,19 +102,20 @@ class LevelLoader {
     }
   }
   void waterAnimation() {
-    if (clockForWaterAnimation.isFinished()) {
+    if (clockForWaterAnimation.isFinished()) {// when around 0.5 sec has passed randomize the color of the water
       for (int y = 0; y < boardHeight; y++) {
         for (int x = 0; x < boardWidth; x++) {
           allTiles[x][y].animateWater();
         }
       }
+      //start clock 
       clockForWaterAnimation.begin();
     }
   }
 
 
 
-  boolean  legalMoveChecker(char baseChar, int x, int y) {
+  boolean  legalMoveChecker(char baseChar, int x, int y) {// this functions deals with seeing if the clicked square needs a battle to start
     if (x >= 0 && x<=24 && y <= 23) {// prevents array out of bound error
       // this part checks for enemy base and then starts battle
       if (allTiles[x][y].checker(baseChar)) {
@@ -126,26 +135,34 @@ class LevelLoader {
     //calculating which tile the mouse is on the screen    
     clickedXCord = int(mouseX/tileWidth);
     clickedYCord = int(mouseY/tileHeight);
+    if(allTiles[clickedXCord][clickedYCord].checkForObstcle('H') == 1 || allTiles[clickedXCord][clickedYCord].checkForObstcle('w') == 2){
+      println("invalid moves");
+    }
+    else if(amountOfMovesLeft <= 0){
+      myTurn = false;
+    }
 
-    legalMoveChecker('B', clickedXCord, clickedYCord);
-    legalMoveChecker('A', clickedXCord, clickedYCord);
-
-    if (legalMoveChecker('B', clickedXCord, clickedYCord) || legalMoveChecker('A', clickedXCord, clickedYCord) ) {
-      //changing where the stickman is to be drawn later on
-      charX = clickedXCord * int(tileWidth);
-      charY = clickedYCord * int(tileHeight);
-
-      // switching the tile which was clicked upon into a upperCase o which is green tile
-      allTiles[clickedXCord][clickedYCord].switchTileTo('O');
-
-      //upadte both turn and gold count
-      turnCounter ++;
-
-      calculateGold();
-      turn = 1;
+    else {// if this happens then it means you clicked on somthing that is clickable
+      legalMoveChecker('B', clickedXCord, clickedYCord);
+      legalMoveChecker('A', clickedXCord, clickedYCord);
+  
+      if (legalMoveChecker('B', clickedXCord, clickedYCord) || legalMoveChecker('A', clickedXCord, clickedYCord) ) {
+        //changing where the stickman is to be drawn later on
+        charX = clickedXCord * int(tileWidth);
+        charY = clickedYCord * int(tileHeight);
+  
+        // switching the tile which was clicked upon into a upperCase o which is green tile
+        allTiles[clickedXCord][clickedYCord].switchTileTo('O');
+  
+        //upadte both turn and gold count
+        turnCounter ++ ;
+  
+        calculateGold();
+        turn = 1;
+        amountOfMovesLeft -= 1;
     }
   }
-
+  }
   void battle() {
     state = 2;
   }
@@ -171,20 +188,43 @@ class LevelLoader {
     int whichWayToMove;
     whichWayToMove =  int(random(1, 5));
 
+    
     if (whichWayToMove == 1 && aiY + 1 <= 24 ) {  //checkerCode('A',aiX,aiY + 1)) {// move down
       allTiles[aiX][aiY + 1].switchTileTo('A');
       aiY = aiY +1;
-    } else if (whichWayToMove == 2 && aiY -1 >= 0) {// checkerCode('A',aiX,aiY -1)) {// move up
+      if(allTiles[aiX][aiY].checker('A')){
+        amountOfMovesLeft -=1;
+      }
+    } 
+    
+    else if (whichWayToMove == 2 && aiY -1 >= 0) {// checkerCode('A',aiX,aiY -1)) {// move up
       allTiles[aiX][aiY -1].switchTileTo('A');
       aiY = aiY -1;
-    } else if (whichWayToMove == 3 &&  aiX + 1 <= 24) {//checkerCode('A',aiX + 1,aiY)) {// move right
+      if(allTiles[aiX][aiY].checker('A')){
+        amountOfMovesLeft -=1;
+      }
+    } 
+    
+    else if (whichWayToMove == 3 &&  aiX + 1 <= 24) {//checkerCode('A',aiX + 1,aiY)) {// move right
       allTiles[aiX +1][aiY].switchTileTo('A');
       aiX = aiX +1;
-    } else if (whichWayToMove == 4 && aiX -1 >= 0 ) {//checkerCode('A',aiX -1 ,aiY)) {// move left
+      if(allTiles[aiX][aiY].checker('A')){
+        amountOfMovesLeft -=1;
+      }
+    } 
+    
+    else if (whichWayToMove == 4 && aiX -1 >= 0 ) {//checkerCode('A',aiX -1 ,aiY)) {// move left
       allTiles[aiX -1 ][aiY].switchTileTo('A');
       aiX = aiX -1;
+      if(allTiles[aiX][aiY].checker('A')){
+        amountOfMovesLeft -=1;
+      }
     }
-  }
+    amountOfMovesLeft ++;
+    if(amountOfMovesLeft >= 3){
+      myTurn = true;
+    }
+}
 
   // generic code for checking multiple char
   boolean checkerCode(char checkThis, int __x, int __y) {
