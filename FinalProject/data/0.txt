@@ -1,8 +1,8 @@
 ooooooooooooooooooooooooo
 ooooooooooooooooooooooooo
-ooAooooooooooooooooooooooooooo
-ooooOOooooooHoooooooooooo
-ooooOOoooooHooooooooooooo
+oooooooooooooooooooooooooooooo
+ooooooooooooHoooooooooooo
+oooooooooooHooooooooooooo
 oooooooooHHHooooowooooooo
 ooooooHHHooooooowwwoooooo
 ooooooooooooooowwwwwoooooooooo
@@ -20,6 +20,6 @@ ooooooooooooooooooooooooo
 woooooooooooooooooooowwwo
 wwooooooooooooooooooowwwwwoooo
 wwwoooooooooOooooooowwwwwooooo
-wwwwoooBAooObOooooowwwwwoooooo
+wwwwoooAAooObOooooowwwwwoooooo
 wwwwwwooooooOooooooooooooooooo
 oooooooooooooooooooooooooooooo

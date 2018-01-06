@@ -17,13 +17,27 @@ class Tile {
     // lowercase o: is grey space :: grey
     // b:           is human main base :: dark green
     // O:           is the land you conquered :: light green
-    // A:           is enemy conquerd land :: lightish orange
+    
+    // H:           is hills
+    // w:           is water
+    
+    // enemey color and letters
+    // A:           is enemy orange conquerd land :: lightish orange color
+    // B:           is enemy red conquerd land   ::  lightish red color
+    // C:           is enemy black               ::  black color
+    
+    //M:            is enemy mongols             :: white color
+    //T:            is enemey Timurids           :: is dark red
+    
     
     if (tileType == 'o') {
-      rgb = color(100); // this is for empty space
+      rgb = color(100); 
     }
     if (tileType == 'b') {
-      rgb = color(0, 255, 0); // this is for our base
+      rgb = color(0, 255, 0); 
+    }
+    if (tileType == 'B') {
+      rgb = color(255, 0, 0); 
     }
     if (tileType == 'O') {
       rgb = color(150, 255, 150);
@@ -44,15 +58,19 @@ class Tile {
     else{
       tileType = _tileType;
     }
+    if (tileType == 'B') {
+      rgb = color(255, 0, 0); 
+    }
+    
     if (tileType == 'o') {
-      rgb = color(100); // this is for empty space
+      rgb = color(100); 
     }
 
     if (tileType == 'b') {
-      rgb = color(0, 255, 0); // this is for our base
+      rgb = color(0, 255, 0); 
     }
 
-    if (tileType == 'O') { //our tiles
+    if (tileType == 'O') { 
       rgb = color(150, 255, 150);
     }
 
