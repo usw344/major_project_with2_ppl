@@ -1,13 +1,22 @@
 // Muhammad and kam major project
-// Due Jan
-// button objecy by Muhmmad
-// stickman Object by kam
-// both worked heavily on levelLoader
 
-// what works right now
-//you can expand
-//primative fighting is also there
+// what needs finishing in board version
+/// need to fix edges issues
+/// need to add better turn management (as in if the ai hits its own spot then make it select a different one)
+/// need to stop user from clicking on hill and water
+/// need the ai to work better
+/// need to add better graphics (kam)!!!
 
+// what needs work in stickman fights
+/// need to add ai attack
+/// need to make the human stickman jump 
+/// need to add obsticles and such to make battles more interesting
+/// need concept of armour.
+/// need to make ai health, speed, attack evolve with time
+
+// what is needs to look better
+/// better overall graphics
+/// needs sound and music
 
 
 //loading our objects
@@ -31,12 +40,15 @@ PImage ourHut,theGoldBar,back;
 int state;
 
 // for the stickman armour, attack and speed
-
 float armour,attack,speed;
+
+boolean shop;
 void setup() {
   //switch between full screen and normal WARNING DO NOT USE FULLSCREEN FOR DEBUGGING
   size(625, 625);
   //fullScreen();
+  
+  shop = false;
   
   state = 1;
   
@@ -71,11 +83,14 @@ void draw() {
   } 
   
   else if (state == 1) { // grid game
-
-    lvl1.waterAnimation();
+    shop = false;// allow for movement
+    
+    lvl1.waterAnimation();// makes the water gliter
+    
     if(turn == 0) {
       lvl1.showBoard();
     }
+    
     else if(turn == 1) {
       lvl1.aiHandler();
       turn = 0;
@@ -87,15 +102,23 @@ void draw() {
   else if (state == 2) { // stick man fight
     image(back,width/2,height/2,width,height);
     handleStickerman();// all the code for the stick square battle
+    
     weaponHandler();
     weapon1.myDraw();
 
   }
   else if(state == 3){
-    attack = theShop.weaponLevel + 3;
+    shop = true;
+    
+    attack = theShop.weaponLevel + 3;// add three to compensate for the starter value 
     armour = theShop.armourLevel + 3;
     speed = theShop.speedLevel + 3;
+    
+    theShop.getGoldValue(lvl1.amountOfGold);// get the current of gold
     theShop.myShopDrawLoop();
+      
+    lvl1.amountOfGold = theShop.returnUpdatedGoldValue();// returning the amount of gold after transaction
+      
     backToGameButton();
   }
 }
@@ -134,13 +157,6 @@ void  helpScreen() {
 }
 
 
-
-
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////////// code involing the stickman
 void handleStickerman() { // sets up the stickman and starts the moving;
   //human plauer
@@ -171,15 +187,10 @@ void keyPressed() {
   
 }
 
-void keyReleased() {
-  humanPlayerStickMan.handleKeyRelease();
-  
-  
-}
-
 void mousePressed() {
-  lvl1.mouseHandler(); // triggers the char to move. ALL THE MAJOR CODE FOR CHAR
-  //theWeaponLevel = firstShop.makeTheCalcForWeaponLvl(theWeaponLevel);
+  if(shop == false){
+    lvl1.mouseHandler(); // triggers the char to move. ALL THE MAJOR CODE FOR CHAR
+  }
 
 }
 
@@ -245,7 +256,7 @@ void drawResourceBar() {
   text("= ",goldBarX + 40,barY+goldBarH/2+5);
   
   // amount of gold you have as of this turn 
-  text(lvl1.amountOfGold,goldBarX + 80,barY+goldBarH/2+5); 
+  text(int(lvl1.amountOfGold),goldBarX + 80,barY+goldBarH/2+5); 
   
   // just the word turn
   text("turn",goldBarX/2 - width/16,barY+goldBarH/2+5); 

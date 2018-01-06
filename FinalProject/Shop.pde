@@ -1,6 +1,8 @@
 class Shop {
   float armourLevel, speedLevel, weaponLevel;
   float x, y, w, h;
+  
+  float theGoldValue;
   Button2 armourButton, speedButton, weaponButton; 
 
 
@@ -12,6 +14,8 @@ class Shop {
     y = 100;
     w = 200;
     h = 100;
+    
+    theGoldValue = 0;
 
     // making calculations for button location
     armourButton = new Button2(x, y, w, h);
@@ -49,11 +53,16 @@ class Shop {
   }
 
   boolean doIHaveEnoughGold(){
-    
-    
-    
-    
+       
     return false;
+  }
+
+  void getGoldValue(float ourGold){
+    theGoldValue = ourGold;
+  }
+
+  float returnUpdatedGoldValue(){
+    return theGoldValue;
   }
 
 }
