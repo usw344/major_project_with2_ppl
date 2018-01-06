@@ -13,7 +13,11 @@ class Tile {
     h = _h;
     tileType = _tileType;
 
-    
+    //letter legend
+    // lowercase o: is grey space :: grey
+    // b:           is human main base :: dark green
+    // O:           is the land you conquered :: light green
+    // A:           is enemy conquerd land :: lightish orange
     
     if (tileType == 'o') {
       rgb = color(100); // this is for empty space
@@ -21,15 +25,10 @@ class Tile {
     if (tileType == 'b') {
       rgb = color(0, 255, 0); // this is for our base
     }
-    if (tileType == 'B') {
-      rgb = color(100);
-      //rgb = color(255,0,0); // for other town halls uncomment this if you want to debug;
-    }
     if (tileType == 'O') {
       rgb = color(150, 255, 150);
     }
     if (tileType == 'A') {
-      //rgb = color(100);
       rgb = color(250, 124, 20);
     }
     if(tileType == 'H'){
@@ -51,10 +50,6 @@ class Tile {
 
     if (tileType == 'b') {
       rgb = color(0, 255, 0); // this is for our base
-    }
-
-    if (tileType == 'B') {
-      rgb = color(255, 0, 0); // for other town halls;
     }
 
     if (tileType == 'O') { //our tiles

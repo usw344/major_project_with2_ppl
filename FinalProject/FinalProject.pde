@@ -2,8 +2,8 @@
 
 // what needs finishing in board version
 /// need to fix edges issues
-/// need to add better turn management (as in if the ai hits its own spot then make it select a different one)
-/// need to stop user from clicking on hill and water
+/// ** done*** need to add better turn management (as in if the ai hits its own spot then make it select a different one)
+/// ** done*** need to stop user from clicking on hill and water
 /// need the ai to work better
 /// need to add better graphics (kam)!!!
 
@@ -14,7 +14,8 @@
 /// need concept of armour.
 /// need to make ai health, speed, attack evolve with time
 
-// what is needs to look better
+// what is needs to look better/ get a better grade
+/// need to reorginze the classes
 /// better overall graphics
 /// needs sound and music
 
@@ -84,14 +85,9 @@ void draw() {
   
   else if (state == 1) { // grid game
     shop = false;// allow for movement
-    //println(lvl1.turnCounter);
-    lvl1.waterAnimation();// makes the water gliter
-    lvl1.showBoard();
-    
-    if(lvl1.myTurn == false) {
-      lvl1.aiHandler();
-    }
-    
+     
+    lvl1.levelLoaderDrawLoop();// main code for board 
+     
     fill(0);
     drawResourceBar();// draws all the elements at the bottom and the button to enter the shop
   } 
@@ -125,9 +121,7 @@ void draw() {
 void startScreen() {
   background(255);
   startButton.displayButton(width/2, height/4, width/3, height/5);
-  
   startButton.isTheButtonBeingClicked(1);// go to the game when clicked
-  
   startButton.theText("Start");
 }
 

@@ -87,6 +87,16 @@ class LevelLoader {
     }
   }
 
+  void levelLoaderDrawLoop(){
+    waterAnimation();// makes the water gliter
+    showBoard();
+    if(myTurn == false) {
+      aiHandler();
+    }
+  
+  }
+
+
 
   void showBoard() {
     for (int y = 0; y < boardHeight; y++) {
@@ -187,38 +197,37 @@ class LevelLoader {
 
     int whichWayToMove;
     whichWayToMove =  int(random(1, 5));
-
-    
     if (whichWayToMove == 1 && aiY + 1 <= 24 ) {  //checkerCode('A',aiX,aiY + 1)) {// move down
+      if(allTiles[aiX][aiY +1 ].checker('A')){
+        amountOfMovesLeft -=1;
+      }
       allTiles[aiX][aiY + 1].switchTileTo('A');
       aiY = aiY +1;
-      if(allTiles[aiX][aiY].checker('A')){
+
+    } 
+    else if (whichWayToMove == 2 && aiY -1 >= 0) {// checkerCode('A',aiX,aiY -1)) {// move up
+      if(allTiles[aiX][aiY - 1].checker('A')){
         amountOfMovesLeft -=1;
       }
-    } 
-    
-    else if (whichWayToMove == 2 && aiY -1 >= 0) {// checkerCode('A',aiX,aiY -1)) {// move up
       allTiles[aiX][aiY -1].switchTileTo('A');
       aiY = aiY -1;
-      if(allTiles[aiX][aiY].checker('A')){
+    } 
+    else if (whichWayToMove == 3 &&  aiX + 1 <= 24) {//checkerCode('A',aiX + 1,aiY)) {// move right
+      if(allTiles[aiX + 1][aiY].checker('A')){
         amountOfMovesLeft -=1;
       }
-    } 
-    
-    else if (whichWayToMove == 3 &&  aiX + 1 <= 24) {//checkerCode('A',aiX + 1,aiY)) {// move right
       allTiles[aiX +1][aiY].switchTileTo('A');
       aiX = aiX +1;
-      if(allTiles[aiX][aiY].checker('A')){
-        amountOfMovesLeft -=1;
-      }
+
     } 
     
     else if (whichWayToMove == 4 && aiX -1 >= 0 ) {//checkerCode('A',aiX -1 ,aiY)) {// move left
-      allTiles[aiX -1 ][aiY].switchTileTo('A');
-      aiX = aiX -1;
-      if(allTiles[aiX][aiY].checker('A')){
+      if(allTiles[aiX - 1][aiY].checker('A')){
         amountOfMovesLeft -=1;
       }
+      allTiles[aiX -1 ][aiY].switchTileTo('A');
+      aiX = aiX -1;
+      
     }
     amountOfMovesLeft ++;
     if(amountOfMovesLeft >= 3){
