@@ -20,7 +20,8 @@ class LevelLoader {
   //turn boolean
   boolean myTurn;
 
-  BoardAi orangeAi, redAi, blackAi;
+  boolean timeForTheMongols;
+  BoardAi orangeAi, redAi, blackAi, mongolAi;
   
   //timer for water Animation;
   Timer clockForWaterAnimation;
@@ -41,11 +42,13 @@ class LevelLoader {
     
     myTurn = false;
     
+    timeForTheMongols = false;
   
     boardHeight = lines.length;
     boardWidth = lines[0].length();
     
     stickMan = loadImage("Sticky.png");
+
 
     turnCounter = 0;
 
@@ -81,13 +84,13 @@ class LevelLoader {
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
         if (allTiles[x][y].checker('A')) {// the start point of the ai is this **** change this to make the ai start at the top
-          orangeAi = new BoardAi(boardHeight, boardWidth, 5, 11 , 'A');
+          orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A');
         }
         if(allTiles[x][y].checker('B')){
-          redAi = new BoardAi(boardHeight, boardWidth, aiX, aiY , 'B');
+          redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B');
         }
         if(allTiles[x][y].checker('C')){
-          blackAi = new BoardAi(boardHeight, boardWidth, aiX, aiY , 'C');
+          blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C');
         }
     }
     }
@@ -96,13 +99,17 @@ class LevelLoader {
   void levelLoaderDrawLoop(){
     waterAnimation();// makes the water gliter
     showBoard();
-
+    unleasheTheMongols();
   if(myTurn == false){
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < 5; i++){
       blackAi.boardAiDrawLoop(allTiles);
       orangeAi.boardAiDrawLoop(allTiles);
       redAi.boardAiDrawLoop(allTiles);
-    }
+      
+      if(timeForTheMongols){
+        mongolAi.boardAiDrawLoop(allTiles);
+      }
+  }
     amountOfMovesLeft = 3;
     myTurn = true;
   }
@@ -152,6 +159,14 @@ class LevelLoader {
     return false; // not a valid move dont move
   }
 
+  void unleasheTheMongols(){
+    if(timeForTheMongols == false && turnCounter > 30){
+      allTiles[17][16].switchTileTo('M');
+      mongolAi = new BoardAi(boardWidth,boardHeight,16,16,'M');
+      timeForTheMongols  = true;
+    }
+    
+  }
 
   void mouseHandler() {
     //calculating which tile the mouse is on the screen    
@@ -160,14 +175,15 @@ class LevelLoader {
     if(allTiles[clickedXCord][clickedYCord].checkForObstcle('H') == 1 || allTiles[clickedXCord][clickedYCord].checkForObstcle('w') == 2){
       println("invalid moves");
     }
-    else if(amountOfMovesLeft <= 0){
+    else if(amountOfMovesLeft == 0){
       myTurn = false;
     }
 
     else {// if this happens then it means you clicked on somthing that is clickable
       legalMoveChecker('B', clickedXCord, clickedYCord);
       legalMoveChecker('A', clickedXCord, clickedYCord);
-  
+      legalMoveChecker('C', clickedXCord, clickedYCord);
+      
       if (legalMoveChecker('B', clickedXCord, clickedYCord) || legalMoveChecker('A', clickedXCord, clickedYCord) ) {
         //changing where the stickman is to be drawn later on
         charX = clickedXCord * int(tileWidth);
@@ -192,9 +208,7 @@ class LevelLoader {
 
   void calculateGold() {
     //this function goes through and checks for all your tiles and gives you one gold per tile
-
     amountToAdd = 0;
-
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
         if (allTiles[x][y].checker('O')) {

@@ -50,7 +50,10 @@ class Tile {
     if(tileType == 'H'){
       rgb = color(33,131,203);
     }
-  }
+    if(tileType == 'M'){
+      rgb = color(234,227,227); 
+    }
+}
 
   void switchTileTo(char _tileType) {
 
@@ -83,7 +86,10 @@ class Tile {
       //rgb = color(100);
       rgb = color(250, 124, 20);
     }
-  }
+    if(tileType == 'M'){
+      rgb = color(234,227,227); 
+    }  
+}
   boolean checker(char tileTypeToCheck) {
     if (tileType == tileTypeToCheck) {
       return true;

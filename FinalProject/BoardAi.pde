@@ -40,37 +40,24 @@ class BoardAi {
     int whichWayToMove;
     whichWayToMove =  int(random(1, 5));
 
-    if (whichWayToMove == 1 && aiY + 1 <= 24 ) {  //checkerCode('A',aiX,aiY + 1)) {// move down
-      if (tempBoard[aiX][aiY +1 ].checker(aiChar)) {
-        aiMoves -=1;
-      }
+    if (whichWayToMove == 1 && aiY + 1 <= 24 && tempBoard[aiX][aiY +1 ].checker(aiChar) == false) { // move down
       tempBoard[aiX][aiY + 1].switchTileTo(aiChar);
       aiY = aiY +1;
-      aiMoves ++;
     } 
-    else if (whichWayToMove == 2 && aiY -1 >= 0) {// checkerCode('A',aiX,aiY -1)) {// move up
-      if (tempBoard[aiX][aiY - 1].checker(aiChar)) {
-        aiMoves -=1;
-      }
+    else if (whichWayToMove == 2 && aiY -1 >= 0 && tempBoard[aiX][aiY - 1].checker(aiChar) == false) {// move up
       tempBoard[aiX][aiY -1].switchTileTo(aiChar);
       aiY = aiY -1;
-      aiMoves ++;
     } 
-    else if (whichWayToMove == 3 &&  aiX + 1 <= 24) {//checkerCode('A',aiX + 1,aiY)) {// move right
-      if (tempBoard[aiX + 1][aiY].checker(aiChar)) {
-        aiMoves -=1;
-      }
+    else if (whichWayToMove == 3 &&  aiX + 1 <= 24 && tempBoard[aiX + 1][aiY].checker(aiChar) == false) {// move right
       tempBoard[aiX +1][aiY].switchTileTo(aiChar);
       aiX = aiX +1;
-      aiMoves++;
     } 
-    else if (whichWayToMove == 4 && aiX -1 >= 0 ) {//checkerCode('A',aiX -1 ,aiY)) {// move left
-      if (tempBoard[aiX - 1][aiY].checker(aiChar)) {
-        aiMoves -=1;
-      }
+    else if (whichWayToMove == 4 && aiX -1 >= 0 && tempBoard[aiX - 1][aiY].checker(aiChar) == false) {// move left
       tempBoard[aiX -1 ][aiY].switchTileTo(aiChar);
       aiX = aiX -1;
-      aiMoves++;
     }
-  }
+    else{
+      //
+    }
+}
 }
