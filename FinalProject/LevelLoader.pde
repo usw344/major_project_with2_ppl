@@ -160,8 +160,19 @@ class LevelLoader {
   }
 
   void unleasheTheMongols(){
-    if(timeForTheMongols == false && turnCounter > 30){
+    if(timeForTheMongols == false && turnCounter > 25){
+      allTiles[16][16].switchTileTo('M');
+      allTiles[17][15].switchTileTo('M');
+      allTiles[18][15].switchTileTo('M');
       allTiles[17][16].switchTileTo('M');
+      allTiles[17][17].switchTileTo('M');
+      allTiles[19][17].switchTileTo('M');
+      allTiles[18][17].switchTileTo('M');
+      allTiles[20][17].switchTileTo('M');
+      allTiles[21][17].switchTileTo('M');
+      allTiles[24][18].switchTileTo('M');
+      allTiles[20][18].switchTileTo('M');
+      
       mongolAi = new BoardAi(boardWidth,boardHeight,16,16,'M');
       timeForTheMongols  = true;
     }
