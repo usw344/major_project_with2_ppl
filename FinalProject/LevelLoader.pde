@@ -1,5 +1,3 @@
-
-
 class LevelLoader {
   // all int vars
   int boardHeight, boardWidth; 
@@ -91,7 +89,7 @@ class LevelLoader {
     waterAnimation();// makes the water gliter
     showBoard();
     if(myTurn == false) {
-      aiHandler();
+      ///// put ai code here;
     }
   
   }
@@ -194,7 +192,6 @@ class LevelLoader {
   }
 
   void aiHandler() {
-
     int whichWayToMove;
     whichWayToMove =  int(random(1, 5));
     if (whichWayToMove == 1 && aiY + 1 <= 24 ) {  //checkerCode('A',aiX,aiY + 1)) {// move down
@@ -229,6 +226,7 @@ class LevelLoader {
       aiX = aiX -1;
       
     }
+    
     amountOfMovesLeft ++;
     if(amountOfMovesLeft >= 3){
       myTurn = true;

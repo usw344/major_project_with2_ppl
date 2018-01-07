@@ -29,7 +29,9 @@ class Tile {
     //M:            is enemy mongols             :: white color
     //T:            is enemey Timurids           :: is dark red
     
-    
+    if(tileType == 'C'){
+      rgb = color(0);
+    }
     if (tileType == 'o') {
       rgb = color(100); 
     }
