@@ -20,6 +20,8 @@ class LevelLoader {
   //turn boolean
   boolean myTurn;
 
+  BoardAi orangeAi, redAi, blackAi;
+  
   //timer for water Animation;
   Timer clockForWaterAnimation;
 
@@ -37,11 +39,12 @@ class LevelLoader {
   LevelLoader(String levelWeAreOn) {
     String lines[] = loadStrings(levelWeAreOn);
     
-    myTurn = true;
-
+    myTurn = false;
+    
+  
     boardHeight = lines.length;
     boardWidth = lines[0].length();
-
+    
     stickMan = loadImage("Sticky.png");
 
     turnCounter = 0;
@@ -78,20 +81,31 @@ class LevelLoader {
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
         if (allTiles[x][y].checker('A')) {// the start point of the ai is this **** change this to make the ai start at the top
-          aiX = x;
-          aiY = y;
+          orangeAi = new BoardAi(boardHeight, boardWidth, 5, 11 , 'A');
         }
-      }
+        if(allTiles[x][y].checker('B')){
+          redAi = new BoardAi(boardHeight, boardWidth, aiX, aiY , 'B');
+        }
+        if(allTiles[x][y].checker('C')){
+          blackAi = new BoardAi(boardHeight, boardWidth, aiX, aiY , 'C');
+        }
+    }
     }
   }
 
   void levelLoaderDrawLoop(){
     waterAnimation();// makes the water gliter
     showBoard();
-    if(myTurn == false) {
-      ///// put ai code here;
+
+  if(myTurn == false){
+    for(int i = 0; i < 4; i++){
+      blackAi.boardAiDrawLoop(allTiles);
+      orangeAi.boardAiDrawLoop(allTiles);
+      redAi.boardAiDrawLoop(allTiles);
     }
-  
+    amountOfMovesLeft = 3;
+    myTurn = true;
+  }
   }
 
 
@@ -191,48 +205,7 @@ class LevelLoader {
     amountOfGold += amountToAdd;
   }
 
-  void aiHandler() {
-    int whichWayToMove;
-    whichWayToMove =  int(random(1, 5));
-    if (whichWayToMove == 1 && aiY + 1 <= 24 ) {  //checkerCode('A',aiX,aiY + 1)) {// move down
-      if(allTiles[aiX][aiY +1 ].checker('A')){
-        amountOfMovesLeft -=1;
-      }
-      allTiles[aiX][aiY + 1].switchTileTo('A');
-      aiY = aiY +1;
-
-    } 
-    else if (whichWayToMove == 2 && aiY -1 >= 0) {// checkerCode('A',aiX,aiY -1)) {// move up
-      if(allTiles[aiX][aiY - 1].checker('A')){
-        amountOfMovesLeft -=1;
-      }
-      allTiles[aiX][aiY -1].switchTileTo('A');
-      aiY = aiY -1;
-    } 
-    else if (whichWayToMove == 3 &&  aiX + 1 <= 24) {//checkerCode('A',aiX + 1,aiY)) {// move right
-      if(allTiles[aiX + 1][aiY].checker('A')){
-        amountOfMovesLeft -=1;
-      }
-      allTiles[aiX +1][aiY].switchTileTo('A');
-      aiX = aiX +1;
-
-    } 
-    
-    else if (whichWayToMove == 4 && aiX -1 >= 0 ) {//checkerCode('A',aiX -1 ,aiY)) {// move left
-      if(allTiles[aiX - 1][aiY].checker('A')){
-        amountOfMovesLeft -=1;
-      }
-      allTiles[aiX -1 ][aiY].switchTileTo('A');
-      aiX = aiX -1;
-      
-    }
-    
-    amountOfMovesLeft ++;
-    if(amountOfMovesLeft >= 3){
-      myTurn = true;
-    }
-}
-
+ 
   // generic code for checking multiple char
   boolean checkerCode(char checkThis, int __x, int __y) {
     if (__x > 0 && __x<24 && __y < 23) {   

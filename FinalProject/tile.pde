@@ -60,6 +60,9 @@ class Tile {
     else{
       tileType = _tileType;
     }
+    if(tileType == 'C'){
+      rgb = color(0);
+    }
     if (tileType == 'B') {
       rgb = color(255, 0, 0); 
     }

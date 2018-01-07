@@ -1,7 +1,8 @@
 class BoardAi {
   Tile[][] tempBoard;
   int aiX, aiY, aiMoves;
-  char aiChar
+  char aiChar;
+  boolean stopAi;
   BoardAi(int boardXWidth, int boardYHeight, int _aiX, int _aiY ,char _aiChar) {
     tempBoard = new Tile[boardXWidth][boardYHeight];
     aiX = _aiX;
@@ -12,12 +13,20 @@ class BoardAi {
 
   void boardAiDrawLoop(Tile[][] currentTempBoard) {
     importCurrentBoard(currentTempBoard);
-    aiHandler();
+      aiHandler();
+      exportCurrentBoard();
+    
+    
   }
 
 
   void importCurrentBoard(Tile[][] _currentTempBoard) {
     tempBoard = _currentTempBoard;
+    stopAi = false;
+  }
+  
+  Tile[][] exportCurrentBoard(){
+    return tempBoard;
   }
 
   boolean isAiDoneMoving() {
