@@ -100,8 +100,10 @@ class LevelLoader {
         blackAi.boardAiDrawLoop(allTiles);
         orangeAi.boardAiDrawLoop(allTiles);
         redAi.boardAiDrawLoop(allTiles);
-        mongolAi.boardAiDrawLoop(allTiles);
+        if(timeForTheMongols){
+          mongolAi.boardAiDrawLoop(allTiles);
     }
+      }
     
     amountOfMovesLeft = 3;
     myTurn = true;
