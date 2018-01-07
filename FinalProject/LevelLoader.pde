@@ -28,17 +28,18 @@ class LevelLoader {
 
 
   //the board array
-  Tile[][] allTiles;
+  Tile[][] allTiles, loadMongolsTiles;
 
   // vars for ai
   int aiX, aiY;
-
+  String mongolMap[];
 
 
 
 
   LevelLoader(String levelWeAreOn) {
     String lines[] = loadStrings(levelWeAreOn);
+    mongolMap = loadStrings("mongols.txt");
     
     myTurn = false;
     
@@ -71,8 +72,9 @@ class LevelLoader {
         char tileType = lines[y].charAt(x);
 
         allTiles[x][y] = new Tile(x*tileWidth, y*tileHeight, tileWidth, tileHeight, tileType);
-      }
+      
     }
+
     
     //doesnt do much for now
     charX = 5 * int(tileWidth);
@@ -81,35 +83,26 @@ class LevelLoader {
     // need to load hill here as to not overburden the ram
     hill = loadImage("hill.png");
 
-    for (int y = 0; y < boardHeight; y++) {
-      for (int x = 0; x < boardWidth; x++) {
-        if (allTiles[x][y].checker('A')) {// the start point of the ai is this **** change this to make the ai start at the top
-          orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A');
-        }
-        if(allTiles[x][y].checker('B')){
-          redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B');
-        }
-        if(allTiles[x][y].checker('C')){
-          blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C');
-        }
-    }
-    }
+    orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A');
+    redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B');
+    blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C');
+    
+  }
   }
 
   void levelLoaderDrawLoop(){
     waterAnimation();// makes the water gliter
     showBoard();
     unleasheTheMongols();
-  if(myTurn == false){
-    for(int i = 0; i < 5; i++){
-      blackAi.boardAiDrawLoop(allTiles);
-      orangeAi.boardAiDrawLoop(allTiles);
-      redAi.boardAiDrawLoop(allTiles);
-      
-      if(timeForTheMongols){
+  
+    if(myTurn == false){
+      for(int i = 0; i < 6; i++){
+        blackAi.boardAiDrawLoop(allTiles);
+        orangeAi.boardAiDrawLoop(allTiles);
+        redAi.boardAiDrawLoop(allTiles);
         mongolAi.boardAiDrawLoop(allTiles);
-      }
-  }
+    }
+    
     amountOfMovesLeft = 3;
     myTurn = true;
   }
@@ -161,19 +154,18 @@ class LevelLoader {
 
   void unleasheTheMongols(){
     if(timeForTheMongols == false && turnCounter > 25){
-      allTiles[16][16].switchTileTo('M');
-      allTiles[17][15].switchTileTo('M');
-      allTiles[18][15].switchTileTo('M');
-      allTiles[17][16].switchTileTo('M');
-      allTiles[17][17].switchTileTo('M');
-      allTiles[19][17].switchTileTo('M');
-      allTiles[18][17].switchTileTo('M');
-      allTiles[20][17].switchTileTo('M');
-      allTiles[21][17].switchTileTo('M');
-      allTiles[24][18].switchTileTo('M');
-      allTiles[20][18].switchTileTo('M');
-      
-      mongolAi = new BoardAi(boardWidth,boardHeight,16,16,'M');
+    for (int y = 0; y < boardHeight; y++) {
+      for (int x = 0; x < boardWidth; x++) {
+        char tileType = mongolMap[y].charAt(x);
+        if(tileType == 'M'){
+          allTiles[x][y].switchTileTo('M');
+        }
+        if(tileType == 'm'){
+          mongolAi = new BoardAi(boardWidth,boardHeight,x,y,'M');
+        }
+    }
+    }
+
       timeForTheMongols  = true;
     }
     
