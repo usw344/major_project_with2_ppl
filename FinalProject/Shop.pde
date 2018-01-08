@@ -4,6 +4,8 @@ class Shop {
   
   float theGoldValue;
   Button2 armourButton, speedButton, weaponButton; 
+  
+  float armourCost, speedCost, weaponCost;
 
 
   Shop() {
@@ -14,6 +16,10 @@ class Shop {
     y = 100;
     w = 200;
     h = 100;
+    
+    armourCost = 2;
+    speedCost = 2;
+    weaponCost = 2;
     
     theGoldValue = 0;
 
@@ -33,6 +39,8 @@ class Shop {
     armourButton.displayButton();
     speedButton.displayButton();
     weaponButton.displayButton();
+    
+    text(int(theGoldValue), width-width/3,height/2);
   }
   void displaySectionLevel() {
     // just for devolpment reasons, want to see the level of the box
@@ -41,14 +49,28 @@ class Shop {
     weaponButton.theText("Attack Level = " + str(weaponLevel));
   }
   void upgradOnClick() {
-    if (armourButton.isTheButtonBeingClicked()) {
+    fill(0);
+    text(armourCost,x,y*2 - y/5);
+    if (armourButton.isTheButtonBeingClicked() && weaponCost < theGoldValue) {
+      armourCost += armourLevel * 2;
+      theGoldValue -= armourCost;
       armourLevel += 0.5;
+      
     }
-    if (speedButton.isTheButtonBeingClicked()) {
+    fill(0);
+    text(speedCost,x,y*2 - y/5);
+    if (speedButton.isTheButtonBeingClicked() && speedCost < theGoldValue) {
+      speedCost += speedLevel * 2;
+      theGoldValue -= speedCost;
       speedLevel += 0.5;
     }
-    if (weaponButton.isTheButtonBeingClicked()) {
+    fill(0);
+    text(weaponCost,x,y*2 - y/5);
+    if (weaponButton.isTheButtonBeingClicked() && weaponCost < theGoldValue) {
+      weaponCost += weaponLevel * 2;
+      theGoldValue -= weaponCost;
       weaponLevel += 0.5;
+      
     }
   }
 
@@ -56,6 +78,7 @@ class Shop {
        
     return false;
   }
+
 
   void getGoldValue(float ourGold){
     theGoldValue = ourGold;
