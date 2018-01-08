@@ -43,6 +43,7 @@ class Stickman {
 
 
   void display() {
+    println("false");
     imageMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
   }
@@ -60,19 +61,16 @@ class Stickman {
   
 //////////////////////////////////////////////////////this is all the code for handling the movement of the stickman
   void movement(float currentSpeed) {
+    println("true");
     dx = currentSpeed;
     dy = currentSpeed;
     if (movingLeft) {
-      if (x > w/2) {
-        x -= dx;
-        
-      }
+      
+      x -= dx;
     }
     if (movingRight) {
-      if (x < width-w/2) {
-        x += dy;
-      }
-    }
+      x += dy;
+  }
   }
 
 ////////////////////////////////////////////////////////////////////////// dealing with keyPressed and released

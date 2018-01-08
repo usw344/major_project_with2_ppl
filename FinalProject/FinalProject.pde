@@ -2,9 +2,8 @@
 
 // what needs finishing in board version
 /// need to fix edges issues
-/// ** done*** need to add better turn management (as in if the ai hits its own spot then make it select a different one)
-/// ** done*** need to stop user from clicking on hill and water
 /// need the ai to work better
+/// need to make it so ai can not move on hills
 /// need to add better graphics (kam)!!!
 
 // what needs work in stickman fights
