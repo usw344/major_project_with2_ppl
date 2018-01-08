@@ -16,7 +16,7 @@ class WeaponType {
     y = ___y;
     w = ___w;
     h = ___h;
-    ammo1 = new Ammo(x,y,2,5,20,"arrow.png",w,h);
+    ammo1 = new Ammo(x,y,2,20,"arrow.png",w,h,true);
     weaponLvl = __levelOfWeapon;
 }
   void display() {
@@ -45,13 +45,6 @@ class WeaponType {
         theThingToAttack.health -= dmg;
         ammo1.x = x - 20;
       }
-    }
-  }
-
-  void myDraw() {
-    if (mousePressed) {
-      ammo1.fire(aiControledStickMan.x,true);
-      ammo1.display(true);
     }
   }
 

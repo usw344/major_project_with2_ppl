@@ -61,16 +61,14 @@ class Stickman {
   
 //////////////////////////////////////////////////////this is all the code for handling the movement of the stickman
   void movement(float currentSpeed) {
-    println("true");
     dx = currentSpeed;
-    dy = currentSpeed;
     if (movingLeft) {
-      
+      println(dx);
       x -= dx;
     }
     if (movingRight) {
-      x += dy;
-  }
+      x += dx;
+    }
   }
 
 ////////////////////////////////////////////////////////////////////////// dealing with keyPressed and released
@@ -95,7 +93,7 @@ class Stickman {
 //////////////////////////////////////
   void ai(Stickman humanPlayer) {
     float humanX, humanY;
-    float speedToMove = dx*2.3;
+    float speedToMove = 3;
     
     humanX = humanPlayer.x;
     humanY = humanPlayer.y;

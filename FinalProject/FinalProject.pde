@@ -176,6 +176,9 @@ void keyPressed() {
   humanPlayerStickMan.handleKeyPress();
   
 }
+void keyReleased() {
+  humanPlayerStickMan.handleKeyRelease();
+}
 
 void mousePressed() {
   if(shop == false){

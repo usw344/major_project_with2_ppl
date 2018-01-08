@@ -1,31 +1,33 @@
 class Ammo {
-  float x, y, dx, dy, dmg, w, h;
+  float x, y, dx, dmg, w, h;
   PImage spirte;
-  boolean isItTouchingTheGround, isDisplaying;
+  boolean isItTouchingTheGround, isDisplaying, isShooting;
 
-  Ammo(float _x, float _y, float _dx, float _dy, float _dmg, String _ammoPicToload, float _w, float _h) { //boolean _isItTouchingTheGround, boolean _isDisplaying){
+  Ammo(float _x, float _y, float _dx, float _dmg, String _ammoPicToload, float _w, float _h, boolean _isShooting) { //boolean _isItTouchingTheGround, boolean _isDisplaying){
     x = _x;
     y = _y;
     dx = _dx;
-    dy = _dy;
     dmg = _dmg;
     w = _w;
     h = _h;
+    isShooting = _isShooting;
     //isItTouchingTheGround = _isItTouchingTheGround;
     //isDisplaying = _isDisplaying;
     spirte = loadImage(_ammoPicToload);
   }
-
-  void display(boolean shoot) {
-    if (shoot) {
-      image(spirte, x, y, w, h);
-    }
+  
+  void fire() {
+   if (mousePressed) {
+     isShooting = true;
+   }
+   if (isShooting) {
+     x += dx;
+   }
   }
-
-
-  void fire(float _x, boolean shoot) {
-    if(x<= _x){ // check to see which way the shot should go
-      x += 10;
+  
+  void comeBack(float _aiX) {
+    if (x >= _aiX || x >= width) {
+      
     }
   }
 }
