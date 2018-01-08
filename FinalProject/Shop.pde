@@ -58,14 +58,14 @@ class Shop {
       
     }
     fill(0);
-    text(speedCost,x,y*2 - y/5);
+    text(speedCost,x, y+h + h + h/3);
     if (speedButton.isTheButtonBeingClicked() && speedCost < theGoldValue) {
       speedCost += speedLevel * 2;
       theGoldValue -= speedCost;
       speedLevel += 0.5;
     }
     fill(0);
-    text(weaponCost,x,y*2 - y/5);
+    text(weaponCost,x,y+h* 4);
     if (weaponButton.isTheButtonBeingClicked() && weaponCost < theGoldValue) {
       weaponCost += weaponLevel * 2;
       theGoldValue -= weaponCost;
