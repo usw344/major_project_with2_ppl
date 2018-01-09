@@ -3,12 +3,14 @@ class BoardAi {
   int aiX, aiY, aiMoves;
   char aiChar;
   boolean stopAi;
-  BoardAi(int boardXWidth, int boardYHeight, int _aiX, int _aiY ,char _aiChar) {
+  Stickman thisAiStickman;
+  BoardAi(int boardXWidth, int boardYHeight, int _aiX, int _aiY ,char _aiChar, float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman) {
     tempBoard = new Tile[boardXWidth][boardYHeight];
     aiX = _aiX;
     aiY = _aiY;
     aiMoves = 0;
     aiChar = _aiChar;
+    thisAiStickman = new Stickman(width-100, _speedOfStickman, attackValueOfAI, imageOfAiSticman);
   }
 
   void boardAiDrawLoop(Tile[][] currentTempBoard) {
@@ -18,6 +20,15 @@ class BoardAi {
     
     
   }
+
+  void aiStickManBattle(Stickman _humanSticman){
+    thisAiStickman.display();
+    thisAiStickman.ai(_humanSticman); //passing in the human stickman to be used in the a
+    thisAiStickman.healthBar();
+    
+  }
+
+
 
 
   void importCurrentBoard(Tile[][] _currentTempBoard) {

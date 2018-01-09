@@ -1,6 +1,6 @@
 //Made by Kam
 class Stickman {
-  float x, y, dx, dy, w, h,current;
+  float x, y, dx, dy, w, h,current, aiAttack;
   int health;
   PImage plains;
   boolean movingRight, movingLeft, engageAi, shootWhichWay;
@@ -25,17 +25,19 @@ class Stickman {
     engageAi = false;// this is human controled so no ai
     health = 100;
   }
-  Stickman(float _x) {// second constructor for the enemy one. (no movement boolean and diffeent draw lcoation)
+  Stickman(float _x, float _speed, float attack,String imageOfAi) {// second constructor for the enemy one. (no movement boolean and diffeent draw lcoation)
     //setting up enemy localtion
     x = _x;
     y = height/2;
-    dx = 5;
-    dy = 5;
+    dx = _speed;
+    dy = _speed;
     w = width/6;
     h = height/3;
     
+    aiAttack = attack;
+    
     //loading its place
-    sticky = loadImage("Sticky.png");
+    sticky = loadImage(imageOfAi);
    
     engageAi = true;//the computer will controll this one
     health = 100;
@@ -43,7 +45,6 @@ class Stickman {
 
 
   void display() {
-    println("false");
     imageMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
   }

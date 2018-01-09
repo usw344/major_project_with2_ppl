@@ -96,8 +96,6 @@ void draw() {
     handleStickerman();// all the code for the stick square battle
     
     weaponHandler();
-    weapon1.myDraw();
-
   }
   else if(state == 3){
     shop = true;
@@ -155,18 +153,21 @@ void handleStickerman() { // sets up the stickman and starts the moving;
   humanPlayerStickMan.movement(speed);
   
   //ai player
-  aiControledStickMan.display();
+  lvl1.aiBattleHandler();
   
-  aiControledStickMan.ai(humanPlayerStickMan); //passing in the human stickman to be used in the ai
   
-  aiControledStickMan.healthBar();
+  
+  
+
+  
+
 
 }
 
 void weaponHandler() {
   weapon1.display();
   weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
-  weapon1.attack(aiControledStickMan,attack);
+  //weapon1.attack(aiControledStickMan,attack);
   
   //arrow.fire();
 }
@@ -194,10 +195,8 @@ void objectLoader() {
 
   // stickman/fighters
   humanPlayerStickMan = new Stickman();
-  aiControledStickMan = new Stickman(4*width/5);
-  
 
-
+ 
   //buttons
   startButton = new Button();
   helpButton = new Button();

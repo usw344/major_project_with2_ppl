@@ -6,6 +6,8 @@ class LevelLoader {
   int charX, charY;
   int xCord, yCord;
   int clickedXCord, clickedYCord;
+  
+  int whichAiIsDoingBattle;
 
   // to do with turn and resources
   float amountOfGold, amountToAdd;
@@ -40,6 +42,8 @@ class LevelLoader {
   LevelLoader(String levelWeAreOn) {
     String lines[] = loadStrings(levelWeAreOn);
     mongolMap = loadStrings("mongols.txt");
+    
+    whichAiIsDoingBattle = 0;
     
     myTurn = false;
     
@@ -83,9 +87,10 @@ class LevelLoader {
     // need to load hill here as to not overburden the ram
     hill = loadImage("hill.png");
 
-    orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A');
-    redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B');
-    blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C');
+    //float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman
+    orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A',width-width/4,3,10,"knight.png");
+    redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B',width-width/4,5,10,"Sticky.png");
+    blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C',width-width/4,5,10,"Sticky.png");
     
   }
   }
@@ -111,6 +116,24 @@ class LevelLoader {
   }
 
 
+  void aiBattleHandler(){
+    if(whichAiIsDoingBattle == 1){
+      orangeAi.aiStickManBattle(humanPlayerStickMan);
+  }
+    if(whichAiIsDoingBattle == 2){
+      redAi.aiStickManBattle(humanPlayerStickMan);
+  
+  }
+    if(whichAiIsDoingBattle == 3){
+      blackAi.aiStickManBattle(humanPlayerStickMan);
+  
+  }
+    if(whichAiIsDoingBattle == 4){
+      mongolAi.aiStickManBattle(humanPlayerStickMan);
+  
+  }
+  
+  }
 
   void showBoard() {
     for (int y = 0; y < boardHeight; y++) {
@@ -143,8 +166,19 @@ class LevelLoader {
     if (x >= 0 && x<=24 && y <= 23) {// prevents array out of bound error
       // this part checks for enemy base and then starts battle
       if (allTiles[x][y].checker(baseChar)) {
+        if(allTiles[x][y].checker('A')){// orange
+          whichAiIsDoingBattle = 1;
+        }
+        if(allTiles[x][y].checker('B')){// red
+          whichAiIsDoingBattle = 2;
+        }
+        if(allTiles[x][y].checker('C')){// blac
+          whichAiIsDoingBattle = 3;
+        }
+        if(allTiles[x][y].checker('M')){
+          whichAiIsDoingBattle = 4;
+        }
         battle();
-
         return true;
       }
 
@@ -163,7 +197,7 @@ class LevelLoader {
           allTiles[x][y].switchTileTo('M');
         }
         if(tileType == 'm'){
-          mongolAi = new BoardAi(boardWidth,boardHeight,x,y,'M');
+          mongolAi = new BoardAi(boardWidth,boardHeight,x,y,'M',width-width/4,5,10,"Sticky.png");
         }
     }
     }
@@ -188,8 +222,9 @@ class LevelLoader {
       legalMoveChecker('B', clickedXCord, clickedYCord);
       legalMoveChecker('A', clickedXCord, clickedYCord);
       legalMoveChecker('C', clickedXCord, clickedYCord);
+      legalMoveChecker('M', clickedXCord, clickedYCord);
       
-      if (legalMoveChecker('B', clickedXCord, clickedYCord) || legalMoveChecker('A', clickedXCord, clickedYCord) ) {
+      if (legalMoveChecker('B', clickedXCord, clickedYCord) || legalMoveChecker('A', clickedXCord, clickedYCord) ||  legalMoveChecker('M', clickedXCord, clickedYCord) || legalMoveChecker('C', clickedXCord, clickedYCord) ) {
         //changing where the stickman is to be drawn later on
         charX = clickedXCord * int(tileWidth);
         charY = clickedYCord * int(tileHeight);
