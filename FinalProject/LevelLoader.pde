@@ -162,24 +162,26 @@ class LevelLoader {
 
 
 
-  boolean  legalMoveChecker(char baseChar, int x, int y) {// this functions deals with seeing if the clicked square needs a battle to start
+   boolean  legalMoveChecker(char baseChar, int x, int y) {// this functions deals with seeing if the clicked square needs a battle to start
     if (x >= 0 && x<=24 && y <= 23) {// prevents array out of bound error
+      if (checkerCode('O', x, y)) {
       // this part checks for enemy base and then starts battle
-      if (allTiles[x][y].checker(baseChar)) {
-        if(allTiles[x][y].checker('A')){// orange
-          whichAiIsDoingBattle = 1;
+        if (allTiles[x][y].checker(baseChar)) {
+          if(allTiles[x][y].checker('A')){// orange
+            whichAiIsDoingBattle = 1;
+          }
+          if(allTiles[x][y].checker('B')){// red
+            whichAiIsDoingBattle = 2;
+          }
+          if(allTiles[x][y].checker('C')){// black
+            whichAiIsDoingBattle = 3;
+          }
+          if(allTiles[x][y].checker('M')){
+            whichAiIsDoingBattle = 4;
+          }
+          battle();
+          return true;
         }
-        if(allTiles[x][y].checker('B')){// red
-          whichAiIsDoingBattle = 2;
-        }
-        if(allTiles[x][y].checker('C')){// blac
-          whichAiIsDoingBattle = 3;
-        }
-        if(allTiles[x][y].checker('M')){
-          whichAiIsDoingBattle = 4;
-        }
-        battle();
-        return true;
       }
 
       /// this next if block checks for empty space to  move to
@@ -187,6 +189,7 @@ class LevelLoader {
     } 
     return false; // not a valid move dont move
   }
+
 
   void unleasheTheMongols(){
     if(timeForTheMongols == false && turnCounter > 25){
