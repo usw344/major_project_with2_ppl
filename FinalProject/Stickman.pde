@@ -69,7 +69,14 @@ class Stickman {
       x -= dx;
     }
     if(jump){
-      //jumping();
+      y -= 10;
+      if(y < 100){
+        jump = false;
+      }
+    }
+    else if (jump == false && y < height/2){
+      y += 10;
+    
     }
     if (movingRight) {
       x += dx;
@@ -83,6 +90,10 @@ class Stickman {
     }
     if (key == 'd') {
       movingRight = true;
+    }
+    if(key == ' '){
+      jump = true;
+    
     }
   }
 
@@ -144,6 +155,9 @@ void healthBar() {
   text(health,width/10,height/8+100);
 
   }
+
+
+
 
  void colorOfHealth(int health) {
     if (health > 66) {
