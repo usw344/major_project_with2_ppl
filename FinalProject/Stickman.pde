@@ -5,6 +5,8 @@ class Stickman {
   PImage plains;
   boolean movingRight, movingLeft, engageAi, shootWhichWay, jump;
   PImage sticky;
+  
+  WeaponType aiWeapon;
 
 //constructor
   Stickman() {
@@ -25,6 +27,8 @@ class Stickman {
     sticky = loadImage("Sticky.png");
     engageAi = false;// this is human controled so no ai
     health = 100;
+    
+   
   }
   Stickman(float _x, float _speed, float attack,String imageOfAi) {// second constructor for the enemy one. (no movement boolean and diffeent draw lcoation)
     //setting up enemy localtion
@@ -42,13 +46,21 @@ class Stickman {
    
     engageAi = true;//the computer will controll this one
     health = 100;
+    
+     aiWeapon = new WeaponType(attack,0,0, "Crossbow.png", 1, 1 , x,y,w,h);
   }
 
 
   void display() {
     imageMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
+    if(engageAi){
+          
+    }
   }
+  
+  void aiWeaponHandler();
+  
   
   void whichWayAmIFacing(int theX) {
     if (x >= theX) {

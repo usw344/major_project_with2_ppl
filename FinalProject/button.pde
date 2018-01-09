@@ -6,6 +6,10 @@
 // .thetext to add the text to your button
 // the object does all the rest
 
+
+
+///////was working in stickman on weapon
+
 class Button {
   float buttonX,buttonY,buttonHeight,buttonWidth; 
   boolean isButtonClicked;
