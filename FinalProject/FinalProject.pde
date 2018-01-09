@@ -155,13 +155,24 @@ void handleStickerman() { // sets up the stickman and starts the moving;
   //ai player
   lvl1.aiBattleHandler();
   
+  float whichOneToAttack = lvl1.whichAiIsDoingBattle;
+    if(whichOneToAttack == 1){
+      weapon1.attack(lvl1.orangeAi.thisAiStickman,attack);
+        
+  }
+    if(whichOneToAttack == 2){
+      weapon1.attack(lvl1.redAi.thisAiStickman,attack);
   
+  }
+    if(whichOneToAttack == 3){
+      weapon1.attack(lvl1.blackAi.thisAiStickman,attack);
   
+  }
+    if(whichOneToAttack == 4){
+      weapon1.attack(lvl1.mongolAi.thisAiStickman,attack);
   
-
+  }
   
-
-
 }
 
 void weaponHandler() {
