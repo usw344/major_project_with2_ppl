@@ -1,33 +1,56 @@
 class Ammo {
-  float x, y, dx, dmg, w, h;
+  float x, y, dx, dmg, w, h, restLocal;
   PImage spirte;
-  boolean isItTouchingTheGround, isDisplaying, isShooting;
+  boolean isShooting; //isItTouchingTheGround, isDisplaying
 
   Ammo(float _x, float _y, float _dx, float _dmg, String _ammoPicToload, float _w, float _h, boolean _isShooting) { //boolean _isItTouchingTheGround, boolean _isDisplaying){
     x = _x;
+    restLocal = _x;
     y = _y;
-    dx = _dx;
+    dx = _dx * 10;
     dmg = _dmg;
     w = _w;
     h = _h;
-    isShooting = _isShooting;
+    isShooting = false;
+    
     //isItTouchingTheGround = _isItTouchingTheGround;
     //isDisplaying = _isDisplaying;
     spirte = loadImage(_ammoPicToload);
   }
   
-  void fire() {
-   if (mousePressed) {
-     isShooting = true;
-   }
-   if (isShooting) {
-     x += dx;
-   }
+  
+  void shootDrawLoop(){
+    println(isShooting);
+    display(); 
+    moveBullet();
+    reset();
   }
   
-  void comeBack(float _aiX) {
-    if (x >= _aiX || x >= width) {
-      
+  void display(){
+    if(isShooting){
+      image(spirte,x,y,w,h);
     }
   }
+  
+  
+  void moveBullet(){
+    if(isShooting){
+      x += dx;
+      
+    }
+  
+  }
+
+  void reset(){
+    if(x > width){
+      isShooting = false;
+      x = restLocal;
+    
+    }
+  
+  }
+
+
+
+
 }

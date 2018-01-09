@@ -193,8 +193,10 @@ void keyReleased() {
 }
 
 void mousePressed() {
+  weapon1.ammo1.isShooting = true;
   if(shop == false){
     lvl1.mouseHandler(); // triggers the char to move. ALL THE MAJOR CODE FOR CHAR
+    
   }
 
 }

@@ -20,6 +20,7 @@ class WeaponType {
     weaponLvl = __levelOfWeapon;
 }
   void display() {
+    ammo1.shootDrawLoop();
     image(thePicOfTheWeapon, x + w/10,y - h/15 ,w/2,h/5);   
   }
   
@@ -34,8 +35,9 @@ class WeaponType {
     
     dmg = updatedDamage;
     if(mousePressed && theThingToAttack.x / x < 1.4 && weaponLvl <= 1) {
-      theThingToAttack.health -= dmg;
       
+      theThingToAttack.health -= dmg;
+      ammo1.shootDrawLoop();
     }
     if(weaponLvl > 1  && weaponLvl <= 2){
      

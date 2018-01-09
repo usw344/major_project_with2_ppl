@@ -3,7 +3,7 @@ class Stickman {
   float x, y, dx, dy, w, h,current, aiAttack;
   int health;
   PImage plains;
-  boolean movingRight, movingLeft, engageAi, shootWhichWay;
+  boolean movingRight, movingLeft, engageAi, shootWhichWay, jump;
   PImage sticky;
 
 //constructor
@@ -19,6 +19,7 @@ class Stickman {
     // setting all the movment booleans to false. 
     movingLeft = false;
     movingRight = false;
+    jump = false;
     
     //loading up the stickman
     sticky = loadImage("Sticky.png");
@@ -66,6 +67,9 @@ class Stickman {
     if (movingLeft) {
       println(dx);
       x -= dx;
+    }
+    if(jump){
+      //jumping();
     }
     if (movingRight) {
       x += dx;
@@ -140,16 +144,22 @@ void healthBar() {
   text(health,width/10,height/8+100);
 
   }
+
+ void colorOfHealth(int health) {
+    if (health > 66) {
+      fill(0,255,5);
+    }
+    else if ( health > 33) {
+      fill(255,141,0);
+    }
+    else {
+      fill(255,0,0);
+    }
+  }
+
 }
 
-void colorOfHealth(int health) {
-  if (health > 66) {
-    fill(0,255,5);
-  }
-  else if ( health > 33) {
-    fill(255,141,0);
-  }
-  else {
-    fill(255,0,0);
-  }
-}
+
+
+
+ 

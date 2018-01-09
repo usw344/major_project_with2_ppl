@@ -197,7 +197,7 @@ class LevelLoader {
           allTiles[x][y].switchTileTo('M');
         }
         if(tileType == 'm'){
-          mongolAi = new BoardAi(boardWidth,boardHeight,x,y,'M',width-width/4,5,10,"Sticky.png");
+          mongolAi = new BoardAi(boardWidth,boardHeight,x,y,'M',width-width/4,5,10,"Mongol.png");
         }
     }
     }
