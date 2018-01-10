@@ -149,7 +149,6 @@ void  helpScreen() {
 void handleStickerman() { // sets up the stickman and starts the moving;
   //human plauer
   humanPlayerStickMan.display();
-  
   humanPlayerStickMan.movement(speed);
   
   //ai player

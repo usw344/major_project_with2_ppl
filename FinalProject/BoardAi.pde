@@ -23,7 +23,8 @@ class BoardAi {
 
   void aiStickManBattle(Stickman _humanSticman){
     thisAiStickman.display();
-    thisAiStickman.ai(_humanSticman); //passing in the human stickman to be used in the a
+    thisAiStickman.ai(_humanSticman);
+  //  thisAiStickman.aiWeaponHandler(_humanSticman);
     thisAiStickman.healthBar();
     
   }

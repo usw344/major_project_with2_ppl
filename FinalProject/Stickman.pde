@@ -7,6 +7,8 @@ class Stickman {
   PImage sticky;
   
   WeaponType aiWeapon;
+  
+  Ammo aiAmmo;
 
 //constructor
   Stickman() {
@@ -47,19 +49,23 @@ class Stickman {
     engageAi = true;//the computer will controll this one
     health = 100;
     
-     aiWeapon = new WeaponType(attack,0,0, "Crossbow.png", 1, 1 , x,y,w,h);
+    aiWeapon = new WeaponType(attack,0,0, "Crossbow.png", 1, 1 , x*10,y*10,w *10,h*10);
+    
   }
 
 
   void display() {
     imageMode(CENTER);
     image(sticky,x,y,w,h);//the stickman PImage
-    if(engageAi){
-          
-    }
   }
   
-  void aiWeaponHandler();
+  void aiWeaponHandler(Stickman _theHumanAiToattack){
+    aiWeapon.display();
+    aiWeapon.move(x,y);
+    //aiWeapon.aiAttack(_theHumanAiToattack,aiAttack);
+  
+  
+  }
   
   
   void whichWayAmIFacing(int theX) {
