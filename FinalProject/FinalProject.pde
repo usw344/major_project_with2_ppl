@@ -175,7 +175,7 @@ void handleStickerman() { // sets up the stickman and starts the moving;
 }
 
 void weaponHandler() {
-  weapon1.display();
+  weapon1.display(humanPlayerStickMan.x);
   weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
   //weapon1.attack(aiControledStickMan,attack);
   

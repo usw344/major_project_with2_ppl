@@ -3,7 +3,7 @@ class Stickman {
   float x, y, dx, dy, w, h,current, aiAttack;
   int health;
   PImage plains;
-  boolean movingRight, movingLeft, engageAi, shootWhichWay, jump;
+  boolean movingRight, movingLeft, engageAi, shootWhichWay, jump, movingUp, movingDown;
   PImage sticky;
   
   WeaponType aiWeapon;
@@ -24,6 +24,8 @@ class Stickman {
     movingLeft = false;
     movingRight = false;
     jump = false;
+    movingUp = false;
+    movingDown = false;
     
     //loading up the stickman
     sticky = loadImage("Sticky.png");
@@ -60,10 +62,8 @@ class Stickman {
   }
   
   void aiWeaponHandler(Stickman _theHumanAiToattack){
-    aiWeapon.display();
+    aiWeapon.display(x);
     aiWeapon.move(x,y);
-    //aiWeapon.aiAttack(_theHumanAiToattack,aiAttack);
-  
   
   }
   
@@ -87,10 +87,12 @@ class Stickman {
       x -= dx;
     }
     if(jump){
-      y -= 10;
       if(y < 100){
-        jump = false;
-      }
+      jump = false;
+     } 
+      
+      y -= 10;
+      
     }
     else if (jump == false && y < height/2){
       y += 10;
@@ -99,6 +101,14 @@ class Stickman {
     if (movingRight) {
       x += dx;
     }
+    if(movingUp){
+      y -= dy;
+    }
+    if(movingDown){
+      if(y < height - h/2 )
+        y += dy;
+    }
+    
   }
 
 ////////////////////////////////////////////////////////////////////////// dealing with keyPressed and released
@@ -113,6 +123,12 @@ class Stickman {
       jump = true;
     
     }
+    if(key == 'w'){
+      movingUp = true;
+    }
+    if(key == 's'){
+      movingDown = true;
+    }
   }
 
   void handleKeyRelease() {
@@ -121,6 +137,12 @@ class Stickman {
     }
     if (key == 'd') {
       movingRight = false;
+    }
+    if(key == 'w'){
+      movingUp = false;
+    }
+    if(key == 's'){
+      movingDown = false;
     }
   }
 

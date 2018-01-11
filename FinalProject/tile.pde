@@ -39,7 +39,7 @@ class Tile {
       rgb = color(0, 255, 0); 
     }
     if (tileType == 'B') {
-      rgb = color(255, 0, 0); 
+      rgb = color(235,242,34); 
     }
     if (tileType == 'O') {
       rgb = color(150, 255, 150);
@@ -67,7 +67,7 @@ class Tile {
       rgb = color(0);
     }
     if (tileType == 'B') {
-      rgb = color(255, 0, 0); 
+      rgb = color(235,242,34); 
     }
     
     if (tileType == 'o') {

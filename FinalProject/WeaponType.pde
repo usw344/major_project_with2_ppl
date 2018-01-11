@@ -1,6 +1,6 @@
 // use floats for everythihg
 class WeaponType {
-  float dmg,hitSpeed,range,x,y,w,h;
+  float dmg,hitSpeed,range,x,y,w,h, updatedX;
   //int behavior;
   Ammo ammo1, aiAmmo;
   PImage thePicOfTheWeapon;
@@ -20,8 +20,8 @@ class WeaponType {
     weaponLvl = __levelOfWeapon;
     //aiAmmo = new Ammo(x,y,2,20,"arrow.png",w,h);
 }
-  void display() {
-   
+  void display(float currentLocaltionOfStickman) {
+    updatedX = currentLocaltionOfStickman;
     image(thePicOfTheWeapon, x + w/10,y - h/15 ,w/2,h/5);   
   }
   
@@ -34,10 +34,9 @@ class WeaponType {
   void attack(Stickman theThingToAttack,float updatedDamage) {
     //anything that is a 1 is melee and 2 is shooting
      if(ammo1.isHittingTarget(theThingToAttack)){
-       println("loooool");
        theThingToAttack.health -= 10;
      }
-     ammo1.shootDrawLoop(x);
+     ammo1.shootDrawLoop(x,updatedX);
      }
   
     
