@@ -3,8 +3,8 @@ class Stickman {
   float x, y, dx, dy, w, h,current, aiAttack;
   int health;
   PImage plains;
-  boolean movingRight, movingLeft, engageAi, shootWhichWay, jump, movingUp, movingDown;
-  PImage sticky;
+  boolean movingRight, movingLeft, engageAi, shootWhichWay, jump, movingUp, movingDown,facingL;
+  PImage sticky,invertImg;
   
   WeaponType aiWeapon;
   
@@ -29,12 +29,14 @@ class Stickman {
     
     //loading up the stickman
     sticky = loadImage("You.png");
+    invertImg = loadImage("YouL.png");
     engageAi = false;// this is human controled so no ai
     health = 100;
+    facingL = false;
     
    
   }
-  Stickman(float _x, float _speed, float attack,String imageOfAi) {// second constructor for the enemy one. (no movement boolean and diffeent draw lcoation)
+  Stickman(float _x, float _speed, float attack,String imageOfAi, String imageInverted, boolean isFacingL) {// second constructor for the enemy one. (no movement boolean and diffeent draw lcoation)
     //setting up enemy localtion
     x = _x;
     y = height/2;
@@ -42,6 +44,8 @@ class Stickman {
     dy = _speed;
     w = width/3;
     h = height/3;
+    facingL = isFacingL;
+    invertImg = loadImage(imageInverted);
     
     aiAttack = attack;
     
@@ -58,8 +62,13 @@ class Stickman {
 
   void display() {
     imageMode(CENTER);
-    image(sticky,x,y,w,h);//the stickman PImage
-  }
+    if (facingL == false) {
+      image(sticky,x,y,w,h);//the stickman PImage
+    }
+    else {
+      image(invertImg,x,y,w,h);
+    }
+}
   
   void aiWeaponHandler(Stickman _theHumanAiToattack){
     aiWeapon.display(x);
@@ -115,9 +124,11 @@ class Stickman {
   void handleKeyPress() {// used with the keyPressed in the main file
     if (key == 'a') {
       movingLeft = true;
+      facingL = true;
     }
     if (key == 'd') {
       movingRight = true;
+      facingL = false;
     }
     if(key == ' '){
       jump = true;
@@ -162,9 +173,11 @@ class Stickman {
       // very simple ai just moves towards the humanPlayer
       if(humanPlayer.x < x) {
         x -= speedToMove;
+        facingL = false;
       }
       else if(humanPlayer.x > x) {
-        x += speedToMove;  
+        x += speedToMove;
+        facingL = true;
       }
       
       if(humanPlayer.y > y) {

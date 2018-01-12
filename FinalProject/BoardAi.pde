@@ -4,13 +4,13 @@ class BoardAi {
   char aiChar;
   boolean stopAi;
   Stickman thisAiStickman;
-  BoardAi(int boardXWidth, int boardYHeight, int _aiX, int _aiY ,char _aiChar, float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman) {
+  BoardAi(int boardXWidth, int boardYHeight, int _aiX, int _aiY ,char _aiChar, float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman, String invertedMan, boolean _isFacingL) {
     tempBoard = new Tile[boardXWidth][boardYHeight];
     aiX = _aiX;
     aiY = _aiY;
     aiMoves = 0;
     aiChar = _aiChar;
-    thisAiStickman = new Stickman(width-100, _speedOfStickman, attackValueOfAI, imageOfAiSticman);
+    thisAiStickman = new Stickman(width-100, _speedOfStickman, attackValueOfAI, imageOfAiSticman, invertedMan, _isFacingL);
   }
 
   void boardAiDrawLoop(Tile[][] currentTempBoard) {
