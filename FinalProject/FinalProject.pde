@@ -150,6 +150,7 @@ void handleStickerman() { // sets up the stickman and starts the moving;
   //human plauer
   humanPlayerStickMan.display();
   humanPlayerStickMan.movement(speed);
+  humanPlayerStickMan.healthBar();
   
   //ai player
   lvl1.aiBattleHandler();

@@ -102,12 +102,12 @@ class Stickman {
       x += dx;
     }
     if(movingUp){
-      y -= dy;
+      //y -= dy;
     }
     if(movingDown){
-      if(y < height - h/2 )
-        y += dy;
-    }
+      //if(y < height - h/2 )
+       // y += dy;
+   }
     
   }
 
@@ -180,8 +180,15 @@ class Stickman {
 void healthBar() {
 
   //drawing a rect based on your current health
+  
+  
+  fill(0);
+  textSize(32);
+  
+  text(health,x,y - h/2 - h/3);
+  
   colorOfHealth(health);
-  rect(width/10,height/8,health*5, height/25);
+  rect(x, y - h/2,health*2,25);
   
   if (health <= 0) {
     state = 1;// when the battle end go back to grid
@@ -189,11 +196,7 @@ void healthBar() {
     
   }
   
-  fill(0);
-  textSize(32);
   
-  text(health,width/10,height/8+100);
-
   }
 
 
