@@ -4,18 +4,14 @@
 /// need to fix edges issues
 /// need the ai to work better
 /// need to make it so ai can not move on hills
-/// need to add better graphics (kam)!!!
 
 // what needs work in stickman fights
 /// need to add ai attack
-/// need to make the human stickman jump 
-/// need to add obsticles and such to make battles more interesting
 /// need concept of armour.
 /// need to make ai health, speed, attack evolve with time
 
 // what is needs to look better/ get a better grade
 /// need to reorginze the classes
-/// better overall graphics
 /// needs sound and music
 
 

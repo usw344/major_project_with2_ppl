@@ -1,4 +1,12 @@
 // use floats for everythihg
+
+
+
+
+
+
+
+///FINISH INVERTING
 class WeaponType {
   float dmg,hitSpeed,range,x,y,w,h, updatedX;
   //int behavior;
@@ -6,7 +14,7 @@ class WeaponType {
   PImage thePicOfTheWeapon;
   float weaponLvl;
   
-  WeaponType(float amountOfDmg, float hitSpeedOfWeapon,float rangeOfWeapon, String theImage, int howItActs, float __levelOfWeapon ,  float ___x, float ___y,float ___w,float ___h) {
+  WeaponType(float amountOfDmg, float hitSpeedOfWeapon,float rangeOfWeapon, String theImage, int howItActs, float __levelOfWeapon ,  float ___x, float ___y,float ___w,float ___h, String inverted) {
     dmg = amountOfDmg;
     hitSpeed = hitSpeedOfWeapon;
     range = rangeOfWeapon;
@@ -22,7 +30,12 @@ class WeaponType {
 }
   void display(float currentLocaltionOfStickman) {
     updatedX = currentLocaltionOfStickman;
-    image(thePicOfTheWeapon, x + w/10,y - h/15 ,w/2,h/5);   
+    if (humanPlayerStickMan.facingL = false) {
+      image(thePicOfTheWeapon, x + w/10,y - h/15 ,w/2,h/5);   
+    }
+    else {
+      image(inverted,x +w/10, y-h/15, w/2,h/5);
+    }
   }
   
   void move(float currentX, float currentY) {
@@ -39,13 +52,6 @@ class WeaponType {
      ammo1.shootDrawLoop(x,updatedX);
      }
   
-    
-    
-    
-    
-
-  
-
 
   void aiAttack(Stickman _theThingToAttack,float updatedDamage){
     if(_theThingToAttack.x < x){
