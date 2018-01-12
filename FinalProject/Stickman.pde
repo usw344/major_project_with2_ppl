@@ -28,7 +28,7 @@ class Stickman {
     movingDown = false;
     
     //loading up the stickman
-    sticky = loadImage("Sticky.png");
+    sticky = loadImage("You.png");
     engageAi = false;// this is human controled so no ai
     health = 100;
     
@@ -40,7 +40,7 @@ class Stickman {
     y = height/2;
     dx = _speed;
     dy = _speed;
-    w = width/6;
+    w = width/3;
     h = height/3;
     
     aiAttack = attack;
@@ -149,7 +149,7 @@ class Stickman {
 //////////////////////////////////////
   void ai(Stickman humanPlayer) {
     float humanX, humanY;
-    float speedToMove = 3;
+    float speedToMove = dx;
     
     humanX = humanPlayer.x;
     humanY = humanPlayer.y;

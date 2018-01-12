@@ -16,7 +16,7 @@ class WeaponType {
     y = ___y;
     w = ___w;
     h = ___h;
-    ammo1 = new Ammo(x,y,2,20,"arrow.png",w,h);
+    ammo1 = new Ammo(x + w/2,y - h/18,2,20,"arrow.png",w/2,h/2);
     weaponLvl = __levelOfWeapon;
     //aiAmmo = new Ammo(x,y,2,20,"arrow.png",w,h);
 }
@@ -43,19 +43,7 @@ class WeaponType {
     
     
     
-    //dmg = updatedDamage;
-    //if(mousePressed && theThingToAttack.x / x < 1.4 && weaponLvl <= 1) {
-      
-    //  theThingToAttack.health -= dmg;
-    //  ammo1.shootDrawLoop();
-    //}
-    
-    //  if(theThingToAttack.x / ammo1.x < 1.4){
-      
-    //    theThingToAttack.health -= dmg;
-    //    ammo1.x = x - 20;
-    //  }
-    //}
+
   
 
 

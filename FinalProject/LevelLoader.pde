@@ -88,9 +88,9 @@ class LevelLoader {
     hill = loadImage("hill.png");
 
     //float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman
-    orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A',width-width/4,3,10,"knight.png");
-    redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B',width-width/4,5,10,"Sticky.png");
-    blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C',width-width/4,5,10,"Sticky.png");
+    orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A',width-width/4,3,10,"Red.png");
+    redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B',width-width/4,5,10,"Yellow.png");
+    blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C',width-width/4,5,10,"Black.png");
     
   }
   }
@@ -200,7 +200,7 @@ class LevelLoader {
           allTiles[x][y].switchTileTo('M');
         }
         if(tileType == 'm'){
-          mongolAi = new BoardAi(boardWidth,boardHeight,x,y,'M',width-width/4,5,10,"Mongol.png");
+          mongolAi = new BoardAi(boardWidth,boardHeight,x,y,'M',width-width/4,30,10,"mongls.png");
         }
     }
     }

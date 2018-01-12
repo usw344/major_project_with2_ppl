@@ -218,7 +218,7 @@ void objectLoader() {
   
   // weapons ammo,...
   w1 = new Weapon();
-  weapon1 = new WeaponType(0, 1 , 15 , "gun.jpg", 2,0.1,humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y,humanPlayerStickMan.w*2,humanPlayerStickMan.h);
+  weapon1 = new WeaponType(0, 1 , 15 , "Crossbow.png", 2,0.1,humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y ,humanPlayerStickMan.w*3,humanPlayerStickMan.h*2);
   
   //game sections
   theShop = new Shop();
