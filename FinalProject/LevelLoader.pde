@@ -101,7 +101,7 @@ class LevelLoader {
     unleasheTheMongols();
   
     if(myTurn == false){
-      for(int i = 0; i < 6; i++){
+      for(int i = 0; i < 3; i++){
         blackAi.boardAiDrawLoop(allTiles);
         orangeAi.boardAiDrawLoop(allTiles);
         redAi.boardAiDrawLoop(allTiles);
@@ -265,7 +265,7 @@ class LevelLoader {
  
   // generic code for checking multiple char
   boolean checkerCode(char checkThis, int __x, int __y) {
-    if (__x > 0 && __x<24 && __y < 23) {   
+    if (__x > 0 && __x<24 && __y < 23 && __y > 0) {   
       if (allTiles[__x+1][__y].checker(checkThis)) {
         return true;
       }

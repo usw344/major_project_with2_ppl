@@ -1,10 +1,5 @@
 // Muhammad and kam major project
 
-// what needs finishing in board version
-/// need to fix edges issues
-/// need the ai to work better
-/// need to make it so ai can not move on hills
-
 // what needs work in stickman fights
 /// need to add ai attack
 /// need concept of armour.
@@ -41,7 +36,9 @@ float armour,attack,speed;
 boolean shop;
 void setup() {
   //switch between full screen and normal WARNING DO NOT USE FULLSCREEN FOR DEBUGGING
-  size(625, 625);
+  
+  size(600,600);
+  //size(1360, 693);
   //fullScreen();
   
   shop = false;
@@ -214,7 +211,7 @@ void objectLoader() {
   
   // weapons ammo,...
   w1 = new Weapon();
-  weapon1 = new WeaponType(0, 1 , 15 , "Crossbow.png", 2,0.1,humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y ,humanPlayerStickMan.w*3,humanPlayerStickMan.h*2);
+  weapon1 = new WeaponType(0, 1 , 15 , "Crossbow.png", 2,0.1,humanPlayerStickMan.x + humanPlayerStickMan.x/12  , humanPlayerStickMan.y ,humanPlayerStickMan.w*3,humanPlayerStickMan.h*2,"CrossbowL.png");
   
   //game sections
   theShop = new Shop();

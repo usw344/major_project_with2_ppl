@@ -11,14 +11,15 @@ class WeaponType {
   float dmg,hitSpeed,range,x,y,w,h, updatedX;
   //int behavior;
   Ammo ammo1, aiAmmo;
-  PImage thePicOfTheWeapon;
+  PImage thePicOfTheWeapon,inverted;
   float weaponLvl;
   
-  WeaponType(float amountOfDmg, float hitSpeedOfWeapon,float rangeOfWeapon, String theImage, int howItActs, float __levelOfWeapon ,  float ___x, float ___y,float ___w,float ___h, String inverted) {
+  WeaponType(float amountOfDmg, float hitSpeedOfWeapon,float rangeOfWeapon, String theImage, int howItActs, float __levelOfWeapon ,  float ___x, float ___y,float ___w,float ___h, String _inverted) {
     dmg = amountOfDmg;
     hitSpeed = hitSpeedOfWeapon;
     range = rangeOfWeapon;
     thePicOfTheWeapon = loadImage(theImage);
+    inverted = loadImage(_inverted);
     //behavior = howItActs;
     x = ___x;
     y = ___y;

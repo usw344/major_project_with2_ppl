@@ -48,28 +48,46 @@ class BoardAi {
     return false;
   }
 
+
+  boolean checkForObstcles(int _x, int _y){
+    if(tempBoard[_x][_y].checker('w') ||tempBoard[_x][_y].checker('H')) {
+      return false;
+    }
+    
+    return true;
+  
+  }
+
+
   void aiHandler() {
     int whichWayToMove;
     whichWayToMove =  int(random(1, 5));
 
     if (whichWayToMove == 1 && aiY + 1 <= 24 && tempBoard[aiX][aiY +1 ].checker(aiChar) == false) { // move down
-      tempBoard[aiX][aiY + 1].switchTileTo(aiChar);
-      aiY = aiY +1;
+      if(checkForObstcles(aiX,aiY + 1)){
+        tempBoard[aiX][aiY + 1].switchTileTo(aiChar);
+        aiY = aiY +1;
+      }
     } 
+    
     else if (whichWayToMove == 2 && aiY -1 >= 0 && tempBoard[aiX][aiY - 1].checker(aiChar) == false) {// move up
-      tempBoard[aiX][aiY -1].switchTileTo(aiChar);
-      aiY = aiY -1;
+      if(checkForObstcles(aiX,aiY - 1)){
+        tempBoard[aiX][aiY -1].switchTileTo(aiChar);
+        aiY = aiY -1;
+      }
     } 
     else if (whichWayToMove == 3 &&  aiX + 1 <= 24 && tempBoard[aiX + 1][aiY].checker(aiChar) == false) {// move right
-      tempBoard[aiX +1][aiY].switchTileTo(aiChar);
-      aiX = aiX +1;
+      if(checkForObstcles(aiX + 1,aiY)){
+        tempBoard[aiX +1][aiY].switchTileTo(aiChar);
+        aiX = aiX +1;
+      }
     } 
     else if (whichWayToMove == 4 && aiX -1 >= 0 && tempBoard[aiX - 1][aiY].checker(aiChar) == false) {// move left
-      tempBoard[aiX -1 ][aiY].switchTileTo(aiChar);
-      aiX = aiX -1;
+      if(checkForObstcles(aiX - 1,aiY)){
+        tempBoard[aiX -1 ][aiY].switchTileTo(aiChar);
+        aiX = aiX -1;
     }
-    else{
-      //
     }
+
 }
 }

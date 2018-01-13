@@ -55,7 +55,7 @@ class Stickman {
     engageAi = true;//the computer will controll this one
     health = 100;
     
-    aiWeapon = new WeaponType(attack,0,0, "Crossbow.png", 1, 1 , x*10,y*10,w *10,h*10);
+    aiWeapon = new WeaponType(attack,0,0, "Crossbow.png", 1, 1 , x*10,y*10,w *10,h*10,"CrossbowL.png");
     
   }
 
@@ -63,6 +63,7 @@ class Stickman {
   void display() {
     imageMode(CENTER);
     if (facingL == false) {
+      rect(x,y,w,h);
       image(sticky,x,y,w,h);//the stickman PImage
     }
     else {
@@ -92,7 +93,6 @@ class Stickman {
   void movement(float currentSpeed) {
     dx = currentSpeed;
     if (movingLeft) {
-      println(dx);
       x -= dx;
     }
     if(jump){
@@ -164,31 +164,33 @@ class Stickman {
     
     humanX = humanPlayer.x;
     humanY = humanPlayer.y;
-    
+ 
     if(humanX + w/2 >= x - w/2 && humanX - w/2 <= x + w/2 && humanY + h/2 >= y - h/2 && humanY - h/2 <= y + h/2){ // to check if range of the other stickman and hit it
-      healthBar(); 
-  }
-    
-    else {
-      // very simple ai just moves towards the humanPlayer
-      if(humanPlayer.x < x) {
-        x -= speedToMove;
-        facingL = false;
-      }
-      else if(humanPlayer.x > x) {
-        x += speedToMove;
-        facingL = true;
-      }
-      
-      if(humanPlayer.y > y) {
-        y += speedToMove;
-      }
-      
-      else if(humanPlayer.y < y ){
-        y -= speedToMove;
-      }
+      healthBar();
+      humanPlayer.health -= 10;
+      humanPlayer.x -= 20;
+      x = 600;
     }
-  }
+
+    // very simple ai just moves towards the humanPlayer
+    println(humanPlayer.x,x);
+    if(humanPlayer.x < x) {
+      x -= speedToMove;
+      facingL = false;
+      }
+    else if(humanPlayer.x > x) {
+      x += speedToMove;
+      facingL = true;
+      }
+      
+    if(humanPlayer.y > y) {
+      y += speedToMove;
+      }
+    else if(humanPlayer.y < y ){
+       y -= speedToMove;
+      } 
+    }
+  
 
 void healthBar() {
 
@@ -225,7 +227,7 @@ void healthBar() {
     else {
       fill(255,0,0);
     }
-  }
+ }
 
 }
 
