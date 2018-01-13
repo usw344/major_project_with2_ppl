@@ -37,9 +37,9 @@ boolean shop;
 void setup() {
   //switch between full screen and normal WARNING DO NOT USE FULLSCREEN FOR DEBUGGING
   
-  size(600,600);
+  //size(600,600);
   //size(1360, 693);
-  //fullScreen();
+  fullScreen();
   
   shop = false;
   
