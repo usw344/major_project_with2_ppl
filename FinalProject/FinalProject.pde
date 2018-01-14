@@ -14,7 +14,7 @@
 Stickman humanPlayerStickMan,aiControledStickMan;
 Weapon w1;
 LevelLoader lvl1;
-Button startButton, helpButton, shopButton, backButton;
+Button startButton, helpButton, shopButton, backButton,levelButton;
 WeaponType weapon1;
 Ammo arrow;
 Shop theShop; //firstShop;
@@ -23,6 +23,7 @@ int turn;
 
 float theWeaponLevel;
 
+String lvl0, lvl2, lvl3;
 
 // images for the resource bar at the bottom and hut
 PImage ourHut,theGoldBar,back;
@@ -37,13 +38,13 @@ boolean shop;
 void setup() {
   //switch between full screen and normal WARNING DO NOT USE FULLSCREEN FOR DEBUGGING
   
-  //size(600,600);
+  size(1000,1000);
   //size(1360, 693);
-  fullScreen();
+  //fullScreen();
   
   shop = false;
   
-  state = 1;
+  state = 0;
 
   turn = 0;
   // starts the constructor for the objects
@@ -58,6 +59,9 @@ void setup() {
   speed = 3;
   attack = 3;
 
+  lvl0 = "o.txt";
+  lvl2 = "lvl1.txt";
+  lvl3 = "lvl2.txt";
 
 }
 
@@ -67,8 +71,10 @@ void draw() {
 
 
   if (state == 0) { // intro screne
+    shop = true;
     startScreen(); // all the buttons for the first screen
     helpButtonCode(); // instructions for the game
+    selectLevelButton(); // select your level
   } 
   
   else if (state == -1) {
@@ -104,6 +110,11 @@ void draw() {
       
     backToGameButton();
   }
+  else if(state == 5){
+    levelSelectorCode();
+  
+  }
+
 }
 
 
@@ -115,7 +126,13 @@ void startScreen() {
   startButton.theText("Start");
 }
 
+void selectLevelButton(){
+  levelButton.displayButton(width/2, height/2,width/3,height/5);
+  levelButton.isTheButtonBeingClicked(5);
+  levelButton.theText("Levels");
 
+
+}
 
 void helpButtonCode() {
   helpButton.displayButton(width/2, height- height/4, width/3, height/5);
@@ -137,6 +154,11 @@ void  helpScreen() {
   text("dont know yet to play the game", width/2, height/2);
 }
 
+
+void levelSelectorCode(){
+  //
+
+}
 
 /////////////////////////////////////////////////////////////////////////// code involing the stickman
 void handleStickerman() { // sets up the stickman and starts the moving;
@@ -208,6 +230,7 @@ void objectLoader() {
   helpButton = new Button();
   shopButton = new Button();
   backButton = new Button();
+  levelButton = new Button();
   
   // weapons ammo,...
   w1 = new Weapon();
