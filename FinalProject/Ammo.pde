@@ -1,5 +1,5 @@
 class Ammo {
-  float x, y, dx, dmg, w, h, restLocal;
+  float x, y, dx, dmg, w, h, restLocal,restLocalY;
   PImage spirte;
   boolean isShooting, theShotHasHitEnemy; //isItTouchingTheGround, isDisplaying
 
@@ -26,7 +26,7 @@ class Ammo {
     float targetH = _theTarget.h;
     
     if(x > targetX - targetW/2 && x < targetX - targetW/2+ targetW && y > targetY - targetH/2 && y < targetY - targetH/2 + targetH){
-      reset(restLocal);
+      reset(restLocal,restLocalY);
       theShotHasHitEnemy = true;
       return true;
     }
@@ -34,17 +34,18 @@ class Ammo {
   }
   
   
-  void shootDrawLoop(float _resetLocal, float _updatedX){
-    display(_updatedX); 
+  void shootDrawLoop(float _resetLocal, float _updatedX, float _updatedY){
+    display(_updatedX,_updatedY); 
+    restLocalY = _updatedY;
     moveBullet();
     if (x > width){
-      reset(_resetLocal);
+      reset(_resetLocal,_updatedY);
     
   }
     restLocal = _resetLocal;  
 }
   
-  void display(float __updatedX){
+  void display(float __updatedX,float _yLocal){
     if(isShooting){
       if(x > width || theShotHasHitEnemy){
         x = __updatedX;
@@ -63,9 +64,9 @@ class Ammo {
   
   }
 
-  void reset(float _restLocal){
+  void reset(float _restLocal,float _resetToY){
       isShooting = false;
-      
+      y = _resetToY;
       x = _restLocal; 
 
   }

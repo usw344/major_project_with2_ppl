@@ -38,7 +38,7 @@ boolean shop;
 void setup() {
   //switch between full screen and normal WARNING DO NOT USE FULLSCREEN FOR DEBUGGING
   
-  size(1000,1000);
+  size(800,800);
   //size(1360, 693);
   //fullScreen();
   
@@ -93,7 +93,7 @@ void draw() {
   else if (state == 2) { // stick man fight
     image(back,width/2,height/2,width,height);
     handleStickerman();// all the code for the stick square battle
-    
+    weapon1.updateTheAmmos;    
     weaponHandler();
   }
   else if(state == 3){
@@ -172,19 +172,19 @@ void handleStickerman() { // sets up the stickman and starts the moving;
   
   float whichOneToAttack = lvl1.whichAiIsDoingBattle;
     if(whichOneToAttack == 1){
-      weapon1.attack(lvl1.orangeAi.thisAiStickman,attack);
+      weapon1.attack(lvl1.orangeAi.thisAiStickman,attack,humanPlayerStickMan.y);
         
   }
     if(whichOneToAttack == 2){
-      weapon1.attack(lvl1.redAi.thisAiStickman,attack);
+      weapon1.attack(lvl1.redAi.thisAiStickman,attack,humanPlayerStickMan.y);
   
   }
     if(whichOneToAttack == 3){
-      weapon1.attack(lvl1.blackAi.thisAiStickman,attack);
+      weapon1.attack(lvl1.blackAi.thisAiStickman,attack,humanPlayerStickMan.y);
   
   }
     if(whichOneToAttack == 4){
-      weapon1.attack(lvl1.mongolAi.thisAiStickman,attack);
+      weapon1.attack(lvl1.mongolAi.thisAiStickman,attack,humanPlayerStickMan.y);
   
   }
   

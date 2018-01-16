@@ -13,6 +13,7 @@ class WeaponType {
   Ammo ammo1, aiAmmo;
   PImage thePicOfTheWeapon,inverted;
   float weaponLvl;
+  float humanY;
   
   WeaponType(float amountOfDmg, float hitSpeedOfWeapon,float rangeOfWeapon, String theImage, int howItActs, float __levelOfWeapon ,  float ___x, float ___y,float ___w,float ___h, String _inverted) {
     dmg = amountOfDmg;
@@ -47,15 +48,21 @@ class WeaponType {
   
   
   }
-  void attack(Stickman theThingToAttack,float updatedDamage) {
+  void attack(Stickman theThingToAttack,float updatedDamage,float setAmmoYTo) {
     //anything that is a 1 is melee and 2 is shooting
      if(ammo1.isHittingTarget(theThingToAttack)){
        theThingToAttack.health -= 10;
      }
-     ammo1.shootDrawLoop(x,updatedX);
-     ammo1.shootDrawLoop(y,updatedY);
+     ammo1.shootDrawLoop(x,updatedX,humanY);
+     
      }
   
+  void updateTheAmmo(float humanStickManY){
+    humanY = humanStickManY;
+  
+  
+  }
+
 
   void aiAttack(Stickman _theThingToAttack,float updatedDamage){
     if(_theThingToAttack.x < x){
