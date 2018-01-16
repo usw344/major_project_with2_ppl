@@ -55,7 +55,7 @@ class Stickman {
     engageAi = true;//the computer will controll this one
     health = 100;
     
-    aiWeapon = new WeaponType(attack,0,0, "Crossbow.png", 1, 1 , x*10,y*10,w *10,h*10,"CrossbowL.png");
+    aiWeapon = new WeaponType(attack,0,0, "Crossbow.png", 1, 1 , x*11,y*11,w *10,h*10,"CrossbowL.png");
     
   }
 
@@ -63,7 +63,7 @@ class Stickman {
   void display() {
     imageMode(CENTER);
     if (facingL == false) {
-      rect(x,y,w,h);
+      //rect(x,y,w,h);
       image(sticky,x,y,w,h);//the stickman PImage
     }
     else {

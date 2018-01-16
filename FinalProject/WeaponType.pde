@@ -8,7 +8,7 @@
 
 ///FINISH INVERTING
 class WeaponType {
-  float dmg,hitSpeed,range,x,y,w,h, updatedX;
+  float dmg,hitSpeed,range,x,y,w,h, updatedX, updatedY;
   //int behavior;
   Ammo ammo1, aiAmmo;
   PImage thePicOfTheWeapon,inverted;
@@ -25,17 +25,19 @@ class WeaponType {
     y = ___y;
     w = ___w;
     h = ___h;
-    ammo1 = new Ammo(x + w/2,y - h/18,2,20,"arrow.png",w/2,h/2);
+    ammo1 = new Ammo(x + w/10,y - h/30,2,20,"arrow.png",w/4,h/4);
     weaponLvl = __levelOfWeapon;
     //aiAmmo = new Ammo(x,y,2,20,"arrow.png",w,h);
 }
+
   void display(float currentLocaltionOfStickman) {
     updatedX = currentLocaltionOfStickman;
-    if (humanPlayerStickMan.facingL = false) {
-      image(thePicOfTheWeapon, x + w/10,y - h/15 ,w/2,h/5);   
+    updatedY = currentLocaltionOfStickman;
+    if (humanPlayerStickMan.facingL) {
+      image(inverted, x - w/10,y-4 ,w/2,h/5);   
     }
     else {
-      image(inverted,x +w/10, y-h/15, w/2,h/5);
+      image(thePicOfTheWeapon,x + w/10, y-4, w/2,h/5);
     }
   }
   
@@ -51,6 +53,7 @@ class WeaponType {
        theThingToAttack.health -= 10;
      }
      ammo1.shootDrawLoop(x,updatedX);
+     ammo1.shootDrawLoop(y,updatedY);
      }
   
 
