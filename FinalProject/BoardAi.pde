@@ -1,6 +1,7 @@
 class BoardAi {
   Tile[][] tempBoard;
   int aiX, aiY, aiMoves;
+  int mongolLives,redlives,orangeLives,blackLives;
   char aiChar;
   boolean stopAi;
   Stickman thisAiStickman;
@@ -11,6 +12,10 @@ class BoardAi {
     aiMoves = 0;
     aiChar = _aiChar;
     thisAiStickman = new Stickman(width-100, _speedOfStickman, attackValueOfAI, imageOfAiSticman, invertedMan, _isFacingL);
+    mongolLives = 7;
+    orangeLives = 3;
+    redlives = 3;
+    blackLives = 4;
   }
 
   void boardAiDrawLoop(Tile[][] currentTempBoard) {
