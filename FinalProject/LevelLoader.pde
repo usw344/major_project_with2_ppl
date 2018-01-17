@@ -88,9 +88,9 @@ class LevelLoader {
     hill = loadImage("hill.png");
 
     //float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman
-    orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A',width-width/4,3,10,"Red.png","RedR.png",true);
-    redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B',width-width/4,5,10,"Yellow.png","YellowR.png",true);
-    blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C',width-width/4,5,10,"Black.png","BlackR.png",true);
+    orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A',width-width/4,3,10,"Red.png","RedR.png",true,3);
+    redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B',width-width/4,5,10,"Yellow.png","YellowR.png",true,3);
+    blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C',width-width/4,5,10,"Black.png","BlackR.png",true,5);
     
   }
   }
@@ -102,11 +102,20 @@ class LevelLoader {
   
     if(myTurn == false){
       for(int i = 0; i < 3; i++){
+        
+        // add the ami Dead HERE --------------------------------------------------------------------------------------------------------111 
         blackAi.boardAiDrawLoop(allTiles);
         orangeAi.boardAiDrawLoop(allTiles);
         redAi.boardAiDrawLoop(allTiles);
+       
+        
+        
         if(timeForTheMongols){
           mongolAi.boardAiDrawLoop(allTiles);
+          if(mongolAi.amIDead()){
+            changeIt('M');
+            
+          }
     }
       }
     
@@ -115,6 +124,18 @@ class LevelLoader {
   }
   }
 
+  void changeIt(char changeThisChar){
+    for (int x = 0; x < boardHeight; x++) {
+      for (int y = 0; y < boardWidth; y++) {
+        if(allTiles[x][y].checker(changeThisChar)){
+          allTiles[x][y].switchTileTo('O');       
+        
+    }
+  
+  }
+    }
+  }
+  
 
   void aiBattleHandler(){
     if(whichAiIsDoingBattle == 1){
@@ -201,7 +222,7 @@ class LevelLoader {
           allTiles[x][y].switchTileTo('M');
         }
         if(tileType == 'm'){
-          mongolAi = new BoardAi(boardWidth,boardHeight,x,y,'M',width-width/4,30,10,"mongls.png","MongolsR.png",true);
+          mongolAi = new BoardAi(boardWidth,boardHeight,x,y,'M',width-width/4,30,10,"mongls.png","MongolsR.png",true,10);
         }
     }
     }

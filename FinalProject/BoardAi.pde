@@ -1,21 +1,18 @@
 class BoardAi {
   Tile[][] tempBoard;
   int aiX, aiY, aiMoves;
-  int mongolLives,redlives,orangeLives,blackLives;
+  int aiLives;
   char aiChar;
   boolean stopAi;
   Stickman thisAiStickman;
-  BoardAi(int boardXWidth, int boardYHeight, int _aiX, int _aiY ,char _aiChar, float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman, String invertedMan, boolean _isFacingL) {
+  BoardAi(int boardXWidth, int boardYHeight, int _aiX, int _aiY ,char _aiChar, float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman, String invertedMan, boolean _isFacingL,int lives) {
     tempBoard = new Tile[boardXWidth][boardYHeight];
     aiX = _aiX;
     aiY = _aiY;
     aiMoves = 0;
     aiChar = _aiChar;
     thisAiStickman = new Stickman(width-100, _speedOfStickman, attackValueOfAI, imageOfAiSticman, invertedMan, _isFacingL);
-    mongolLives = 7;
-    orangeLives = 3;
-    redlives = 3;
-    blackLives = 4;
+    aiLives = lives;
   }
 
   void boardAiDrawLoop(Tile[][] currentTempBoard) {
@@ -24,6 +21,15 @@ class BoardAi {
       exportCurrentBoard();
     
     
+  }
+
+  boolean amIDead(){
+    if(aiLives < 0){
+      return true;
+    
+    }
+    return false;
+  
   }
 
   void aiStickManBattle(Stickman _humanSticman){
