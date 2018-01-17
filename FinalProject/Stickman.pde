@@ -1,9 +1,9 @@
 //Made by Kam
 class Stickman {
   float x, y, dx, dy, w, h,current, aiAttack;
-  int health;
+  int health,lives;
   PImage plains;
-  boolean movingRight, movingLeft, engageAi, shootWhichWay, jump, movingUp, movingDown,facingL;
+  boolean movingRight, movingLeft, engageAi, shootWhichWay, jump, movingUp, movingDown,facingL,youLost;
   PImage sticky,invertImg;
   
   WeaponType aiWeapon;
@@ -33,6 +33,8 @@ class Stickman {
     engageAi = false;// this is human controled so no ai
     health = 100;
     facingL = false;
+    youLost = false;
+    lives = 5;
     
    
   }
@@ -56,6 +58,8 @@ class Stickman {
     health = 100;
     
     aiWeapon = new WeaponType(attack,0,0, "Crossbow.png", 1, 1 , x*11,y*11,w *10,h*10,"CrossbowL.png");
+    youLost = false;
+    lives = 5;
     
   }
 
@@ -227,6 +231,15 @@ void healthBar() {
     else {
       fill(255,0,0);
     }
+ }
+ 
+ void theEnd(Stickman humanPlayer) {
+   if (humanPlayer.health <= 0) {
+     lives-=1;
+     if (lives <=0) {
+       youLost = true;
+     }
+   }
  }
 
 }

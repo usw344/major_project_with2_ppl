@@ -93,8 +93,11 @@ void draw() {
   else if (state == 2) { // stick man fight
     image(back,width/2,height/2,width,height);
     handleStickerman();// all the code for the stick square battle
-    weapon1.updateTheAmmos;    
+    weapon1.updateTheAmmo(humanPlayerStickMan.y);
     weaponHandler();
+    if(humanPlayerStickMan.youLost) {
+      state = 4;
+    }
   }
   else if(state == 3){
     shop = true;
@@ -109,6 +112,12 @@ void draw() {
     lvl1.amountOfGold = theShop.returnUpdatedGoldValue();// returning the amount of gold after transaction
       
     backToGameButton();
+  }
+  else if(state == 4) {
+    background(0);
+    fill(255);
+    textSize(14);
+    text("You failed your mission, your emporor died in battle. Who thought it was a good idea to send him into battle?",0,height/2);
   }
   else if(state == 5){
     levelSelectorCode();
@@ -293,5 +302,7 @@ void drawResourceBar() {
   textSize(16);
   text("SHOP",shopButtonX + shopButtonW/22,shopButtonY + shopButtonH/12);
  
-
+ //draws the amount of lives you have
+  text("Lives:",shopButtonX+shopButtonW/2,shopButtonY+shopButtonH/12);
+  text(humanPlayerStickMan.lives,shopButtonX+shopButtonW/1.1,shopButtonY+shopButtonH/12);
 }

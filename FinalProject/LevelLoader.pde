@@ -119,18 +119,19 @@ class LevelLoader {
   void aiBattleHandler(){
     if(whichAiIsDoingBattle == 1){
       orangeAi.aiStickManBattle(humanPlayerStickMan);
+      humanPlayerStickMan.theEnd(humanPlayerStickMan);
   }
     if(whichAiIsDoingBattle == 2){
       redAi.aiStickManBattle(humanPlayerStickMan);
-  
+      humanPlayerStickMan.theEnd(humanPlayerStickMan);
   }
     if(whichAiIsDoingBattle == 3){
       blackAi.aiStickManBattle(humanPlayerStickMan);
-  
+      humanPlayerStickMan.theEnd(humanPlayerStickMan);
   }
     if(whichAiIsDoingBattle == 4){
       mongolAi.aiStickManBattle(humanPlayerStickMan);
-  
+      humanPlayerStickMan.theEnd(humanPlayerStickMan);
   }
   
   }
@@ -305,4 +306,5 @@ class LevelLoader {
     }  
     return false;
   }
+  
 }
