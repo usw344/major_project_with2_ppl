@@ -27,6 +27,7 @@ class Ammo {
     
     if(x > targetX - targetW/2 && x < targetX - targetW/2+ targetW && y > targetY - targetH/2 && y < targetY - targetH/2 + targetH){
       reset(restLocal,restLocalY);
+      targetX += 100;
       theShotHasHitEnemy = true;
       return true;
     }

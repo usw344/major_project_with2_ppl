@@ -1,7 +1,6 @@
 // Muhammad and kam major project
 
 // what needs work in stickman fights
-/// need to add ai attack
 /// need concept of armour.
 /// need to make ai health, speed, attack evolve with time
 
@@ -204,7 +203,6 @@ void weaponHandler() {
   weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
   //weapon1.attack(aiControledStickMan,attack);
   
-  //arrow.fire();
 }
 
 /// this makes the stickman move;

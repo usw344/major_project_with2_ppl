@@ -114,7 +114,6 @@ class LevelLoader {
           mongolAi.boardAiDrawLoop(allTiles);
           if(mongolAi.amIDead()){
             changeIt('M');
-            
           }
     }
       }
@@ -141,18 +140,30 @@ class LevelLoader {
     if(whichAiIsDoingBattle == 1){
       orangeAi.aiStickManBattle(humanPlayerStickMan);
       humanPlayerStickMan.theEnd(humanPlayerStickMan);
+      if(orangeAi.amIDead()){
+          changeIt('A');
+      }
   }
     if(whichAiIsDoingBattle == 2){
       redAi.aiStickManBattle(humanPlayerStickMan);
       humanPlayerStickMan.theEnd(humanPlayerStickMan);
+      if(redAi.amIDead()){
+          changeIt('B');
+      }
   }
     if(whichAiIsDoingBattle == 3){
       blackAi.aiStickManBattle(humanPlayerStickMan);
       humanPlayerStickMan.theEnd(humanPlayerStickMan);
+      if(blackAi.amIDead()){
+          changeIt('C');
+      }
   }
     if(whichAiIsDoingBattle == 4){
       mongolAi.aiStickManBattle(humanPlayerStickMan);
       humanPlayerStickMan.theEnd(humanPlayerStickMan);
+      if(mongolAi.amIDead()){
+          changeIt('M');
+      }
   }
   
   }
