@@ -1,12 +1,11 @@
 // Muhammad and kam major project
 
-// what needs work in stickman fights
-/// need concept of armour.
-/// need to make ai health, speed, attack evolve with time
+// devolpment notes:
+// since last seen (monday jan 15) we have added;
+// a way to win and lose.
+// better shooting mech.
+// and some minor bug fixes
 
-// what is needs to look better/ get a better grade
-/// need to reorginze the classes
-/// needs sound and music
 
 
 //loading our objects
@@ -46,6 +45,7 @@ void setup() {
   state = 0;
 
   turn = 0;
+  
   // starts the constructor for the objects
   objectLoader();
   
@@ -72,8 +72,8 @@ void draw() {
   if (state == 0) { // intro screne
     shop = true;
     startScreen(); // all the buttons for the first screen
-    helpButtonCode(); // instructions for the game
-    selectLevelButton(); // select your level
+    //helpButtonCode(); // instructions for the game
+    //selectLevelButton(); // select your level
   } 
   
   else if (state == -1) {
@@ -91,21 +91,27 @@ void draw() {
   
   else if (state == 2) { // stick man fight
     image(back,width/2,height/2,width,height);
+    
     handleStickerman();// all the code for the stick square battle
+    
     weapon1.updateTheAmmo(humanPlayerStickMan.y);
     weaponHandler();
+    
     if(humanPlayerStickMan.youLost) {
-      state = 4;
+      state = 4;// if all your lives are gone then the game ends
     }
   }
   else if(state == 3){
     shop = true;
     
-    attack = theShop.weaponLevel + 3;// add three to compensate for the starter value 
+    // add three to compensate for the starter value (which are 0)
+    attack = theShop.weaponLevel + 3;
     armour = theShop.armourLevel + 3;
     speed = theShop.speedLevel + 3;
     
     theShop.getGoldValue(lvl1.amountOfGold);// get the current of gold
+    
+    // main run code for the shop. Neatly orginized into a single function
     theShop.myShopDrawLoop();
       
     lvl1.amountOfGold = theShop.returnUpdatedGoldValue();// returning the amount of gold after transaction
@@ -118,8 +124,8 @@ void draw() {
     textSize(14);
     text("You failed your mission, your emporor died in battle. Who thought it was a good idea to send him into battle?",0,height/2);
   }
-  else if(state == 5){
-    levelSelectorCode();
+  else if(state == 5){// not done yet
+    //levelSelectorCode();
   
   }
 
@@ -157,7 +163,7 @@ void backToGameButton(){
 
 }
 
-
+///////////////////////// do nothing as of this patch
 void  helpScreen() {
   text("dont know yet to play the game", width/2, height/2);
 }
@@ -170,7 +176,8 @@ void levelSelectorCode(){
 
 /////////////////////////////////////////////////////////////////////////// code involing the stickman
 void handleStickerman() { // sets up the stickman and starts the moving;
-  //human plauer
+  //human player main code
+  
   humanPlayerStickMan.display();
   humanPlayerStickMan.movement(speed);
   humanPlayerStickMan.healthBar();
@@ -178,6 +185,7 @@ void handleStickerman() { // sets up the stickman and starts the moving;
   //ai player
   lvl1.aiBattleHandler();
   
+  // this handels which ai the human is attacking
   float whichOneToAttack = lvl1.whichAiIsDoingBattle;
     if(whichOneToAttack == 1){
       weapon1.attack(lvl1.orangeAi.thisAiStickman,attack,humanPlayerStickMan.y);
@@ -198,6 +206,7 @@ void handleStickerman() { // sets up the stickman and starts the moving;
   
 }
 
+// name says it all. This handels the human player weapon
 void weaponHandler() {
   weapon1.display(humanPlayerStickMan.x);
   weapon1.move(humanPlayerStickMan.x,humanPlayerStickMan.y);
@@ -214,8 +223,12 @@ void keyReleased() {
   humanPlayerStickMan.handleKeyRelease();
 }
 
+/// handles the the board human movement and basically 60% of its functions
 void mousePressed() {
+  // this is for the battle, needed it in a mousPressed()
   weapon1.ammo1.isShooting = true;
+  
+  //else on all other occasion we want to be moving around on the board
   if(shop == false){
     lvl1.mouseHandler(); // triggers the char to move. ALL THE MAJOR CODE FOR CHAR
     
@@ -228,6 +241,9 @@ void mousePressed() {
 //////////////////////////////////////  background functions such as loading objects
 void objectLoader() {
 
+  /// simple function to load all the objects rather than have them sit in the setup
+  
+  
   // stickman/fighters
   humanPlayerStickMan = new Stickman();
 
@@ -245,12 +261,13 @@ void objectLoader() {
   
   //game sections
   theShop = new Shop();
+  
   lvl1 = new LevelLoader("0.txt"); //load whichever level you want hint make your own if you want
 }
 
 
 void drawResourceBar() {
-  
+  ///// very inefficent but, gets the job done. Draws that bar at the bottom of the screen
   //where to draw the black bar at the bottom of the screen
   float barY = height-lvl1.tileHeight;
   float barWidth = width;

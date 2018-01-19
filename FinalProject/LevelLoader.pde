@@ -41,8 +41,11 @@ class LevelLoader {
 
   LevelLoader(String levelWeAreOn) {
     String lines[] = loadStrings(levelWeAreOn);
+    
+    // mongols are loaded from their own file
     mongolMap = loadStrings("mongols.txt");
     
+    // determin which ai is doing battle
     whichAiIsDoingBattle = 0;
     
     myTurn = false;
@@ -83,11 +86,15 @@ class LevelLoader {
     //doesnt do much for now
     charX = 5 * int(tileWidth);
     charY = 22 * int(tileHeight);
+
+    
     
     // need to load hill here as to not overburden the ram
     hill = loadImage("hill.png");
 
-    //float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman
+
+    // how to read the following lines
+    //float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman, String revers image,
     orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A',width-width/4,3,10,"Red.png","RedR.png",true,3);
     redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B',width-width/4,5,10,"Yellow.png","YellowR.png",true,3);
     blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C',width-width/4,5,10,"Black.png","BlackR.png",true,5);
@@ -95,38 +102,45 @@ class LevelLoader {
   }
   }
 
+
+   // main code for the level loader
   void levelLoaderDrawLoop(){
     waterAnimation();// makes the water gliter
+    
     showBoard();
-    unleasheTheMongols();
+    
+    unleasheTheMongols();// handle all mongol code
   
     if(myTurn == false){
-      for(int i = 0; i < 3; i++){
+      for(int i = 0; i < 3; i++){// gives the ai 3 moves
         
-        // add the ami Dead HERE --------------------------------------------------------------------------------------------------------111 
+        //moves all the ai
         blackAi.boardAiDrawLoop(allTiles);
         orangeAi.boardAiDrawLoop(allTiles);
         redAi.boardAiDrawLoop(allTiles);
        
-        
-        
-        if(timeForTheMongols){
+        if(timeForTheMongols){// checks to see if right amount of turn have passed
           mongolAi.boardAiDrawLoop(allTiles);
-          if(mongolAi.amIDead()){
+          
+          if(mongolAi.amIDead()){// the way to deafeat the mongols
             changeIt('M');
           }
     }
       }
     
     amountOfMovesLeft = 3;
+    
     myTurn = true;
+    
   }
   }
 
-  void changeIt(char changeThisChar){
+  void changeIt(char changeThisChar){// changes the lost ai to your tile
     for (int x = 0; x < boardHeight; x++) {
       for (int y = 0; y < boardWidth; y++) {
+    
         if(allTiles[x][y].checker(changeThisChar)){
+          
           allTiles[x][y].switchTileTo('O');       
         
     }
@@ -136,30 +150,42 @@ class LevelLoader {
   }
   
 
-  void aiBattleHandler(){
+  void aiBattleHandler(){// does all the ai battle
     if(whichAiIsDoingBattle == 1){
+      // makes both do batttle
       orangeAi.aiStickManBattle(humanPlayerStickMan);
+      
+      
       humanPlayerStickMan.theEnd(humanPlayerStickMan);
+      
       if(orangeAi.amIDead()){
           changeIt('A');
       }
   }
     if(whichAiIsDoingBattle == 2){
       redAi.aiStickManBattle(humanPlayerStickMan);
+      
+      
       humanPlayerStickMan.theEnd(humanPlayerStickMan);
+      
       if(redAi.amIDead()){
           changeIt('B');
       }
   }
     if(whichAiIsDoingBattle == 3){
       blackAi.aiStickManBattle(humanPlayerStickMan);
+      
+      
       humanPlayerStickMan.theEnd(humanPlayerStickMan);
+      
       if(blackAi.amIDead()){
           changeIt('C');
       }
   }
     if(whichAiIsDoingBattle == 4){
       mongolAi.aiStickManBattle(humanPlayerStickMan);
+      
+      
       humanPlayerStickMan.theEnd(humanPlayerStickMan);
       if(mongolAi.amIDead()){
           changeIt('M');
@@ -171,11 +197,14 @@ class LevelLoader {
   void showBoard() {
     for (int y = 0; y < boardHeight; y++) {
       for (int x = 0; x < boardWidth; x++) {
+        
         allTiles[x][y].display();
+        
         if(allTiles[x][y].checker('H')){// need to display hill here because it crashes in the tile object
           fill(255);
           rectMode(CORNER);
           imageMode(CORNER);
+          
           image(hill,x*tileWidth, y*tileHeight, tileWidth, tileHeight);      
         }
       }
@@ -185,11 +214,11 @@ class LevelLoader {
     if (clockForWaterAnimation.isFinished()) {// when around 0.5 sec has passed randomize the color of the water
       for (int y = 0; y < boardHeight; y++) {
         for (int x = 0; x < boardWidth; x++) {
-          allTiles[x][y].animateWater();
+          allTiles[x][y].animateWater();// run the animate code
         }
       }
       //start clock 
-      clockForWaterAnimation.begin();
+      clockForWaterAnimation.begin();// reset the clock
     }
   }
 
@@ -199,25 +228,30 @@ class LevelLoader {
     if (x >= 0 && x<=24 && y <= 23) {// prevents array out of bound error
       if (checkerCode('O', x, y)) {
       // this part checks for enemy base and then starts battle
+        /// goes through all the ai letters
         if (allTiles[x][y].checker(baseChar)) {
           if(allTiles[x][y].checker('A')){// orange
             whichAiIsDoingBattle = 1;
           }
+          
           if(allTiles[x][y].checker('B')){// red
-            whichAiIsDoingBattle = 2;
-          }
+            whichAiIsDoingBattle = 2;  
+        }
+          
           if(allTiles[x][y].checker('C')){// black
             whichAiIsDoingBattle = 3;
           }
+          
+          
           if(allTiles[x][y].checker('M')){
             whichAiIsDoingBattle = 4;
           }
-          battle();
+          battle();// at the end do battle
           return true;
         }
       }
 
-      /// this next if block checks for empty space to  move to
+      /// runs though whtie space
       return checkerCode('O', x, y);
     } 
     return false; // not a valid move dont move
