@@ -1,3 +1,4 @@
+// taken from csc 30 demo
 class Timer {
   // data
   int startTime, timeToWait, endTime;
@@ -9,10 +10,9 @@ class Timer {
   
   // behaviour
   void begin() {
-    startTime = millis();
-    endTime = startTime + timeToWait;
+    startTime = millis();// setting startTime To milis (0ish)
+    endTime = startTime + timeToWait;// calculating the end time
   }
-  
   boolean isFinished() {
     if (millis() >= endTime) {
       return true;

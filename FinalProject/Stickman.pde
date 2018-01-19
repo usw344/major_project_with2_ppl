@@ -55,10 +55,13 @@ class Stickman {
     sticky = loadImage(imageOfAi);
    
     engageAi = true;//the computer will controll this one
+    
     health = 100;
     
     aiWeapon = new WeaponType(attack,0,0, "Crossbow.png", 1, 1 , x*11,y*11,w *10,h*10,"CrossbowL.png");
+    
     youLost = false;
+    
     lives = 5;
     
   }
@@ -66,8 +69,9 @@ class Stickman {
 
   void display() {
     imageMode(CENTER);
+    
+    // finds which image of you to load. (meaning which way you are facing)
     if (facingL == false) {
-      //rect(x,y,w,h);
       image(sticky,x,y,w,h);//the stickman PImage
     }
     else {
@@ -75,33 +79,16 @@ class Stickman {
     }
 }
   
-  void aiWeaponHandler(Stickman _theHumanAiToattack){
-    aiWeapon.display(x);
-    aiWeapon.move(x,y);
-  
-  }
-  
-  
-  void whichWayAmIFacing(int theX) {
-    if (x >= theX) {
-      shootWhichWay = true;
-    }
-    else {
-      shootWhichWay = false;;
-    }
-  }
-  
-  
-  
+
 //////////////////////////////////////////////////////this is all the code for handling the movement of the stickman
-  void movement(float currentSpeed) {
+  void movement(float currentSpeed) {// current speed is taken from the shop
     dx = currentSpeed;
     if (movingLeft) {
       x -= dx;
     }
-    if(jump){
+    if(jump){// a very basic jump 
       if(y < 100){
-      jump = false;
+      jump = false;// after reaching a max height of 100
      } 
       
       y -= 10;
@@ -114,14 +101,6 @@ class Stickman {
     if (movingRight) {
       x += dx;
     }
-    if(movingUp){
-      //y -= dy;
-    }
-    if(movingDown){
-      //if(y < height - h/2 )
-       // y += dy;
-   }
-    
   }
 
 ////////////////////////////////////////////////////////////////////////// dealing with keyPressed and released
@@ -137,13 +116,7 @@ class Stickman {
     if(key == ' '){
       jump = true;
     
-    }
-    if(key == 'w'){
-      movingUp = true;
-    }
-    if(key == 's'){
-      movingDown = true;
-    }
+    }  
   }
 
   void handleKeyRelease() {
@@ -153,12 +126,6 @@ class Stickman {
     if (key == 'd') {
       movingRight = false;
     }
-    if(key == 'w'){
-      movingUp = false;
-    }
-    if(key == 's'){
-      movingDown = false;
-    }
   }
 
 //////////////////////////////////////
@@ -166,22 +133,24 @@ class Stickman {
     float humanX, humanY;
     float speedToMove = dx;
     
+    // done to make collsion detection easier
     humanX = humanPlayer.x;
     humanY = humanPlayer.y;
  
-    if(humanX + w/2 >= x - w/2 && humanX - w/2 <= x + w/2 && humanY + h/2 >= y - h/2 && humanY - h/2 <= y + h/2){ // to check if range of the other stickman and hit it
-      healthBar();
-      humanPlayer.health -= 10;
-      humanPlayer.x -= 20;
-      x = 600;
+    if(humanX + w/2 >= x - w/2 && humanX - w/2 <= x + w/2 && humanY + h/2 >= y - h/2 && humanY - h/2 <= y + h/2){ // to check if range of the other stickman and hit it      
+      humanPlayer.health -= 10;// if ai hits human do damage
+      
+      humanPlayer.x -= 20;// pushes human back
+      
+      x = 600;// puts ai back at starting point
     }
 
     // very simple ai just moves towards the humanPlayer
-    println(humanPlayer.x,x);
     if(humanPlayer.x < x) {
       x -= speedToMove;
       facingL = false;
       }
+    
     else if(humanPlayer.x > x) {
       x += speedToMove;
       facingL = true;
@@ -190,6 +159,7 @@ class Stickman {
     if(humanPlayer.y > y) {
       y += speedToMove;
       }
+    
     else if(humanPlayer.y < y ){
        y -= speedToMove;
       } 
@@ -199,14 +169,12 @@ class Stickman {
 void healthBar() {
 
   //drawing a rect based on your current health
-  
-  
   fill(0);
   textSize(32);
   
   text(health,x,y - h/2 - h/3);
   
-  colorOfHealth(health);
+  colorOfHealth(health);// to calculate the color
   rect(x, y - h/2,health*2,25);
   
   if (health <= 0) {
@@ -219,17 +187,15 @@ void healthBar() {
   }
 
 
-
-
  void colorOfHealth(int health) {
-    if (health > 66) {
+    if (health > 66) { // green
       fill(0,255,5);
     }
-    else if ( health > 33) {
+    else if ( health > 33) { // redis
       fill(255,141,0);
     }
     else {
-      fill(255,0,0);
+      fill(255,0,0);// red
     }
  }
  
@@ -237,7 +203,7 @@ void healthBar() {
    if (humanPlayer.health <= 0) {
      lives-=1;
      if (lives <=0) {
-       youLost = true;
+       youLost = true;// game over
      }
    }
  }

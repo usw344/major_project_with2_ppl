@@ -95,6 +95,7 @@ class LevelLoader {
 
     // how to read the following lines
     //float _stickmanXLocation, float _speedOfStickman, float attackValueOfAI, String imageOfAiSticman, String revers image,
+    
     orangeAi = new BoardAi(boardHeight, boardWidth, 17, 14 , 'A',width-width/4,3,10,"Red.png","RedR.png",true,3);
     redAi = new BoardAi(boardHeight, boardWidth, 20, 2 , 'B',width-width/4,5,10,"Yellow.png","YellowR.png",true,3);
     blackAi = new BoardAi(boardHeight, boardWidth, 5, 4 , 'C',width-width/4,5,10,"Black.png","BlackR.png",true,5);
@@ -135,7 +136,7 @@ class LevelLoader {
   }
   }
 
-  void changeIt(char changeThisChar){// changes the lost ai to your tile
+  void changeIt(char changeThisChar){// changes the lost ai tile to yours to your tile
     for (int x = 0; x < boardHeight; x++) {
       for (int y = 0; y < boardWidth; y++) {
     
@@ -151,12 +152,14 @@ class LevelLoader {
   
 
   void aiBattleHandler(){// does all the ai battle
+    // this next block determines which ai (orange, yellow etc) did you try to attach. Then its tells the board ai class to tell the stickman to fight
+    
     if(whichAiIsDoingBattle == 1){
       // makes both do batttle
       orangeAi.aiStickManBattle(humanPlayerStickMan);
       
       
-      humanPlayerStickMan.theEnd(humanPlayerStickMan);
+      humanPlayerStickMan.theEnd(humanPlayerStickMan);// the end functions checks to see if you are dead
       
       if(orangeAi.amIDead()){
           changeIt('A');
@@ -168,7 +171,7 @@ class LevelLoader {
       
       humanPlayerStickMan.theEnd(humanPlayerStickMan);
       
-      if(redAi.amIDead()){
+      if(redAi.amIDead()){/// checks to see if you won
           changeIt('B');
       }
   }
@@ -200,7 +203,7 @@ class LevelLoader {
         
         allTiles[x][y].display();
         
-        if(allTiles[x][y].checker('H')){// need to display hill here because it crashes in the tile object
+        if(allTiles[x][y].checker('H')){// need to display hill here because it crashes in the tile object (because we have an array and it loads the image to much)
           fill(255);
           rectMode(CORNER);
           imageMode(CORNER);
@@ -214,7 +217,7 @@ class LevelLoader {
     if (clockForWaterAnimation.isFinished()) {// when around 0.5 sec has passed randomize the color of the water
       for (int y = 0; y < boardHeight; y++) {
         for (int x = 0; x < boardWidth; x++) {
-          allTiles[x][y].animateWater();// run the animate code
+          allTiles[x][y].animateWater();// run the animate code (randomly select a color in the blue scale)
         }
       }
       //start clock 

@@ -30,9 +30,9 @@ class Shop {
   }
 
   void myShopDrawLoop() {
-    displayShop();
-    displaySectionLevel();
-    upgradOnClick();
+    displayShop();// display all the buttons
+    displaySectionLevel();// show which level each value is at
+    upgradOnClick();// if you click on those buttons level up that value
   }
 
   void displayShop() {
@@ -43,7 +43,7 @@ class Shop {
     text(int(theGoldValue), width-width/3,height/2);
   }
   void displaySectionLevel() {
-    // just for devolpment reasons, want to see the level of the box
+    //display level of the box
     armourButton.theText("Armour Level = " + str(armourLevel));
     speedButton.theText("Speed Level = " +str(speedLevel));
     weaponButton.theText("Attack Level = " + str(weaponLevel));
@@ -51,41 +51,51 @@ class Shop {
   void upgradOnClick() {
     fill(0);
     text(armourCost,x,y*2 - y/5);
+    
+    // check to see if button is clicked and you have the money.
+    // all these if follow that logic
+    
     if (armourButton.isTheButtonBeingClicked() && weaponCost < theGoldValue) {
       armourCost += armourLevel * 2;
+      
       theGoldValue -= armourCost;
+      
       armourLevel += 0.5;
       
     }
     fill(0);
     text(speedCost,x, y+h + h + h/3);
+    
     if (speedButton.isTheButtonBeingClicked() && speedCost < theGoldValue) {
       speedCost += speedLevel * 2;
+      
       theGoldValue -= speedCost;
+      
       speedLevel += 0.5;
     }
     fill(0);
     text(weaponCost,x,y+h* 4);
+    
     if (weaponButton.isTheButtonBeingClicked() && weaponCost < theGoldValue) {
       weaponCost += weaponLevel * 2;
+      
       theGoldValue -= weaponCost;
+      
       weaponLevel += 0.5;
       
     }
   }
 
-  boolean doIHaveEnoughGold(){
-       
-    return false;
-  }
-
 
   void getGoldValue(float ourGold){
+    // used in main file. It finds your current amount of gold
     theGoldValue = ourGold;
   }
 
   float returnUpdatedGoldValue(){
+    // sends back the gold after you have made your upgrade
     return theGoldValue;
+    
   }
 
 }

@@ -28,7 +28,9 @@ class Tile {
     
     //M:            is enemy mongols             :: white color
     //T:            is enemey Timurids           :: is dark red
+
     
+    ////////////////////////// next 2 if functions handle which color each tile should be.
     if(tileType == 'C'){
       rgb = color(0);
     }
@@ -83,7 +85,6 @@ class Tile {
     }
 
     if (tileType == 'A') {
-      //rgb = color(100);
       rgb = color(250, 124, 20);
     }
     if(tileType == 'M'){
@@ -91,6 +92,8 @@ class Tile {
     }  
 }
   boolean checker(char tileTypeToCheck) {
+    
+    // the MOST USEFULL FUNCTION IN THE IS GAME this checks which char is that element is in the array ITS WINS THE NOBEL PEACE PRIZE
     if (tileType == tileTypeToCheck) {
       return true;
     } else {
@@ -98,6 +101,7 @@ class Tile {
     }
   }
   
+  // desgined to check a element in the array to ensure its not a hill or water square
   int checkForObstcle(char charToCheck){
     if(charToCheck == tileType && tileType == 'H'){
       return 1;
@@ -108,7 +112,7 @@ class Tile {
     return 0;// for no obstcle in the way
   
   }
-
+  // simple display
   void display() {
     rectMode(CORNER);
     fill(rgb);
@@ -116,10 +120,12 @@ class Tile {
     rect(x, y, w, h);
   }
 
+  // a crude and effective way to give water an animation effect.
+  
   void animateWater() {
     if (tileType == 'w') {
-      int choice  = int(random(1, 5));
-      if (choice == 1) {
+      int choice  = int(random(1, 5));// chose between 4 colors
+      if (choice == 1) {// these are all shades of blue
         rgb = color(2, 190, 240);
       } 
       else if(choice == 2) {

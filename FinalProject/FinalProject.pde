@@ -1,16 +1,25 @@
 // Muhammad and kam major project
+// due date Jan 18 2017
+// for comp sci 30(fall)
+// a game based on civ, MTW2 and the wild and crazy ideas of Kam  && Muhammad
 
-// devolpment notes:
-// since last seen (monday jan 15) we have added;
-// a way to win and lose.
-// better shooting mech.
-// and some minor bug fixes
 
+///// patch 0.0.1 release notes
+// after the hyped relase on jan 15 Linux airs presents the fist patch
+
+// this includes
+// a way to win and lose the game
+// better and smoother graphics
+// a better optimised game.
+// many small bug fixes
+
+/// thank you for your patience
+//// Kamden Wall && Muhammad Ahmed. Comp sci 30 (fall) 2018.
+// thanks for the great 2 years.
 
 
 //loading our objects
 Stickman humanPlayerStickMan,aiControledStickMan;
-Weapon w1;
 LevelLoader lvl1;
 Button startButton, helpButton, shopButton, backButton,levelButton;
 WeaponType weapon1;
@@ -256,7 +265,7 @@ void objectLoader() {
   levelButton = new Button();
   
   // weapons ammo,...
-  w1 = new Weapon();
+ 
   weapon1 = new WeaponType(0, 1 , 15 , "Crossbow.png", 2,0.1,humanPlayerStickMan.x + humanPlayerStickMan.x/15  , humanPlayerStickMan.y + 10 ,humanPlayerStickMan.w*3,humanPlayerStickMan.h*2,"CrossbowL.png");
   
   //game sections
